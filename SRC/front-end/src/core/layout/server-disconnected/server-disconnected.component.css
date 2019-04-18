@@ -1,0 +1,17 @@
+#errorscreen {
+  background-color: white;
+  width: 10000px;
+  height: 1000px;
+  z-index: 10000;
+  position: fixed;
+  padding: 20px;
+}
+
+  #errorscreen p {
+    font-weight: 600;
+    font-size: 20pt;
+  }
+
+  #errorscreen a {
+    cursor: default;
+  }

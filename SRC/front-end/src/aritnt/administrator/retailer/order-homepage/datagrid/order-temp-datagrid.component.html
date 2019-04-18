@@ -1,0 +1,100 @@
+<div id="grid">
+    <!-- left-side -->
+    <div class="left-side">
+      <div class="btn-group">
+        <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="refresh()"><i class="fa fa-lg fa-refresh"
+            aria-hidden="true"></i></dx-button>
+            <!-- <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Add')" (onClick)="add()"><i class="fa fa-lg fa-plus" aria-hidden="true"></i></dx-button> -->
+        <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Infor')" [disabled]="selectedRows?.length != 1"
+          (onClick)="infor(selectedRows[0])"><i class="fa fa-lg fa-info" aria-hidden="true"></i></dx-button>
+        <!-- <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Confirm')" [disabled]="selectedRows?.length != 1 || checkCantComfirm(selectedRows[0])"
+          (onClick)="comfirmed(selectedRows[0])"><i class="fa fa-lg fa-handshake-o" aria-hidden="true"></i></dx-button>
+        <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Process')" [disabled]="selectedRows?.length != 1 || checkCantProcess(selectedRows[0])"
+          (onClick)="showProcessing(selectedRows[0])"><i class="fa fa-lg fa-sitemap" aria-hidden="true"></i></dx-button> -->
+      </div>
+    </div>
+    
+    <dx-data-grid id="gridContainer" [dataSource]="ordersTemp" [columnAutoWidth]="true" [masterDetail]="{ enabled: true, template: 'detail' }"
+    keyExpr="id"  [showBorders]="true" [(selectedRowKeys)]="selectedRows">
+    <dxo-selection mode="single"></dxo-selection>
+
+    <dxo-filter-row 
+        visible="true" ></dxo-filter-row>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+    </dxo-pager>
+
+    <dxi-column dataField="id" [caption]="lang.instant('Common.Code')"></dxi-column>
+    <dxi-column dataField="name" [caption]="lang.instant('Common.Name')"></dxi-column>
+    <dxi-column dataField="companyName" [caption]="companyName"></dxi-column>
+    <dxi-column dataField="email" [caption]="email"></dxi-column>
+    <dxi-column dataField="phoneNumber" [caption]="phoneNumber"></dxi-column>
+    <dxi-column dataField="buyDate" [caption]="buyDate"></dxi-column>
+    <dxi-column dataField="address" [caption]="address"></dxi-column>
+    <dxi-column dataField="note" [caption]="note"></dxi-column>
+    <dxi-column dataField="shippingAddress" [caption]="shippingAddress"></dxi-column>
+    <dxi-column dataField="shippingAddress" [caption]="shippingAddress"></dxi-column>
+    <!-- <dxi-column dataField="retailer.name" [caption]="lang.instant('Admin.Retailer')"></dxi-column>
+    <dxi-column dataField="totalAmount" [caption]="lang.instant('Common.TotalAmount')" format="#,##0.## VND"></dxi-column>
+    <dxi-column dataField="buyingDate" [caption]="lang.instant('Order.DeliveriedDate')" dataType="date"></dxi-column> -->
+    <!-- <dxi-column dataField="statusId" [caption]="lang.instant('Common.Status')">
+      <dxo-lookup [dataSource]="statuses" valueExpr="id" displayExpr="name">
+      </dxo-lookup>
+    </dxi-column> -->
+    <!-- <dxi-column dataField="createdDate" [caption]="lang.instant('Order.OrderedDate')" dataType="date"></dxi-column> -->
+
+    <div *dxTemplate="let order of 'detail'">
+      <div class="master-detail-caption">{{lang.instant('Order.OrderList')}}</div>
+      <dx-data-grid [dataSource]="order.data.retailerOrderHomepageDetailViewModels" [showBorders]="true" [columnAutoWidth]="true">
+        <dxi-column dataField="id" [caption]="lang.instant('Admin.Product')"></dxi-column>
+        <dxi-column dataField="name" [caption]="lang.instant('Admin.Product')"></dxi-column>
+        <dxi-column dataField="price" [caption]="lang.instant('Common.Price')" format="#,##0.## VND"></dxi-column>
+        <dxi-column dataField="qty" [caption]="lang.instant('Order.OrderedQuantity')"></dxi-column>
+        <!-- <dxi-column dataField="adapQuantity" [caption]="lang.instant('Order.AdapedQuantity')"></dxi-column>
+        <dxi-column dataField="deliveriedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')"></dxi-column>
+        <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column> -->
+      </dx-data-grid>
+    </div>
+  </dx-data-grid>
+  </div>
+  
+  
+  <!-- <dx-popup [title]="lang.instant('Action.Process') + ' ' + lang.instant('Order.OrderList')" [(visible)]="isPopupVisible">
+    <div *dxTemplate="let data of 'content'">
+      <div class="left-side" style="margin-bottom:5px">
+        <div class="btn-group">
+          <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Process')"
+            (onClick)="processing(selectedRows[0])"><i class="fa fa-lg fa-sitemap" aria-hidden="true"></i></dx-button>
+        </div>
+      </div>
+      <dx-data-grid [dataSource]="choosingOrder.items" [showBorders]="true" [columnAutoWidth]="true" [masterDetail]="{ enabled: false, template: 'detail' }"
+        (onSelectionChanged)="selectionChanged($event)" style="margin-bottom:5px" [(selectedRowKeys)]="selectedOrderRows">
+        <dxo-selection mode="single"></dxo-selection>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+        </dxo-pager>
+        <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>
+        <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+        <dxi-column dataField="orderedQuantity" [caption]="lang.instant('Order.OrderedQuantity')"></dxi-column>
+        <dxi-column dataField="adapQuantity" [caption]="lang.instant('Order.AdapedQuantity')"></dxi-column>
+        <dxi-column dataField="isAdaped" [caption]="lang.instant('Order.AdapedQuantity')" dataType="boolean"></dxi-column>
+  
+        <div *dxTemplate="let order of 'detail'">
+          <div class="master-detail-caption">{{lang.instant('Order.PlaningList')}}</div>
+          <dx-data-grid [dataSource]="order.data.planningItems" [showBorders]="true" [columnAutoWidth]="true"
+            (onRowUpdating)="update($event)" (onRowInserting)="create($event)" (onRowRemoving)="delete($event)">
+            <dxo-editing mode="form" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+            </dxo-editing>
+  
+            <dxi-column dataField="farmerId" [caption]="lang.instant('Admin.Farmer')">
+              <dxo-lookup [dataSource]="currentItemIntProduct" valueExpr="farmerId" [(displayExpr)]="getInventoryFarmerExpr">
+              </dxo-lookup>
+              <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="quantity" [caption]="lang.instant('Order.PlanningQuantity')" dataType="number"></dxi-column>
+          </dx-data-grid>
+        </div>
+  
+      </dx-data-grid>
+    </div>
+  </dx-popup> -->

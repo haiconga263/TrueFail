@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> L
+
+
+<header id="header">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="~/">
+                    <img alt="Brand" src="~/images/logo_220_82.jpg">
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul id="menubar" class="nav navbar-nav">
+                    <li class="mn-main">
+                        <a class="mn-text" href="~/">@L["Index_Homepage"]</a>
+                    </li>
+                    @*<li class="mn-main dropdown panel-sm">
+                            <a class="mn-text" href="javascript:void(0)">@L["Index_Introduce"]</a>
+                            <div class=" icon-collapse">
+                                <i class="fa fa-chevron-right fa-lg" aria-hidden="true" data-toggle="collapse" data-target="#introduceMenu"></i>
+                            </div>
+                            <ul id="introduceMenu" class="dropdown-menu collapse">
+                                <li><a href="@L["R.About"]">@L["Index_AboutUs"]</a></li>
+                                <li><a href="@L["R.Gifts"]">@L["Index_Gifts"]</a></li>
+                            </ul>
+                        </li>*@
+                    <li class="mn-main has-panel">
+                        <a class="mn-text" href="javascript:void(0)" style="cursor:default">@L["Index_Product"]</a>
+                        <div class=" icon-collapse">
+                            <i class="fa fa-chevron-right fa-lg" aria-hidden="true" data-toggle="collapse" data-target="#categoryMenu"></i>
+                        </div>
+                        <div id="categoryMenu" class="container panel-menu collapse"></div>
+                    </li>
+                    <li class="mn-main has-panel">
+                        <a class="mn-text" href="@L["R.WhereToBuy"]">@L["Index_WhereToBuy"]</a>
+                    </li>
+
+                    <li class="mn-main"><a class="mn-text" href="@L["R.Gifts"]">@L["Index_Gifts"]</a></li>
+
+                    <li class="mn-main"><a class="mn-text" href="@L["R.Recipes"]">@L["Index_Recipe"]</a></li>
+
+                    @*<li class="mn-main"><a class="mn-text" href="@L["R.GreenDaLatBlog"]">@L["GreenDaLatBlog"]</a></li>*@
+                    <li class="mn-main"><a class="mn-text" href="@L["R.WeWork"]">@L["Index_Event"]</a></li>
+
+                    @*<li class="mn-main"><a class="mn-text" href="@L["R.Contact"]">@L["Index_Contact"]</a></li>*@
+                </ul>
+                @*<form class="navbar-form navbar-left">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" id="search" name="searchString">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="btn-search">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>*@
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <div class="form-group">
+                            <form asp-action="SearchAsync" asp-controller="Home" method="get">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" id="search" name="searchString">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" id="btn-search">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </li>
+                    <partial name="_SelectLanguagePartial" />
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+</header>

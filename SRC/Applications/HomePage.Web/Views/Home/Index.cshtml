@@ -1,0 +1,142 @@
+﻿@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using HomePage.Web.Helpers
+
+@using Common
+@model IEnumerable<Homepage.UI.ViewModels.ProductHomepageViewModel>;
+@inject IHtmlLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = "Aritnt Company";
+    var imagePath = GlobalConfiguration.ProductImagePath;
+}
+
+<div class="sc_content mainWrap" style="margin-top:25px;">
+    <section class="singlePage emptyPostFormatIcon emptyPostTitle emptyPostInfo page">
+        <article class="postContent">
+            <div class="postTextArea">
+                <section class="">
+                    <div class="container-fluid">
+                        <div class="sc_blogger sc_blogger_horizontal style_portfolio_big portfolioWrap sc_blogger_indent">
+                            <div class="masonryWrap">
+                                <section class="masonryStyle isotopeWrap portfolio_big"
+                                         data-foliosize="600">
+                                    <article class="isotopeItem post_format_standard isw_1 odd"
+                                             data-wdh="620" data-hgt="620"
+                                             data-incw="1" data-inch="1">
+                                        <div class="isotopeItemWrap">
+                                            <div class="thumb">
+                                                <img src="images/4_chai.jpg">
+                                            </div>
+                                            <div class="isotopeContentWrap">
+                                                <div class="isotopeContent">
+                                                    <a rel="noopener noreferrer" href="@L["R.DasaviSauce"]" style="text-decoration:none;">
+                                                        <h4 class="isotopeTitle">
+                                                            @L["Index_Image_Dasavi"]
+                                                        </h4>
+                                                        <div class="isotopeExcerpt">
+                                                            @L["Index_Image_Dasavi1"]
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <article class="isotopeItem post_format_standard isw_1 even"
+                                             data-wdh="620" data-hgt="620"
+                                             data-incw="1" data-inch="1">
+                                        <div class="isotopeItemWrap">
+                                            <div class="thumb">
+                                                <img src="images/ca5.jpg">
+                                            </div>
+                                            <div class="isotopeContentWrap">
+                                                <div class="isotopeContent">
+                                                    <a rel="noopener noreferrer" href="@L["R.SeaFood"]" style="text-decoration:none;">
+                                                        <h4 class="isotopeTitle">
+                                                            @L["Index_Seafood"]
+                                                        </h4>
+                                                        <div class="isotopeExcerpt">
+                                                            @L["Index_Seafood1"]
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <article class="isotopeItem post_format_standard isw_1 odd last"
+                                             data-wdh="620" data-hgt="620"
+                                             data-incw="1" data-inch="1">
+                                        <div class="isotopeItemWrap">
+                                            <div class="thumb">
+                                                <img src="images/Rau.jpg">
+                                            </div>
+                                            <div class="isotopeContentWrap">
+                                                <div class="isotopeContent">
+                                                    <a rel="noopener noreferrer" href="@L["R.VegetablesFruits"]" style="text-decoration:none;">
+                                                        <h4 class="isotopeTitle">
+                                                            @L["Index_FreshVegetable"]
+                                                        </h4>
+                                                        <div class="isotopeExcerpt">
+                                                            @L["Index_FreshVegetable1"]
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="sc_content mainWrap">
+                    <section class="section_padding_top_80">
+                        <div class="container">
+                            <h3 class="sc_title sc_title_center sc_title_style_1 margin_bottom_50">
+                                @L["Index_Process"]
+                            </h3>
+
+                            <div class="aritnt_back sc_columns  sc_columns_3 sc_columns_indent">
+                                <div class="sc_image">
+                                    <a href="#">
+                                        <img src="images/opertion-vn.png" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section_padding_top_80">
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            <ul class="products">
+                                <div class="container-fluid">
+                                    <h2 class="sc_title sc_title_center sc_title_style_1 margin_bottom_50">
+                                        @L["Index_Product_Outstading"]
+                                    </h2>
+                                    <div class="row">
+                                        @foreach (var item in Model)
+                                        {
+                                            <div id="pro-1" class="col-md-3 col-sm-6 col-xs-12 pro-item">
+                                                <a href="@item.GetUrl()" style="text-decoration:none;">
+                                                    <span class="pro-img" style="background-image:url(@(imagePath + item.ImageURL))"></span>
+                                                    <hr />
+                                                    <span class="pro-name">@item.Name</span>
+                                                    <span class="price" hidden>
+                                                        <span class="amount">@item.SellingCurrentPrice.ToFormatCurrency()</span>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </ul>
+                        }
+                    </section>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>

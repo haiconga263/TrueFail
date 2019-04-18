@@ -1,0 +1,18 @@
+﻿@model List<BlogViewModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> L
+
+
+
+@{
+    ViewData["Title"] = "Trace";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<br />
+<br />
+<br />
+<div class="alert alert-info">
+    <strong>@L["UpdateLoading"]</strong>
+</div>

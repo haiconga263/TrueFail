@@ -1,0 +1,76 @@
+<div id="grid" class="fertilizerCategory-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i
+                    class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="id > 0"
+                (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i
+                    class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Code')}}</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Code')}}" readOnly="true"
+                                [(ngModel)]="fertilizerCategory.code">
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Name')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Name')}}"
+                                [(ngModel)]="fertilizerCategory.name" [(isValid)]="isNameValid" [maxLength]="50">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50"
+                                        message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Group')}}</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="fertilizerCategories" [(ngModel)]="fertilizerCategory.parentId"
+                                displayExpr="name" valueExpr="id">
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="fertilizerCategory.isUsed"
+                                text="{{lang.instant('Common.Active')}}">
+                            </dx-check-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+</div>

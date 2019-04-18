@@ -1,0 +1,45 @@
+<div class="account">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div class="box box-solid">
+        <div class="box-body">
+          <h4 style="background-color:#f7f7f7; font-size: 18px;; padding: 7px 10px; margin-top: 0;">
+            {{lang.instant('Retailer.Information')}} |
+            <a style="text-decoration:underline;cursor:pointer;" (click)="inforUpdate()">{{lang.instant('Action.Update')}}</a>
+          </h4>
+          <div class="media">
+            <div class="media-left">
+              <img src="{{account.imageURL}}" alt="avatar"
+                class="media-object" style="width: 150px;height: auto;border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.15);">
+            </div>
+            <div class="media-body">
+              <div class="clearfix">
+                <h4 style="margin-top: 0; font-size: 12pt; font-style: italic; color:blue">{{account.contact.email}}</h4>
+                <h4 style="margin-top: 0">{{account.name}}</h4>
+                <h4 style="margin-top: 0">{{account.address.street}}, {{accountWard?.name}}, {{accountWard?.district?.name}}, {{accountWard?.province?.name}}, {{accountWard?.country?.name}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="box box-solid">
+        <div class="box-body">
+          <h4 style="background-color:#f7f7f7; font-size: 18px; padding: 7px 10px; margin-top: 0;">
+            {{lang.instant('Common.PaymentType')}} |
+            <a style="text-decoration:underline;cursor:pointer;" (click)="paymentUpdate()">{{lang.instant('Action.Update')}}</a>
+          </h4>
+          <div class="media">
+            <div class="media-body">
+              <div class="clearfix">
+                <h4 style="margin-top: 0">Nhận tiền mặt khi giao hàng</h4>
+                <h4 style="margin-top: 0">(Chức năng chưa hoàn thiện)</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <base href="/">
+</head>
+<body class="skin-blue sidebar-mini login-page">
+    @RenderBody()
+    <app-root>
+        Loading...
+    </app-root>
+    <script type="text/javascript" src=@Url.Content("runtime.js")></script>
+    <script type="text/javascript" src=@Url.Content("polyfills.js")></script>
+    <script type="text/javascript" src=@Url.Content("styles.js")></script>
+    <script type="text/javascript" src=@Url.Content("scripts.js")></script>
+    <script type="text/javascript" src=@Url.Content("vendor.js")></script>
+    <script type="text/javascript" src=@Url.Content("main.js")></script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

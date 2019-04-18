@@ -1,0 +1,76 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="row">
+      <div class="col-xs-5">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3" style="margin-top:10px;padding-right:0px">
+              <label>{{lang.instant('Common.FromDate')}}:</label>
+            </div>
+            <div class="col-xs-9">
+              <dx-date-box [(value)]="from" type="date" displayFormat="dd/MM/yyyy" [max]="to" style="width:100%">
+              </dx-date-box>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-5">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3" style="margin-top:10px;padding-right:0px">
+              <label>{{lang.instant('Common.ToDate')}}:</label>
+            </div>
+            <div class="col-xs-9">
+              <dx-date-box [(value)]="to" type="date" displayFormat="dd/MM/yyyy" [min]="from" style="width:100%">
+              </dx-date-box>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <dx-button style="width:100%;margin-top:3px" class="btn fe-md btn-default" (onClick)="search()"><i class="fa fa-search"></i>
+          {{lang.instant('Common.Search')}}</dx-button>
+      </div>
+    </div>
+  </div>
+  <div class="left-side">
+    <div class="btn-group">
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Infor')" [disabled]="selectedRows?.length != 1" (onClick)="infor(selectedRows[0])"><i class="fa fa-lg fa-info" aria-hidden="true"></i></dx-button>
+    </div>
+  </div>
+  <div class="right-side">
+    <!--<dx-select-box></dx-select-box>-->
+  </div>
+  <dx-data-grid id="gridContainer" [dataSource]="dataSource" [columnAutoWidth]="true" [masterDetail]="{ enabled: true, template: 'detail' }"
+    keyExpr="ID" [showBorders]="true">
+
+    <dxo-filter-row 
+        visible="true" ></dxo-filter-row>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+    </dxo-pager>
+    
+    <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+    <dxi-column dataField="name" [caption]="lang.instant('Common.Name')"></dxi-column>
+    <dxi-column dataField="farmer.name" [caption]="lang.instant('Admin.Farmer')"></dxi-column>
+    <dxi-column dataField="totalAmount" [caption]="lang.instant('Common.TotalAmount')" format="#,##0.## VND"></dxi-column>
+    <dxi-column dataField="buyingDate" [caption]="lang.instant('Order.DeliveriedDate')" dataType="date"></dxi-column>
+    <dxi-column dataField="statusId" [caption]="lang.instant('Common.Status')">
+      <dxo-lookup [dataSource]="statuses" valueExpr="id" displayExpr="name">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="createdDate" [caption]="lang.instant('Order.OrderedDate')" dataType="date"></dxi-column>
+
+    <div *dxTemplate="let order of 'detail'">
+      <div class="master-detail-caption">{{lang.instant('Order.OrderList')}}</div>
+      <dx-data-grid [dataSource]="order.data.items" [showBorders]="true" [columnAutoWidth]="true">
+        <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>
+        <dxi-column dataField="price" [caption]="lang.instant('Common.Price')" format="#,##0.## VND"></dxi-column>
+        <dxi-column dataField="orderedQuantity" [caption]="lang.instant('Order.OrderedQuantity')"></dxi-column>
+        <dxi-column dataField="adapQuantity" [caption]="lang.instant('Order.AdapedQuantity')"></dxi-column>
+        <dxi-column dataField="deliveriedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')"></dxi-column>
+        <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </dx-data-grid>
+</div>

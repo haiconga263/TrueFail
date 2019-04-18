@@ -1,0 +1,81 @@
+<div id="grid" class="product-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-2" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Caption.Name')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-10">
+                            <dx-text-box placeholder="{{lang.instant('Admin.Caption.Name')}}" readOnly="true" [(ngModel)]="caption.name">
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Caption.Type')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="types" [(ngModel)]="caption.type"
+                                displayExpr="name" valueExpr="id" [(isValid)]="isTypeValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+            </div>
+
+            <div class="col-md-6">
+    
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                <label>{{lang.instant('Admin.Caption.DefaultCaption')}} <span class="dx-field-item-required-mark">*</span></label>
+                            </div>
+                            <div class="col-xs-8">
+                                <dx-text-box placeholder="{{lang.instant('Admin.Caption.DefaultCaption')}}" [(ngModel)]="caption.defaultCaption"
+                                    [(isValid)]="isDefaultCaptionValid">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                        <dxi-validation-rule type="stringLength" max="4000" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.form-group -->
+                </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <div class="box-body">
+        <dx-data-grid [(dataSource)]="caption.languages" [keyExpr]="languageId" [showBorders]="true">
+            <dxo-editing mode="form" [allowUpdating]="true">
+            </dxo-editing>
+            <dxi-column dataField="languageId" [caption]="lang.instant('Common.Language')" [formItem]="{visible: false}">
+                <dxo-lookup [dataSource]="languages" valueExpr="id" displayExpr="name">
+                </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="caption" [caption]="lang.instant('Common.Description')"></dxi-column>
+        </dx-data-grid>
+    </div>
+</div>

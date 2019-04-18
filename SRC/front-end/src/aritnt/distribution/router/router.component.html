@@ -1,0 +1,129 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-4" style="margin-top: 10px">
+              <label>{{lang.instant('Admin.Distribution')}}:</label>
+            </div>
+            <div class="col-xs-8">
+              <dx-select-box [dataSource]="distributions" [(ngModel)]="chooseDistribution" displayExpr="name"
+                (onValueChanged)="distributionChanged($event)">
+              </dx-select-box>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-4" style="margin-top: 10px">
+              <label>{{lang.instant('Router.List')}}:</label>
+            </div>
+            <div class="col-xs-8">
+              <dx-select-box [dataSource]="routers" displayExpr="name" valueExpr="id"
+                (onValueChanged)="routerChange($event)">
+              </dx-select-box>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="left-side">
+    <div class="btn-group">
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="refresh()"
+        [disabled]="chooseDistribution == null"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+      <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Create')" (onClick)="create()"
+        [disabled]="chooseDistribution == null"><i class="fa fa-lg fa-plus" aria-hidden="true"></i></dx-button>
+    </div>
+  </div>
+  <div class="map">
+    <div class="router-infor-box" *ngIf="route != null" [class.close]="!isInforOpen">
+      <div class="box-open-close" (click)="openClose()">
+        <i class="fa fa-chevron-right" *ngIf="!isInforOpen"></i>
+        <i class="fa fa-chevron-left" *ngIf="isInforOpen"></i>
+      </div>
+      <div class="row" *ngIf="isInforOpen">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-3" style="margin-top: 10px">
+              <label>{{lang.instant('Delivery.Router')}}:</label>
+            </div>
+            <div class="col-md-9">
+              <dx-text-box placeholder="{{lang.instant('Delivery.Router')}}" [(isValid)]="isNameValid"
+                [(ngModel)]="route.name">
+                <dx-validator>
+                  <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                  </dxi-validation-rule>
+                  <dxi-validation-rule type="stringLength" max="50"
+                    message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+            </div>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <div class="col-md-3" style="margin-top: 10px">
+              <label>{{lang.instant('Common.Description')}}:</label>
+            </div>
+            <div class="col-md-9">
+              <dx-text-box placeholder="{{lang.instant('Common.Description')}}" [(isValid)]="isNameValid"
+                [(ngModel)]="route.description">
+                <dx-validator>
+                  <dxi-validation-rule type="stringLength" max="255"
+                    message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                </dx-validator>
+              </dx-text-box>
+            </div>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <div class="col-md-3" style="margin-top: 10px">
+              <label>{{lang.instant('Admin.Address.Country')}}:</label>
+            </div>
+            <div class="col-md-9">
+              <dx-select-box [dataSource]="countries" [(ngModel)]="route.countryId" displayExpr="name" valueExpr="id"
+                (onValueChanged)="countryChange($event)">
+              </dx-select-box>
+            </div>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <div class="col-md-3" style="margin-top: 10px">
+              <label>{{lang.instant('Admin.Address.Province')}}:</label>
+            </div>
+            <div class="col-md-9">
+              <dx-select-box [dataSource]="provinces" displayExpr="name" valueExpr="id" [(ngModel)]="route.provinceId">
+              </dx-select-box>
+            </div>
+          </div>
+          <div class="row" style="margin-top:10px;margin-right:3px;">
+            <div class="btn-group pull-right">
+              <dx-button class="btn fe-md btn-danger" *ngIf="route != null && route.id != 0"
+                [hint]="lang.instant('Action.Delete')" (onClick)="delete()"><i class="fa fa-lg fa-trash"
+                  aria-hidden="true"></i></dx-button>
+              <dx-button class="btn fe-md btn-default" *ngIf="route != null && route.id == 0"
+                [hint]="lang.instant('Action.Cancel')" (onClick)="cancel()"><i class="fa fa-lg fa-reply"
+                  aria-hidden="true"></i></dx-button>
+              <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save()"><i
+                  class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            </div>
+            <div class="clear-fix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <agm-map (mapReady)="mapReady($event)" style="height: 600px;" [longitude]="centerLong" [latitude]="centerLat"
+      [usePanning]="usePanning" [zoom]="10" (mapClick)="mapClick($event)">
+      <agm-circle *ngIf="route != null && route.id == 0" [latitude]="route.currentLatitude"
+        [longitude]="route.currentLongitude" [radius]="route.radius" (centerChange)="centerChange($event, route.id)"
+        (radiusChange)="radiusChange($event, route.id)" [fillColor]="'blue'" [circleDraggable]="true" [editable]="true">
+      </agm-circle>
+      <agm-circle *ngFor="let router of routers" [latitude]="router.currentLatitude"
+        [longitude]="router.currentLongitude" [radius]="router.radius" (centerChange)="centerChange($event, router.id)"
+        (radiusChange)="radiusChange($event, router.id)" (circleClick)="routerClick(router)" [fillColor]="'red'"
+        [circleDraggable]="true" [editable]="true">
+      </agm-circle>
+
+    </agm-map>
+  </div>
+</div>

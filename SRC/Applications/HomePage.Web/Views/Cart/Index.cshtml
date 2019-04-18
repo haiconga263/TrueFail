@@ -1,0 +1,234 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@inject IHtmlLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = "CartDetail";
+}
+
+<h3 class="postTitle">
+    <a>@L["CartInfo"]</a>
+</h3>
+<br />
+
+<form action="@L["R.CheckOut"]" method="post">
+    <div class="container mb-4"  style="padding-bottom: 2%;">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table id="cart" class="table table-striped">
+                        <thead>
+                            <tr style="font-weight:bold;">
+                                <th scope="col"> </th>
+                                <th scope="col" class="text-center">@L["Index_Product"]</th>
+                                <th scope="col" class="text-center">@L["Quantity"]</th>
+                                <th scope="col" class="text-right">@L["Total"]</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+
+                        <tbody></tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="row">
+                    <div class="col-sm-12  col-md-6">
+                        <a href="@L["R.Products"]" class="btn btn-block btn-light">@L["ContinueShopping"]</a>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-right">
+                        <a href="@L["R.CheckOut"]" class="btn btn-block btn-success text-uppercase" value="submit" id="btn-checkout">@L["Checkout"]</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts
+    {
+    <script>
+        var totalprice = 0;
+        var price = 0;
+        function calPrice(qty, price) {
+            return (qty * price);
+        }
+
+        function recalCart(id, curQty) {
+            //var priceNew = 0;
+            var strPros = $.cookie(CK_PROC_CART);
+
+            if (typeof strPros === 'undefined' || strPros == '') {
+                strPros = '[]';
+            }
+
+            var pros = JSON.parse(strPros);
+            if (typeof pros === 'undefined') {
+                pros = [];
+            }
+
+            for (var i = 0; i < pros.length; i++) {
+                if (pros[i].Id === parseInt(id)) {
+                    //priceNew = curQty * pros[i].price;
+                    pros[i].qty = curQty;
+                }
+
+            }
+
+            $.cookie(CK_PROC_CART, JSON.stringify(pros), { path: '/' });
+
+
+        }
+
+        function loadCartList() {
+           
+            $('#cart tbody').html('');
+            var total = 0;
+            var strPros = $.cookie(CK_PROC_CART);
+
+            if (typeof strPros === 'undefined' || strPros == '') {
+                strPros = '[]';
+            }
+
+            var pros = JSON.parse(strPros);
+            if (typeof pros === 'undefined') {
+                pros = [];
+
+            }
+            for (var i = 0; i < pros.length; i++) {
+                price = pros[i].price;
+                totalprice = (pros[i].qty * price)
+
+                var html = '<tr>                                                                                                                   ' +
+                    '	<td class="cart-img cart-center"><img src="' + pros[i].image + '" /> </td>                                 ' +
+                    '	<td class="cart-center">' + pros[i].name + '</td>                                                                      ' +
+                    '<td > ' +
+                    '<div class="choose-quantity"> ' +
+                    '<div class="input-group">' +
+                    '	  <span class="input-group-btn">' +
+                    '		  <button type="button" class="btn btn-default btn-number" data-pro="' + pros[i].Id + '" data-type="minus" data-field="quant[1]">' +
+                    '			  <span class="glyphicon glyphicon-minus"></span>' +
+                    '		  </button>' +
+                    '	  </span>' +
+                    '	  <input style="text-align: center;" type="text" name="quant[1]" class="form-control input-number"  data-pro="' + pros[i].Id + '" value="' + pros[i].qty + '" min="1" max="99">' +
+                    '	  <span class="input-group-btn">' +
+                    '		  <button type="button" class="btn btn-default btn-number" data-pro="' + pros[i].Id + '" data-type="plus" data-field="quant[1]">' +
+                    '			  <span class="glyphicon glyphicon-plus"></span>' +
+                    '		  </button>' +
+                    '	  </span>' +
+                    '</div>' +
+                    '</div> ' +
+                    '</td>             ' +
+                    '	<td class="text-right cart-center" id="total-price">' + formatNumber(totalprice, ',', '.') + '<strong> đ</strong>' + '</td>                                                                    ' +
+                    '	<td class="text-right cart-center"><button type="button" class="btn btn-sm btn-danger" onclick="removeProduct(' + pros[i].Id + ');"><i class="fa fa-trash"></i> </button> </td>' +
+                    '</tr>';
+
+                $('#cart tbody').append(html);
+                total = (total + (pros[i].qty * pros[i].price));
+            }
+
+            var totalhtml = '<tr> ' +
+                '	<td></td>' +
+                '	<td></td>' +
+                '	<td style="text-align: right;"><strong>Tổng tiền</strong></td>' +
+                '	<td class="text-right"><strong>' + formatNumber(total, ',', '.') + '<strong> đ</strong>' + '</strong></td>' +
+                '	<td></td>' +
+                '</tr>                                                   ';
+            $('#cart tbody').append(totalhtml);
+            loadCart();
+        }
+
+
+
+        $(document).ready(function () {
+            loadCartList();
+        });
+
+        $(document).ready(function () {
+            //$('form').on('onSubmit', function (e) { e.preventDefault(); });
+            $('.btn-number').click(function (e) {
+                e.preventDefault();
+
+                var id = $(this).attr('data-pro');
+                fieldName = $(this).attr('data-field');
+                type = $(this).attr('data-type');
+                var input = $("input[name='" + fieldName + "'][data-pro='" + id + "']");
+                var currentVal = parseInt(input.val());
+                if (!isNaN(currentVal)) {
+                    if (type == 'minus') {
+
+                        if (currentVal > input.attr('min')) {
+                            input.val(currentVal - 1).change();
+                        }
+                        if (parseInt(input.val()) == input.attr('min')) {
+                            $(this).attr('disabled', true);
+                        }
+
+                    } else if (type == 'plus') {
+
+                        if (currentVal < input.attr('max')) {
+                            input.val(currentVal + 1).change();
+                        }
+                        if (parseInt(input.val()) == input.attr('max')) {
+                            $(this).attr('disabled', true);
+                        }
+
+                    }
+                } else {
+                    input.val(0);
+                }
+            });
+
+            $('.input-number').focusin(function () {
+                $(this).data('oldValue', $(this).val());
+            });
+
+            $('.input-number').change(function () {
+                minValue = parseInt($(this).attr('min'));
+                maxValue = parseInt($(this).attr('max'));
+                valueCurrent = parseInt($(this).val());
+                var id = $(this).attr('data-pro');
+
+                recalCart(id, valueCurrent);
+                location.reload();
+
+                //name = $(this).attr('name');
+                //if (valueCurrent >= minValue) {
+                //    $(".btn-number[data-type='minus'][data-pro='" + id + "'][data-field='" + name + "']").removeAttr('disabled')
+                //} else {
+                //    alert('Sorry, the minimum value was reached');
+                //    $(this).val($(this).data('oldValue'));
+                //}
+                //if (valueCurrent <= maxValue) {
+                //    $(".btn-number[data-type='plus'][data-pro='" + id + "'][data-field='" + name + "']").removeAttr('disabled')
+                //} else {
+                //    alert('Sorry, the maximum value was reached');
+                //    $(this).val($(this).data('oldValue'));
+                //}
+            });
+
+            $(".input-number").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                else if (e.keyCode == 13) {
+                    $(this).trigger('change')
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+
+    </script>
+
+}

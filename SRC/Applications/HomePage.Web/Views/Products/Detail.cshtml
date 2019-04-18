@@ -1,0 +1,103 @@
+﻿@using System.Collections.Generic;
+@using System.Globalization;
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using HomePage.Web.Helpers
+
+@using Common
+
+@model Homepage.UI.ViewModels.ProductHomepageViewModel;
+@inject IHtmlLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = "ProductDetail";
+    var related = ViewData["Related"] as IEnumerable<Homepage.UI.ViewModels.ProductHomepageViewModel>;
+    var imagePath = GlobalConfiguration.ProductImagePath;
+
+}
+<br />
+<section class="">
+    <div class="container">
+        <section class="post shop_mode_thumbs">
+            <article class="post_content">
+                <nav class="woocommerce-breadcrumb">
+                    <a href="index.html">@L["Index_Homepage"]</a>&nbsp;&#47;&nbsp;
+                    <a href="@L["R.Products"]">@L["Index_Product"]</a>&nbsp;&#47;&nbsp;
+                    <a href="#">@Model.Name</a>
+                </nav>
+
+                <div class="product" id="pro-@Model.Id" data-pro="@Newtonsoft.Json.JsonConvert.SerializeObject(Model)">
+                    <div class="images">
+                        <a href="@(imagePath + Model.ImageURL)" class="woocommerce-main-image zoom" title="">
+                            <span class="pro-img" style="background-image:url(@(imagePath + Model.ImageURL))"></span>
+                        </a>
+                        <div class="thumbnails columns-5">
+                        </div>
+                    </div>
+
+                    <div class="summary entry-summary">
+                        <h1 class="product_title entry-title" id="pro-@Model.Name">@Model.Name</h1>
+                        <div>
+                            <p class="price">
+                                <ins style="text-decoration:none">
+                                    <span class="amount" hidden>@Model.SellingCurrentPrice.ToFormatCurrency()</span>
+                                </ins>
+                            </p>
+                        </div>
+                        <div class="woocommerce-product-details">
+                            <p>
+                                <strong>@L["ProductDecription"]</strong>
+                            </p>
+                            <p>
+                                @Html.Raw(@Model.Decription)
+                            </p>
+                        </div>
+                        <div class="cart">
+                            <div class="quantity">
+                                <input type="number" hidden step="1" min="1" name="quantity" value="1" title="Qty" class="input-text qty text pro-qty" size="4" />
+                            </div>
+                            <button onclick="addProduct(@Model.Id);" type="submit" class="single_add_to_cart_button button alt" style="display:none;">@L["Order"]</button>
+                        </div>
+                    </div>
+
+                    <div class="woocommerce-tabs wc-tabs-wrapper sc_tabs">
+                        <ul class="tabs wc-tabs sc_tabs_titles">
+                            <li class="tab_names description_tab">
+                                <a href="#tab-description">@L["ProductDecription"]</a>
+                            </li>
+                        </ul>
+                        <div class="panel entry-content wc-tab" id="tab-description">
+                            <h2>@Model.Name</h2>
+                            <p>
+                                @Html.Raw(@Model.DefaultDescription)
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="related products">
+                    <ul class="products">
+                        <h3>Sản phẩm liên quan</h3>
+                        <div class="row">
+                            @foreach (var item in related)
+                            {
+                                <div id="pro-1" class="col-md-3 col-sm-6 col-xs-12 pro-item">
+                                    <a href="@item.GetUrl()" style="text-decoration:none;">
+                                        <span class="pro-img" style="background-image:url(@(imagePath + item.ImageURL))"></span>
+                                        <hr />
+                                        <span class="pro-name">@item.Name</span>
+                                        <span class="price" hidden>
+                                            <span class="amount">@item.SellingCurrentPrice.ToFormatCurrency()</span>
+                                        </span>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </ul>
+                </div>
+            </article>
+        </section>
+    </div>
+</section>

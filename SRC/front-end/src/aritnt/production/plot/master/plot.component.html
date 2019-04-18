@@ -1,0 +1,50 @@
+<div id="grid">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-default" (onClick)="loadData()"><i class="fa fa-lg fa-refresh"
+                    aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-primary" (onClick)="navigateInsertPlot()"><i class="fa fa-lg fa-plus"
+                    aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-warning" [disabled]="!_plotSelected?.length"
+                (onClick)="navigatePlotDetail()">
+                <i class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-danger" [disabled]="!_plotSelected?.length" (onClick)="deletePlot()"><i
+                    class="fa fa-lg fa-trash" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+
+    <dx-data-grid id="grid" [dataSource]="farmers" [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id"
+        [showBorders]="true">
+        <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+        </dxo-pager>
+
+        <dxi-column dataField="id" [width]="70"></dxi-column>
+        <dxi-column dataField="code" [width]="100"></dxi-column>
+        <dxi-column dataField="name"></dxi-column>
+        <dxi-column dataField="contact.name" caption="Contact name"></dxi-column>
+
+        <div *dxTemplate="let farmer of 'detail'">
+            <div class="master-detail-caption">
+                <p><b>{{farmer.data.name}}:</b></p>
+            </div>
+            <dx-data-grid [dataSource]="getPlots(farmer.key)" [showBorders]="true" [columnAutoWidth]="true"
+                [(selectedRowKeys)]="plotSelected">
+                <dxo-selection mode="single" [showCheckBoxesMode]="checkBoxesMode"></dxo-selection>
+                <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+                <dxo-filter-row [visible]="true"></dxo-filter-row>
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+                </dxo-pager>
+
+                <dxi-column dataField="id" [width]="70"></dxi-column>
+                <dxi-column dataField="code"></dxi-column>
+                <dxi-column dataField="description"></dxi-column>
+                <dxi-column dataField="area"></dxi-column>
+                <dxi-column dataField="isGlassHouse" dataType="boolean"></dxi-column>
+            </dx-data-grid>
+        </div>
+    </dx-data-grid>
+</div>

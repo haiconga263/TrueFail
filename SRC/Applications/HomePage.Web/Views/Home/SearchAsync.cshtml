@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Homepage.UI.ViewModels.ProductHomepageViewModel>;
+@using HomePage.Web.Helpers
+@using Common
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = "SearchAsync";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var imagePath = GlobalConfiguration.ProductImagePath;
+}
+
+<br />
+<br />
+<br />
+@if (ViewBag.Notification == "" || ViewBag.Notification == null)
+{
+    <section class="section_padding_top_80">
+        @if (Model != null && Model.Count() > 0)
+        {
+            <ul class="products">
+                <div class="container-fluid">
+                    <h2 class="sc_title sc_title_center sc_title_style_1 margin_bottom_50">
+                        Kết quả tìm kiếm
+                    </h2>
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div id="pro-1" class="col-md-3 col-sm-6 col-xs-12 pro-item">
+                                <a href="@item.GetUrl()" style="text-decoration:none;">
+                                    <span class="pro-img" style="background-image:url(@(imagePath + item.ImageURL))"></span>
+                                    <hr />
+                                    <span class="pro-name">@item.Name</span>
+                                    <span class="price" hidden>
+                                        <span class="amount">@item.SellingCurrentPrice.ToFormatCurrency()</span>
+                                    </span>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </ul>
+        }
+    </section>
+}
+else
+{
+    <h3 style="text-align:center">@ViewBag.Notification</h3>
+}

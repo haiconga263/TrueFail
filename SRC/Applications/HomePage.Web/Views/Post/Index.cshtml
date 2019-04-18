@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> L
+
+@{
+    ViewData["Title"] = "Post";
+}
+<br />
+<section class="">
+    <div class="container">
+        <article class="blogStreampage odd post">
+            <h1 class="postTitle">
+                <a href="@L["R.PostDetail"]">Hoạt động vì môi trường</a>
+            </h1>
+            <div class="postInfo hoverUnderline">
+                <div class="postWrap">
+                    <span class="postSpan postDate">
+                       22/2/2019
+                    </span>
+                </div>
+            </div>
+            <div class="sc_slider sc_slider_swiper swiper-container sc_slider_dark sc_slider_swiper_autoheight" data-settings="none">
+                <ul class="slides swiper-wrapper">
+                    <li class="swiper-slide" data-theme="dark">
+                        <img src="~/images/img1.jpg" width="1240" height="698">
+                    </li>
+                    <li class="swiper-slide" data-theme="dark">
+                        <img src="images/img2.jpg" width="1240" height="698">
+                    </li>
+                    <li class="swiper-slide" data-theme="dark">
+                        <img src="images/img3.jpg" width="1240" height="698">
+                    </li>
+                    <li class="swiper-slide" data-theme="dark">
+                        <img src="images/img4.jpg" width="1240" height="698">
+                    </li>
+                </ul>
+                <ul class="slider-control-nav">
+                    <li class="slide-prev">
+                        <a class="icon-left-open-big" href="#" style="text-decoration:none;"></a>
+                    </li>
+                    <li class="slide-next">
+                        <a class="icon-right-open-big" href="#" style="text-decoration:none;"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="post Gallery">
+                Hoạt động dã ngoại, teambuilding kết hợp hoạt động vì môi trường, toàn thể anh(chị) nhân viên, cùng toàn thể anh chị lãnh đạo công ty tham gia dọn dẹp rác tại bờ biển Dốc Lết - Khánh Hòa
+            </div>
+            <div class="readMore">
+                <a href="@L["R.PostDetail"]" class="sc_button  sc_button_skin_dark sc_button_style_bg sc_button_size_medium" style="text-decoration:none;">Xem thêm</a>
+            </div>
+        </article>
+
+        <article class="blogStreampage odd post">
+            <h1 class="postTitle">
+                <a href="@L["R.PostDetail"]">KỶ NIỆM 125 NĂM THÀNH LẬP ĐÀ LẠT (1893-2018) - HÀNH TRÌNH ĐÀ LẠT XANH LẦN THỨ NHẤT.</a>
+            </h1>
+            <div class="postInfo hoverUnderline">
+                <div class="postWrap">
+                    <span class="postSpan postDate">
+                        31/12/2018
+                    </span>
+                </div>
+            </div>
+            <div class="sc_slider sc_slider_swiper swiper-container sc_slider_dark sc_slider_swiper_autoheight" data-settings="none">
+                <ul class="slides swiper-wrapper">
+                    <li class="swiper-slide" data-theme="dark">
+                        <img src="~/images/img_post1.png" width="1240" height="698">
+                    </li>
+                    <li class="swiper-slide" data-theme="dark">
+                        <img src="~/images/img_post2.jpg" width="1240" height="698">
+                    </li>
+                    <li class="swiper-slide" data-theme="dark">
+                        <img src="images/img_post3.jpg" width="1240" height="698">
+                    </li>
+                    <li class="swiper-slide" data-theme="dark">
+                        <img src="images/img_post4.jpg" width="1240" height="698">
+                    </li>
+                </ul>
+                <ul class="slider-control-nav">
+                    <li class="slide-prev">
+                        <a class="icon-left-open-big" href="#" style="text-decoration:none;"></a>
+                    </li>
+                    <li class="slide-next">
+                        <a class="icon-right-open-big" href="#" style="text-decoration:none;"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="post Gallery">
+                Kỉ niệm 125 năm thành lập Đà Lạt, Tập thể công ty Dasavi và Aritnt đã tổ thực hiện hoạt động hành trình Đà Lạt xanh lần thứ nhất,
+                chương trình gồm các hoạt động làm vệ sinh môi trường tại khu vực quảng trường Thành Phố Đà Lạt và đạp xe đạp vòng quanh khu vực hồ Xuân Hương.
+            </div>
+            <div class="readMore">
+                <a href="@L["R.PostDetail"]" class="sc_button  sc_button_skin_dark sc_button_style_bg sc_button_size_medium" style="text-decoration:none;">Xem thêm</a>
+            </div>
+        </article>
+
+
+    </div>
+</section>

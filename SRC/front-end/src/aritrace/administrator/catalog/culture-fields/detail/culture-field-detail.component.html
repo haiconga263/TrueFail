@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <mk-box header="{{cultureField.name}}" [isRemovable]="false" [isCollapsable]="false">
+        <dx-form id="form" [formData]="cultureField">
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item dataField="codeName" [label]="{text: 'Code Name'}"
+                      [editorOptions]="{onChange: codeNameChanged}">
+              <dxi-validation-rule type="required" message="Code Name is required"></dxi-validation-rule>
+              <dxi-validation-rule type="pattern" [pattern]="'[a-zA-Z][0-9a-zA-Z]+'" message="The Code Name only allows letters and numbers"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="name" [label]="{text: 'Name'}">
+              <dxi-validation-rule type="required" message="Name is required"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="description" [label]="{text: 'Description'}" [colSpan]="2" editorType="dxTextArea"
+                      [editorOptions]="{ height: 100 }"></dxi-item>
+            <dxi-item dataField="dataType"
+                      [label]="{text: 'Data Type'}"
+                      editorType="dxSelectBox"
+                      [editorOptions]="{ items: dataTypes, onValueChanged: dataTypeChanged }">
+              <dxi-validation-rule type="required" message="Data Type is required"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item dataField="minimum" [label]="{text: 'Minimum'}" [editorType]="rangeType" [editorOptions]="{ disabled: !isRange, type: dtType }"></dxi-item>
+            <dxi-item dataField="maximum" [label]="{text: 'Maximum'}" [editorType]="rangeType" [editorOptions]="{ disabled: !isRange, type: dtType }"></dxi-item>
+            <dxi-item dataField="source" [label]="{text: 'Source'}" [colSpan]="2" editorType="dxTextArea" [editorOptions]="{ height: 100, disabled: !isList }"></dxi-item>
+            <dxi-item dataField="isRequired" [label]="{text: 'Is Required'}" editorType="dxCheckBox"></dxi-item>
+            <dxi-item dataField="isUsed" [label]="{text: 'Is Used'}" editorType="dxCheckBox"></dxi-item>
+          </dxi-item>
+        </dx-form>
+
+        <div class="button-actions">
+          <div class="button">
+            <dx-button text="Cancel" (onClick)="cancel()"></dx-button>
+            <dx-button text="Save" type="default" (onClick)="save()"></dx-button>
+          </div>
+        </div>
+
+      </mk-box>
+    </div>
+  </div>
+</div>

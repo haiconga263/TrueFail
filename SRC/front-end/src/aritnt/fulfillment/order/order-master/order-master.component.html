@@ -1,0 +1,75 @@
+<div id="grid" class="order-detail-area">
+  <div class="box-body">
+    <div class="left-side" style="padding:10px">
+      <div class="btn-group">
+        <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();">
+          <i class="fa fa-cubes" aria-hidden="true"></i>
+        </dx-button>
+        <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'"
+          (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+        <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();">
+          <i class="fa fa-lg fa-undo" aria-hidden="true"></i>
+        </dx-button>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>Nhà máy sơ chế</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-select-box [dataSource]="fulfillments" displayExpr="name" valueExpr="id" [value]="fulfillment.id"
+                    (onValueChanged)="fulfillmentChanged($event)">
+                  </dx-select-box>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <div class="box-body">
+
+      <h4>Danh sách hàng thô</h4>
+      <dx-data-grid id="gridContainer" [dataSource]="fcModel" [columnAutoWidth]="true"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
+        [(selectedRowKeys)]="selectedRows" (onSelectionChanged)="onSelectionChanged($event)">
+        <dxo-selection mode="single"></dxo-selection>
+
+        <dxo-filter-row visible="true"></dxo-filter-row>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+        </dxo-pager>
+
+        <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+        <dxi-column dataField="collection.name" [caption]="Collection"></dxi-column>
+        <dxi-column dataField="fulfillment.name" [caption]="Fulfillment"></dxi-column>
+        <dxi-column dataField="deliveryDate" [caption]="DeliveredDate" dataType="date"></dxi-column>
+
+        <div *dxTemplate="let order of 'detail'">
+          <div class="master-detail-caption">Danh sách hàng</div>
+          <dx-data-grid [dataSource]="order.data.items" [showBorders]="true" [columnAutoWidth]="true">
+            <dxi-column dataField="traceCode" caption="Trace Code"></dxi-column>
+            <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>
+            <dxi-column dataField="shippedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')"></dxi-column>
+            <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+          </dx-data-grid>
+
+          <dx-data-grid [dataSource]="order.items" [showBorders]="true" (onRowInserting)="insertingItem($event)"
+            (onRowUpdating)="updatingItem($event)" (onRowInserted)="insertedItem($event)"
+            (onRowUpdated)="updatedItem($event)">
+
+
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+    </div>
+  </div>
+
+ 
+</div>

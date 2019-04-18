@@ -1,0 +1,52 @@
+<div id="grid" class="order-detail-area">
+  <div class="left-side" style="padding:10px">
+    <div class="btn-group">
+      <!-- <dx-button class="btn fe-md btn-primary" [disabled]="selectedRows?.length != 1" hint="Lưu thông tin"
+        (onClick)="save();">
+        <i class="fa fa-lg fa-save" aria-hidden="true"></i>
+      </dx-button> -->
+      <dx-button class="btn fe-md btn-default" [disabled]="selectedRows?.length != 1" hint="In hóa đơn"
+        (onClick)="printReceipt();">
+        <i class="fa fa-get-pocket"></i>
+      </dx-button>
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();">
+        <i class="fa fa-lg fa-undo" aria-hidden="true"></i>
+      </dx-button>
+    </div>
+  </div>
+
+  <div class="left-side">
+    <div class="box-body">
+      <dx-data-grid id="gridContainer" [dataSource]="fcModel" [columnAutoWidth]="true"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
+        [(selectedRowKeys)]="selectedRows" (onSelectionChanged)="onSelectionChanged($event)">
+        <dxo-selection mode="single"></dxo-selection>
+
+        <dxo-filter-row visible="true"></dxo-filter-row>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+        </dxo-pager>
+
+        <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+        <dxi-column dataField="collection.name" [caption]="Collection"></dxi-column>
+        <dxi-column dataField="fulfillment.name" [caption]="Fulfillment"></dxi-column>
+        <dxi-column dataField="deliveryDate" [caption]="DeliveredDate" dataType="date"></dxi-column>
+
+        <div *dxTemplate="let order of 'detail'">
+          <div class="master-detail-caption">Danh sách hàng</div>
+          <dx-data-grid [dataSource]="order.data.items" [showBorders]="true" [columnAutoWidth]="true">
+            <dxi-column dataField="traceCode" caption="Trace Code"></dxi-column>
+            <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>
+            <dxi-column dataField="shippedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')"></dxi-column>
+            <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+          </dx-data-grid>
+
+          <dx-data-grid [dataSource]="order.items" [showBorders]="true" (onRowInserting)="insertingItem($event)"
+            (onRowUpdating)="updatingItem($event)" (onRowInserted)="insertedItem($event)"
+            (onRowUpdated)="updatedItem($event)">
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+    </div>
+  </div>
+</div>

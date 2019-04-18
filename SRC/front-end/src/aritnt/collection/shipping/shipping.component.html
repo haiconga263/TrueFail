@@ -1,0 +1,133 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="btn-group">
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="refresh()"><i
+          class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+      <dx-button class="btn fe-md btn-primary" [disabled]="chooseCollection == null"
+        [hint]="lang.instant('Action.Create')" (onClick)="create()"><i class="fa fa-lg fa-plus" aria-hidden="true"></i>
+      </dx-button>
+      <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Update')"
+        [disabled]="selectedRows?.length != 1 || getShipping(selectedRows[0])?.statusId > 1" (onClick)="update()"><i
+          class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i></dx-button>
+      <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Confirm')"
+        [disabled]="selectedRows?.length != 1 || getShipping(selectedRows[0])?.statusId != 1" (onClick)="confirm()"><i
+          class="fa fa-lg fa-paper-plane" aria-hidden="true"></i></dx-button>
+      <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Confirm')"
+        [disabled]="selectedRows?.length != 1 || getShipping(selectedRows[0])?.statusId != 2" (onClick)="onTriped()"><i
+          class="fa fa-lg fa-truck" aria-hidden="true"></i></dx-button>
+      <dx-button class="btn fe-md btn-danger" [hint]="lang.instant('Action.Cancel')"
+        [disabled]="selectedRows?.length != 1 || getShipping(selectedRows[0])?.statusId == 1" (onClick)="canceled()"><i
+          class="fa fa-lg fa-times-circle" aria-hidden="true"></i></dx-button>
+      <dx-button class="btn fe-md btn-danger" [hint]="lang.instant('Action.Delete')"
+        [disabled]="selectedRows?.length != 1 || getShipping(selectedRows[0])?.statusId > 1" (onClick)="delete()"><i
+          class="fa fa-lg fa-trash" aria-hidden="true"></i></dx-button>
+    </div>
+  </div>
+  <div class="left-side">
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>{{lang.instant('Admin.Collection')}}</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-select-box [dataSource]="collections" [(ngModel)]="chooseCollection" displayExpr="name"
+                    (onValueChanged)="collectionChanged($event)">
+                  </dx-select-box>
+                </div>
+              </div>
+            </div>
+            <!-- /.form-group -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="left-side">
+    <dx-data-grid id="gridContainer" [columnAutoWidth]="true" [dataSource]="shippings"
+      [(selectedRowKeys)]="selectedRows" [showBorders]="true" keyExpr="id" (onRowUpdating)="shippingUpdating($event)"
+      (onRowInserting)="shippingAdding($event)" [masterDetail]="{ enabled: true, template: 'detail' }"
+      (onRowExpanding)="onShippingExpanding($event)">
+      <dxo-editing mode="form">
+      </dxo-editing>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-filter-row visible="true"></dxo-filter-row>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+      </dxo-pager>
+
+      <dxi-column dataField="code" [caption]="lang.instant('Common.Code')" [formItem]="{visible: false}"></dxi-column>
+      <dxi-column dataField="fulfillmentId" [caption]="lang.instant('Admin.Fulfillment')">
+        <dxo-lookup [dataSource]="fulfillments" valueExpr="id" displayExpr="name">
+        </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="shipperId" [caption]="lang.instant('Delivery.DeliveryMan')">
+        <dxo-lookup [dataSource]="deliveryMans" valueExpr="id" displayExpr="fullName">
+        </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="vehicleId" [caption]="lang.instant('Delivery.Vehicle')">
+        <dxo-lookup [dataSource]="vehicles" valueExpr="id" displayExpr="name">
+        </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="deliveryDate" [caption]="lang.instant('Delivery.DeliveryDate')" dataType="date"
+        allowEditing="false" [editorOptions]="{ min: now }">
+        <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+        </dxi-validation-rule>
+      </dxi-column>
+      <dxi-column dataField="statusId" [caption]="lang.instant('Common.Status')" cellTemplate="statusTemplate"
+        [formItem]="{visible: false}">
+        <dxo-lookup [dataSource]="statuses" valueExpr="id" displayExpr="name">
+        </dxo-lookup>
+      </dxi-column>
+
+      <div *dxTemplate="let status of 'statusTemplate'">
+        <span class="label"
+          [style.background-color]="getStatus(status.value).flagColor">{{getStatus(status.value).name}}</span>
+      </div>
+
+      <div *dxTemplate="let trip of 'detail'">
+        <div class="left-side" *ngIf="trip.data.statusId == 1">
+          <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')"
+              (onClick)="changeItem(trip.data)"><i class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+          </div>
+        </div>
+        <dx-data-grid #gridDetail [(dataSource)]="trip.data.items" [showBorders]="true" [columnAutoWidth]="true"
+          (onRowUpdated)="shippingItemUpdated($event, trip.data.items, gridDetail)"
+          (onRowInserting)="shippingItemAdding($event)">
+          <dxo-editing mode="form" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true"
+            *ngIf="trip.data.statusId == 1">
+          </dxo-editing>
+          <dxi-column *ngIf="trip.data.statusId == 1" dataField="traceCode" [caption]="lang.instant('Common.Code')"
+            [editorOptions]="{ tempData: this}" [setCellValue]="setInventoryCellValue">
+            <dxo-lookup [dataSource]="inventories" valueExpr="traceCode" [displayExpr]="traceCodeDisplayExpr">
+            </dxo-lookup>
+            <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+            </dxi-validation-rule>
+          </dxi-column>
+          <dxi-column *ngIf="trip.data.statusId != 1" dataField="traceCode" [caption]="lang.instant('Common.Code')">
+          </dxi-column>
+          <dxi-column dataField="productId" [caption]="lang.instant('Admin.Product')"
+            [editorOptions]="{ disabled: true}">
+            <dxo-lookup [dataSource]="products" valueExpr="id" displayExpr="defaultName">
+            </dxo-lookup>
+          </dxi-column>
+          <dxi-column dataField="uoMId" [caption]="lang.instant('Admin.UoM')" [editorOptions]="{ disabled: true}">
+            <dxo-lookup [dataSource]="uoms" valueExpr="id" displayExpr="name">
+            </dxo-lookup>
+          </dxi-column>
+          <dxi-column dataField="shippedQuantity" dataType="number" [caption]="lang.instant('Common.Quantity')"
+            [editorOptions]="{ tempData: this.inventories, min: 1}" [setCellValue]="setQuantityCellValue">
+            <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+            </dxi-validation-rule>
+            <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+              message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+          </dxi-column>
+        </dx-data-grid>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>

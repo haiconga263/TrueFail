@@ -1,0 +1,39 @@
+<div id="grid">
+    <div class="left-side">
+      <div class="btn-group">
+          <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="refresh()"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+          <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Update')" [disabled]="selectedRows?.length != 1" (onClick)="update()"><i
+              class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i></dx-button>
+      </div>
+    </div>
+    <div class="right-side">
+      <!--<dx-select-box></dx-select-box>-->
+    </div>
+    <dx-data-grid id="gridContainer" [dataSource]="captions" [columnAutoWidth]="true" [masterDetail]="{ enabled: true, template: 'detail' }"
+      keyExpr="id"  [showBorders]="true" [(selectedRowKeys)]="selectedRows">
+      <dxo-selection mode="single"></dxo-selection>
+  
+      <dxo-filter-row 
+          visible="true" ></dxo-filter-row>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+      </dxo-pager>
+      <dxi-column dataField="name" [caption]="lang.instant('Admin.Caption.Type')"></dxi-column>
+      <dxi-column dataField="type" [caption]="lang.instant('Admin.Caption.Name')">
+          <dxo-lookup [dataSource]="types" valueExpr="id" displayExpr="name">
+          </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="defaultCaption" [caption]="lang.instant('Admin.Caption.DefaultCaption')"></dxi-column>
+  
+      <div *dxTemplate="let caption of 'detail'">
+        <div class="master-detail-caption">{{lang.instant('Common.Description')}}</div>
+        <dx-data-grid [dataSource]="caption.data.languages" [showBorders]="true" [columnAutoWidth]="true">
+          <dxi-column dataField="languageId" [caption]="lang.instant('Common.Language')">
+              <dxo-lookup [dataSource]="languages" valueExpr="id" displayExpr="name">
+                </dxo-lookup>
+          </dxi-column>
+          <dxi-column dataField="caption" [caption]="lang.instant('Common.Description')"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </dx-data-grid>
+  </div>

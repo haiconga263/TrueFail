@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Web\Web.csproj" />
+    <ProjectReference Include="..\..\..\Presentations\Users.UI\Users.UI.csproj" />
+    <ProjectReference Include="..\..\Presentations\Administrator.UI\Administrator.UI.csproj" />
+    <ProjectReference Include="..\..\Presentations\AriSystem.UI\AriSystem.UI.csproj" />
+    <ProjectReference Include="..\..\Presentations\MDM.UI\MDM.UI.csproj" />
+    <ProjectReference Include="..\MDM\MDM.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.core\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

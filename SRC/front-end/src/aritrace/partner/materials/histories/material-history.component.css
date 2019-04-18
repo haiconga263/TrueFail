@@ -1,0 +1,11 @@
+::ng-deep .btn-add {
+  margin: 10px 5px;
+}
+
+::ng-deep .popup .dx-field-value.field-value {
+  margin-top: 8px;
+}
+
+  ::ng-deep .popup .dx-field-value.field-value dx-check-box{
+    float:left;
+  }

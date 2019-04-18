@@ -1,0 +1,29 @@
+﻿
+
+#faqs [data-toggle="collapse"].collapsed:after {
+    transform: rotate(0deg);
+}
+/*.custom-header {
+    border-top: 1px solid #006699;
+}*/
+
+#faqs .panel-title > a.text-color {
+    color: #343294;
+    font-size: x-large
+}
+
+#faqs .panel-body {
+    color: black;
+    font-size: 14px;
+}
+
+#faqs .alert-info {
+    border-radius: 0;
+    background: #329474;
+    border: 0;
+    color: white;
+}
+
+#faqs .alert-body {
+    font-size: 15px;
+}

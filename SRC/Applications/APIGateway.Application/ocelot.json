@@ -1,0 +1,198 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/Category/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Category/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Employee/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Employee/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Geo/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Geo/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Language/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Language/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Product/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Product/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/UoM/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/UoM/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Vehicle/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Vehicle/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/api/FarmerBuyingCalendar/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/FarmerBuyingCalendar/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/FarmerOrder/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/FarmerOrder/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/RetailerBuyingCalendar/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/RetailerBuyingCalendar/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/RetailerOrder/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/RetailerOrder/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/api/Retailer/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Retailer/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/api/Farmer/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Farmer/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/api/User/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/User/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+
+
+    {
+      "DownstreamPathTemplate": "/api/collection/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.1.201",
+          "Port": 40000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/collection/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:49992"
+  }
+}

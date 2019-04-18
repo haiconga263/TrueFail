@@ -1,0 +1,17 @@
+<dx-form id="form" [formData]="category">
+  <dxi-item itemType="group" [colCount]="2">
+    <dxi-item itemType="group">
+      <dxi-item dataField="code" [label]="{text: 'Category Code'}"></dxi-item>
+      <dxi-item dataField="name"></dxi-item>
+      <dxi-item dataField="isUsed" editorType="dxCheckBox"></dxi-item>
+    </dxi-item>
+  </dxi-item>
+  <dxi-item><caption-embed></caption-embed></dxi-item>
+</dx-form>
+
+<div class="button-actions">
+  <div class="button">
+    <dx-button text="Cancel" (onClick)="cancel()"></dx-button>
+    <dx-button text="Save" type="default" (onClick)="save()"></dx-button>
+  </div>
+</div>

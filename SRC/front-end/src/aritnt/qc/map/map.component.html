@@ -1,0 +1,5 @@
+<agm-map (mapReady)="mapReady($event)" style="height: 600px;" [longitude]="centerLong" [latitude]="centerLat">
+  <agm-marker *ngFor="let trip of trips" [latitude]="trip.currentLatitude" [longitude]="trip.currentLongitude" [title]="trip.code" iconUrl="/assets/img/distribution/car-60-60.png">
+  </agm-marker>
+
+</agm-map>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Enumerations\" />
+    <Folder Include="Labels\" />
+    <Folder Include="SessionBuffers\ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Common\Common.csproj" />
+    <ProjectReference Include="..\MDM.UI\MDM.UI.csproj" />
+  </ItemGroup>
+
+</Project>

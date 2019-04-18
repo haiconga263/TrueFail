@@ -1,0 +1,175 @@
+<div class="box-body" id="grid">
+    <div class="left-side" style="padding:10px">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Save')" (onClick)="return();">
+                <i class="fa fa-lg fa-save" aria-hidden="true"></i>
+            </dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();">
+                <i class="fa fa-lg fa-undo" aria-hidden="true"></i>
+            </dx-button>
+        </div>
+    </div>
+    <dx-data-grid id="gridContainer" [dataSource]="packs" [columnAutoWidth]="true"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
+        [(selectedRowKeys)]="selectedRows" (onSelectionChanged)="onSelectionChanged($event)">
+        <dxo-selection mode="single"></dxo-selection>
+
+        <dxo-filter-row visible="true"></dxo-filter-row>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+        </dxo-pager>
+
+        <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+        <dxi-column dataField="name" [caption]="lang.instant('Common.Name')"></dxi-column>
+        <dxi-column dataField="retailer.name" [caption]="lang.instant('Admin.Retailer')"></dxi-column>
+        <dxi-column dataField="" caption="Nhà máy sơ chế">
+            <!-- <dxo-lookup [dataSource]="fulfillments" valueExpr="id" displayExpr="name">
+      </dxo-lookup> -->
+        </dxi-column>
+        <!-- <dxi-column dataField="Team" caption="Người đóng gói"></dxi-column>
+    <dxi-column dataField="statusId" [caption]="lang.instant('Common.Status')">
+      <dxo-lookup [dataSource]="statuses" valueExpr="id" displayExpr="name">
+      </dxo-lookup>
+    </dxi-column> -->
+        <div *dxTemplate="let order of 'detail'">
+            <div class="master-detail-caption">{{lang.instant('Order.OrderList')}}</div>
+            <dx-data-grid [dataSource]="order.data.items" [showBorders]="true" [columnAutoWidth]="true">
+                <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>
+                <dxi-column dataField="orderedQuantity" [caption]="lang.instant('Order.OrderedQuantity')"></dxi-column>
+                <!-- <dxi-column dataField="adapQuantity" [caption]="lang.instant('Order.AdapedQuantity')"></dxi-column>
+                <dxi-column dataField="deliveriedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')">
+                </dxi-column> -->
+                <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+            </dx-data-grid>
+        </div>
+    </dx-data-grid>
+
+    <div class="box">
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Thông tin hàng thô</h5>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                <label>Sản phẩm</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <dx-tag-box [(opened)]="isDropDownBoxOpened" [(value)]="selectedProduct"
+                                    [(opened)]="isDropDownBoxOpened" [items]="products"
+                                    [displayExpr]="display_Prt">
+                                    <dx-list selectionMode="multiple" [dataSource]="products"
+                                        [showSelectionControls]="true"
+                                        [(selectedItemKeys)]="selectedProduct">
+                                        <div *dxTemplate="let data of 'item'">
+                                            {{data.defaultName}}
+                                        </div>
+                                    </dx-list>
+                                </dx-tag-box>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                <label>Số lượng trong kho</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="dx-field-value" style="width:100%">
+                                    <dx-number-box></dx-number-box>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                <label>Đơn vị tính</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <dx-select-box [dataSource]="uoms" valueExpr="id" displayExpr="name"
+                                 [value] = ""></dx-select-box>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5>Thông tin đóng gói hàng</h5>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                <label>Số lượng đóng gói</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="dx-field-value" style="width:100%">
+                                    <dx-number-box></dx-number-box>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                <label>Đơn vị tính</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <dx-select-box [dataSource]="uoms" valueExpr="id" displayExpr="name"></dx-select-box>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="box">
+        <div class="box-body">
+            <div class="row">
+                <h5>Thông tin thêm</h5>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                <label>Nhà máy đóng gói</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <dx-select-box [dataSource]="fulfillments" valueExpr="id" displayExpr="name"
+                                [value]="fulfillments[0].id">
+                                </dx-select-box>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                <label>Người thực hiện</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <dx-select-box [dataSource]="teams" valueExpr="id" displayExpr="name"
+                                [value]="teams[0].id" >
+                                </dx-select-box>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                <label>Trạng thái</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <dx-select-box [dataSource]="statusS" valueExpr="id" displayExpr="name"
+                                [value]="statusS[0].id" >
+                                </dx-select-box>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,175 @@
+<div id="grid" class="order-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i
+                    class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'"
+                (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i
+                    class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Code')}}</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Order.Code')}}" readOnly="true"
+                                [(ngModel)]="order.code">
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Retailer')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="retailers" displayExpr="name" valueExpr="id"
+                                [(ngModel)]="order.retailerId" [(isValid)]="isRetailerValid"
+                                (onValueChanged)="retailerChanged($event)">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}">
+                                    </dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Order.DeliveriedLocation')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="locations" displayExpr="name" valueExpr="id"
+                                [(ngModel)]="order.shipTo" [(isValid)]="isShipValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}">
+                                    </dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                        <a href="../../../../../../.editorconfig">../../../../../../.editorconfig</a>
+                        <label>
+                          {{lang.instant('Common.Name')}} <span class="dx-field-item-required-mark">*</span>
+                        </label>
+                      </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Name')}}" [(ngModel)]="order.name"
+                                [(isValid)]="isNameValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}">
+                                    </dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Order.DeliveriedDate')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-date-box [(value)]="order.buyingDate" type="date" displayFormat="dd/MM/yyyy" [min]="now"
+                                  >
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}">
+                                    </dxi-validation-rule>
+                                </dx-validator>
+                            </dx-date-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Order.BillLocation')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="locations" displayExpr="name" valueExpr="id"
+                                [(ngModel)]="order.billTo" [(isValid)]="isBillValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}">
+                                    </dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+    <!-- /.row -->
+    <div class="box-body">
+        <!--<h3>{{lang.instant('Order.OrderList')}}</h3>-->
+        <h3>Danh sách hàng</h3>
+        <dx-data-grid [dataSource]="order.items" [showBorders]="true" (onRowInserting)="insertingItem($event)"
+            (onRowUpdating)="updatingItem($event)" (onRowInserted)="insertedItem($event)"
+            (onRowUpdated)="updatedItem($event)">
+
+            <dxo-editing mode="form" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+            </dxo-editing>
+            <dxi-column dataField="productId" [caption]="lang.instant('Admin.Product')">
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+                <dxo-lookup [dataSource]="products" valueExpr="id" displayExpr="name">
+                </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="price" [caption]="lang.instant('Common.Price')" format="#,##0.## VND"
+                [formItem]="{visible: false}">
+            </dxi-column>
+            <dxi-column dataField="orderedQuantity" [caption]="lang.instant('Order.OrderedQuantity')" dataType="number">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="uoMId" [caption]="lang.instant('Admin.UoM')">
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+                <dxo-lookup [dataSource]="uoms" valueExpr="id" displayExpr="name">
+                </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="totalAmount" [caption]="lang.instant('Common.TotalAmount')" format="#,##0.## VND"
+                [formItem]="{visible: false}">
+            </dxi-column>
+            <dxo-summary>
+                <dxi-total-item column="totalAmount" summaryType="sum" valueFormat="#,##0.##" displayFormat="{0} VND">
+                </dxi-total-item>
+            </dxo-summary>
+        </dx-data-grid>
+    </div>
+</div>

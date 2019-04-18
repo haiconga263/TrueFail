@@ -1,0 +1,125 @@
+<dx-form id="form" [formData]="process">
+  <dxi-item itemType="group" cssClass="group" [colCount]="6" caption="General">
+    <dxi-item itemType="group" [colSpan]="5" [colCount]="2">
+      <dxi-item dataField="code" disabled="false" [label]="{text: 'Code'}"></dxi-item>
+      <dxi-item itemType="empty"></dxi-item>
+
+      <dxi-item itemType="simple" [label]="{text: 'Production'}">
+        <dx-drop-down-box [value]="process.productionId" valueExpr="id" [deferRendering]="false" [displayExpr]="production_displayExpr"
+          placeholder="Select a value..." [dataSource]="productions">
+          <div *dxTemplate="let data of 'content'">
+            <dx-data-grid [dataSource]="productions" keyExpr="id" [columns]="['id', 'name']" [selection]="{ mode: 'single' }"
+              [hoverStateEnabled]="true" [paging]="{ enabled: true, pageSize: 10 }" [filterRow]="{ visible: true }"
+              [scrolling]="{ mode: 'infinite' }" height="100%" (onSelectionChanged)="selectionChangedHandler('productionId', $event)">
+            </dx-data-grid>
+          </div>
+        </dx-drop-down-box>
+      </dxi-item>
+
+      <dxi-item itemType="simple" [label]="{text: 'Product'}">
+        <dx-drop-down-box [value]="process.productId" valueExpr="id" [deferRendering]="false" [displayExpr]="product_displayExpr"
+          placeholder="Select a value..." [dataSource]="products">
+          <div *dxTemplate="let data of 'content'">
+            <dx-data-grid [dataSource]="products" keyExpr="id" [columns]="['id', 'defaultName']" [selection]="{ mode: 'single' }"
+              [hoverStateEnabled]="true" [paging]="{ enabled: true, pageSize: 10 }" [filterRow]="{ visible: true }"
+              [scrolling]="{ mode: 'infinite' }" height="100%" (onSelectionChanged)="selectionChangedHandler('productId', $event)">
+            </dx-data-grid>
+          </div>
+        </dx-drop-down-box>
+      </dxi-item>
+
+      <dxi-item dataField="isUsed" [label]="{text: 'Is Used'}" editorType="dxCheckBox"></dxi-item>
+    </dxi-item>
+  </dxi-item>
+  <dxi-item itemType="group" cssClass="group" [colCount]="6" caption="Product Specific Characteristics">
+    <dxi-item itemType="group" [colSpan]="5" [colCount]="2">
+      <!-- <dxi-item dataField="pointId" [label]="{text: 'Point'}"></dxi-item> -->
+      <dxi-item dataField="farmerId" [label]="{text: 'Farmer'}"></dxi-item>
+
+      <dxi-item itemType="simple" [label]="{text: 'Company Cultivation'}">
+        <dx-drop-down-box [value]="process.companyCultivationId" valueExpr="id" [deferRendering]="false" displayExpr="name"
+          placeholder="Select a value..." [dataSource]="companies">
+          <div *dxTemplate="let data of 'content'">
+            <dx-data-grid [dataSource]="companies" keyExpr="id" [columns]="['id', 'name']" [selection]="{ mode: 'single' }"
+              [hoverStateEnabled]="true" [paging]="{ enabled: true, pageSize: 10 }" [filterRow]="{ visible: true }"
+              [scrolling]="{ mode: 'infinite' }" height="100%" (onSelectionChanged)="selectionChangedHandler('companyCultivationId', $event)">
+            </dx-data-grid>
+          </div>
+        </dx-drop-down-box>
+      </dxi-item>
+
+      <dxi-item itemType="simple" [label]="{text: 'Company Collection'}">
+        <dx-drop-down-box [value]="process.companyCollectionId" valueExpr="id" [deferRendering]="false" displayExpr="name"
+          placeholder="Select a value..." [dataSource]="companies">
+          <div *dxTemplate="let data of 'content'">
+            <dx-data-grid [dataSource]="companies" keyExpr="id" [columns]="['id', 'name']" [selection]="{ mode: 'single' }"
+              [hoverStateEnabled]="true" [paging]="{ enabled: true, pageSize: 10 }" [filterRow]="{ visible: true }"
+              [scrolling]="{ mode: 'infinite' }" height="100%" (onSelectionChanged)="selectionChangedHandler('companyCollectionId', $event)">
+            </dx-data-grid>
+          </div>
+        </dx-drop-down-box>
+      </dxi-item>
+
+      <dxi-item dataField="collectionDate" [label]="{text: 'Collection Date'}" editorType="dxDateBox"></dxi-item>
+
+      <dxi-item itemType="simple" [label]="{text: 'Company Fulfillment'}">
+        <dx-drop-down-box [value]="process.companyFulfillmentId" valueExpr="id" [deferRendering]="false" displayExpr="name"
+          placeholder="Select a value..." [dataSource]="companies">
+          <div *dxTemplate="let data of 'content'">
+            <dx-data-grid [dataSource]="companies" keyExpr="id" [columns]="['id', 'name']" [selection]="{ mode: 'single' }"
+              [hoverStateEnabled]="true" [paging]="{ enabled: true, pageSize: 10 }" [filterRow]="{ visible: true }"
+              [scrolling]="{ mode: 'infinite' }" height="100%" (onSelectionChanged)="selectionChangedHandler('companyFulfillmentId', $event)">
+            </dx-data-grid>
+          </div>
+        </dx-drop-down-box>
+      </dxi-item>
+
+      <dxi-item dataField="fulfillmentDate" [label]="{text: 'Fulfillment Date'}" editorType="dxDateBox"></dxi-item>
+
+      <dxi-item itemType="simple" [label]="{text: 'Company Distribution'}">
+        <dx-drop-down-box [value]="process.companyDistributionId" valueExpr="id" [deferRendering]="false" displayExpr="name"
+          placeholder="Select a value..." [dataSource]="companies">
+          <div *dxTemplate="let data of 'content'">
+            <dx-data-grid [dataSource]="companies" keyExpr="id" [columns]="['id', 'name']" [selection]="{ mode: 'single' }"
+              [hoverStateEnabled]="true" [paging]="{ enabled: true, pageSize: 10 }" [filterRow]="{ visible: true }"
+              [scrolling]="{ mode: 'infinite' }" height="100%" (onSelectionChanged)="selectionChangedHandler('companyDistributionId', $event)">
+            </dx-data-grid>
+          </div>
+        </dx-drop-down-box>
+      </dxi-item>
+
+      <dxi-item dataField="distributionDate" [label]="{text: 'Distribution Date'}" editorType="dxDateBox"></dxi-item>
+
+      <dxi-item itemType="simple" [label]="{text: 'Company Retailer'}">
+        <dx-drop-down-box [value]="process.companyRetailerId" valueExpr="id" [deferRendering]="false" displayExpr="name"
+          placeholder="Select a value..." [dataSource]="companies">
+          <div *dxTemplate="let data of 'content'">
+            <dx-data-grid [dataSource]="companies" keyExpr="id" [columns]="['id', 'name']" [selection]="{ mode: 'single' }"
+              [hoverStateEnabled]="true" [paging]="{ enabled: true, pageSize: 10 }" [filterRow]="{ visible: true }"
+              [scrolling]="{ mode: 'infinite' }" height="100%" (onSelectionChanged)="selectionChangedHandler('companyRetailerId', $event)">
+            </dx-data-grid>
+          </div>
+        </dx-drop-down-box>
+      </dxi-item>
+
+      <dxi-item dataField="retailerDate" [label]="{text: 'Retailer Date'}" editorType="dxDateBox"></dxi-item>
+      <dxi-item dataField="expiryDate" [label]="{text: 'Expiry Date'}" editorType="dxDateBox"></dxi-item>
+      <dxi-item dataField="manufacturingDate" [label]="{text: 'Manufacturing Date'}" editorType="dxDateBox"></dxi-item>
+
+      <dxi-item itemType="simple" [label]="{text: 'Growing Method'}">
+        <dx-select-box [dataSource]="growingMethods" displayExpr="name" valueExpr="id" [(value)]="process.growingMethodId"></dx-select-box>
+      </dxi-item>
+
+      <dxi-item dataField="standardExpiryDate" [label]="{text: 'Standard Expiry Date'}" editorType="dxDateBox"></dxi-item>
+      <dxi-item dataField="description" [label]="{text: 'Description'}"></dxi-item>
+      <dxi-item dataField="quantity" [label]="{text: 'Quantity'}"></dxi-item>
+      <dxi-item dataField="uom" [label]="{text: 'Uom'}"></dxi-item>
+    </dxi-item>
+  </dxi-item>
+</dx-form>
+<div class="button-actions">
+  <div class="button">
+    <dx-button text="Cancel" (onClick)="cancel()"></dx-button>
+    <dx-button text="Save" type="default" (onClick)="save()"></dx-button>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<dx-form id="form" [formData]="production">
+  <dxi-item itemType="group" cssClass="group" [colCount]="6" caption="General">
+    <dxi-item itemType="simple" [colSpan]="2">
+      <dx-box direction="row" width="100%">
+        <dxi-item class="rect" [ratio]="1">
+          <label>GTIN Type:</label>
+        </dxi-item>
+        <dxi-item class="rect" [ratio]="1">
+          <dx-select-box [dataSource]="GTINTypes" displayExpr="text" valueExpr="value" (onValueChanged)="calculateGTIN($event)"
+            [(value)]="gTIN.type">
+          </dx-select-box>
+        </dxi-item>
+      </dx-box>
+    </dxi-item>
+
+    <dxi-item itemType="empty"></dxi-item>
+    <dxi-item itemType="empty"></dxi-item>
+    <dxi-item itemType="empty"></dxi-item>
+    <dxi-item itemType="empty"></dxi-item>
+
+    <dxi-item itemType="simple" [colSpan]="5" [colCount]="2">
+      <dx-box direction="row" width="100%">
+        <dxi-item class="rect" [ratio]="1">
+          <label>GTIN Code:</label>
+        </dxi-item>
+        <dxi-item class="rect" [ratio]="3">
+          <span class="gtin-code">{{gTIN.code}}</span>
+
+          <span class="msg-check {{classChecking}}"> {{msgChecking}}</span>
+        </dxi-item>
+      </dx-box>
+
+      <dx-box direction="row" width="100%" style="margin-top:10px;" [visible]="!isHidden">
+        <dxi-item class="rect" [ratio]="1"></dxi-item>
+        <dxi-item class="rect gtin-center" [ratio]="2">
+          <dx-number-box [hidden]="!hasIndicatorDigit" [(value)]="gTIN.indicatorDigit" (onValueChanged)="calculateGTIN($event)"
+            width="50" [min]="0" [max]="9"></dx-number-box>
+          <span [hidden]="!hasIndicatorDigit" class="gtin-description">Indicator Digit *</span>
+          <span [hidden]="!hasIndicatorDigit" class="gtin-description gtin-sm">9: only use for variable quantity trade items</span>
+        </dxi-item>
+        <dxi-item class="rect" [ratio]="2">
+          <span class="gtin-company-code">{{gTIN.companyCode}}</span>
+          <span class="gtin-description">Company Prefix</span>
+        </dxi-item>
+        <dxi-item class="rect gtin-center" [ratio]="2">
+          <dx-number-box [(value)]="gTIN.numeric" (onValueChanged)="calculateGTIN($event)" width="150" min="1" max="99999999999"></dx-number-box>
+          <span class="gtin-description">numeric *</span>
+        </dxi-item>
+        <dxi-item class="rect" [ratio]="2">
+          <span class="gtin-company-code">{{gTIN.checkDigit}}</span>
+          <span class="gtin-description">Check Digit</span>
+        </dxi-item>
+        <dxi-item class="rect" [ratio]="2">
+          <dx-button class="btn btn-xs" [text]="btnGenerateOptions.text" [icon]="btnGenerateOptions.icon" [type]="btnGenerateOptions.type"
+            [disabled]="btnGenerateOptions.disabled" (onClick)="generateGTIN($event)"></dx-button>
+        </dxi-item>
+        <dxi-item class="rect" [ratio]="2">
+          <dx-button class="btn btn-xs btn-check" [text]="btnCheckOptions.text" [icon]="btnCheckOptions.icon" [type]="btnCheckOptions.type"
+            [disabled]="btnCheckOptions.disabled" (onClick)="checkGTIN($event)"></dx-button>
+        </dxi-item>
+      </dx-box>
+    </dxi-item>
+    <dxi-item itemType="empty"></dxi-item>
+    <dxi-item itemType="group" [colSpan]="5" [colCount]="2">
+      <dxi-item dataField="name" [label]="{text: 'Name'}"></dxi-item>
+      <dxi-item dataField="productId" [label]="{text: 'Product'}">
+        <dx-drop-down-box [value]="production.productId" valueExpr="id" [deferRendering]="false" displayExpr="defaultName"
+        placeholder="Select a value..." [dataSource]="products">
+        <div *dxTemplate="let data of 'content'">
+          <dx-data-grid [dataSource]="products" keyExpr="id" [columns]="['id', 'defaultName']" [selection]="{ mode: 'single' }"
+            [hoverStateEnabled]="true" [paging]="{ enabled: true, pageSize: 10 }" [filterRow]="{ visible: true }"
+            [scrolling]="{ mode: 'infinite' }" height="100%" (onSelectionChanged)="selectionChangedHandler('productId', $event)">
+          </dx-data-grid>
+        </div>
+      </dx-drop-down-box>
+      </dxi-item>
+      <dxi-item itemType="simple" [label]="{text: 'Growing Method'}">
+        <dx-select-box [dataSource]="growingMethods" displayExpr="name" valueExpr="id" [(value)]="production.growingMethodId"></dx-select-box>
+      </dxi-item>
+      <dxi-item dataField="countryOfOrigin" [label]="{text: 'Country Of Origin'}"></dxi-item>
+      <dxi-item dataField="trademark" [label]="{text: 'Trademark'}"></dxi-item>
+      <dxi-item dataField="isUsed" [label]="{text: 'Is Used'}" editorType="dxCheckBox"></dxi-item>
+    </dxi-item>
+  </dxi-item>
+  <dxi-item itemType="group" cssClass="group" [colCount]="6" caption="Product Specific Characteristics">
+    <dxi-item itemType="group" [colSpan]="5" [colCount]="2">
+      <dxi-item dataField="commercialClaim" [label]="{text: 'Commercial Claim'}"></dxi-item>
+      <dxi-item dataField="productSize" [label]="{text: 'Product Size'}"></dxi-item>
+      <dxi-item dataField="grade" [label]="{text: 'Grade'}"></dxi-item>
+      <dxi-item dataField="colour" [label]="{text: 'Colour'}"></dxi-item>
+      <dxi-item dataField="shape" [label]="{text: 'Shape'}"></dxi-item>
+      <dxi-item dataField="variety" [label]="{text: 'Variety'}"></dxi-item>
+      <dxi-item dataField="commercialType" [label]="{text: 'Commercial Type'}"></dxi-item>
+      <dxi-item dataField="colourOfFlesh" [label]="{text: 'Colour Of Flesh'}"></dxi-item>
+      <dxi-item dataField="postHarvestTreatment" [label]="{text: 'Post Harvest Treatment'}"></dxi-item>
+      <dxi-item dataField="postHarvestProcessing" [label]="{text: 'Post Harvest Processing'}"></dxi-item>
+      <dxi-item dataField="cookingType" [label]="{text: 'Cooking Type'}"></dxi-item>
+      <dxi-item dataField="seedProperties" [label]="{text: 'Seed Properties'}"></dxi-item>
+      <dxi-item dataField="tradePackageContentQuantity" [label]="{text: 'Trade Package Content Quantity'}"></dxi-item>
+      <dxi-item dataField="tradeUnitPackageType" [label]="{text: 'Trade Unit Package Type'}"></dxi-item>
+      <dxi-item dataField="consumerUnitContentQuantity" [label]="{text: 'Consumer Unit Content Quantity'}"></dxi-item>
+      <dxi-item dataField="tradeUnit" [label]="{text: 'Trade Unit'}"></dxi-item>
+      <dxi-item dataField="comsumerUnitPackageType" [label]="{text: 'Comsumer Unit Package Type'}"></dxi-item>
+      <dxi-item dataField="comsumerUnit" [label]="{text: 'Comsumer Unit'}"></dxi-item>
+    </dxi-item>
+  </dxi-item>
+</dx-form>
+<div class="button-actions">
+  <div class="button">
+    <dx-button text="Cancel" (onClick)="cancel()"></dx-button>
+    <dx-button text="Save" type="default" (onClick)="save()"></dx-button>
+  </div>
+</div>

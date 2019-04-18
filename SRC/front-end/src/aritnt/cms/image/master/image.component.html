@@ -1,0 +1,23 @@
+<dx-tree-list id="treelist" [dataSource]="dataSource" keyExpr="id" parentIdExpr="parentId" rootValue="">
+  <dxo-scrolling mode="standard"></dxo-scrolling>
+  <dxo-paging [enabled]="true" [pageSize]="20">
+  </dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 40]" [showInfo]="true">
+  </dxo-pager>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-search-panel [visible]="true"></dxo-search-panel>
+  <!-- <dxo-filter-row [visible]="true"></dxo-filter-row> -->
+  <dxo-selection mode="single"></dxo-selection>
+  <dxo-editing mode="row" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+    </dxo-editing>
+
+
+  <!-- <dxi-column dataField="id"></dxi-column> -->
+  <dxi-column dataField="name"></dxi-column>
+  <dxi-column dataField="path"></dxi-column>
+  <!-- <dxi-column dataField="size" [width]="100" [customizeText]="customizeSizeText"></dxi-column> -->
+  <dxi-column dataField="createdDate" dataType="date" [width]="150"></dxi-column>
+  <dxi-column dataField="modifiedDate" dataType="date" [width]="150"></dxi-column>
+</dx-tree-list>
+
+

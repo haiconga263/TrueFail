@@ -1,0 +1,118 @@
+<div id="grid" class="seed-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i
+                    class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="id > 0"
+                (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i
+                    class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Code')}}</label>
+                        </div>
+                        <div class="col-md-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Code')}}" readOnly="true"
+                                [(ngModel)]="seed.code">
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="seed.isUsed" text="{{lang.instant('Common.Active')}}">
+                            </dx-check-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Name')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-md-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Name')}}" [(ngModel)]="seed.name"
+                                [(isValid)]="isNameValid" [maxLength]="50">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50"
+                                        message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Category')}}</label>
+                        </div>
+                        <div class="col-md-8">
+                            <dx-drop-down-box [(value)]="gridProductId" valueExpr="id" [deferRendering]="false"
+                                [displayExpr]="gridBox_displayExpr" [dataSource]="products" [(isValid)]="isProductValid" >
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+
+                                <div *dxTemplate="let data of 'content'">
+                                    <dx-data-grid [dataSource]="products" keyExpr="id" [hoverStateEnabled]="true"
+                                        [(selectedRowKeys)]="gridSelectedProducts" height="100%"
+                                        placeholder="Select a value...">
+
+                                        <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+                                        <dxo-filter-row [visible]="true"></dxo-filter-row>
+                                        <dxo-paging [pageSize]="10"></dxo-paging>
+                                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]"
+                                            [showInfo]="true">
+                                        </dxo-pager>
+                                        <dxo-selection mode="single"></dxo-selection>
+
+                                        <!-- <dxi-column dataField="id" [width]="70"></dxi-column> -->
+                                        <dxi-column dataField="code" [width]="100"></dxi-column>
+                                        <dxi-column dataField="defaultName"></dxi-column>
+                                        <!-- <dxi-column dataField="contact.name" caption="Contact name"></dxi-column> -->
+                                    </dx-data-grid>
+                                </div>
+                            </dx-drop-down-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Description')}}</label>
+                        </div>
+                        <div class="col-md-10">
+                            <dx-text-area [height]="90" [(ngModel)]="seed.description">
+                            </dx-text-area>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

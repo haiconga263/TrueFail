@@ -1,0 +1,115 @@
+<div id="grid" class="product-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'" (onClick)="refresh();"><i class="fa fa-lg fa-refresh"
+                    aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Account')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Account')}}" [readOnly]="type == 'update'"
+                                [(ngModel)]="user.userName" [(isValid)]="isUserNameValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="pattern" [pattern]="userNamePattern" message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Email')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Email')}}" [(ngModel)]="user.email"
+                                [(isValid)]="isEmailValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="email" message="{{lang.instant('Validation.WrongFormatEmail')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="100" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Password')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Password')}}" [(ngModel)]="user.password"
+                                [(isValid)]="isPasswordValid" [readOnly]="type == 'update'" mode="password">
+                                <dx-validator>
+                                    <dxi-validation-rule *ngIf="type != 'update'" type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" min="8" max="20" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="pattern" [pattern]="passwordPattern" message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="user.isUsed" text="{{lang.instant('Common.Active')}}"></dx-check-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
+
+<div id="grid" *ngIf="!user.isExternalUser">
+    <div class="left-side">
+        <h3> {{lang.instant('User.RoleList')}}</h3>
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [disabled]="type == 'add'" (onClick)="saveRole();"><i class="fa fa-lg fa-save"
+                    aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [disabled]="type == 'add'" (onClick)="refresh();"><i class="fa fa-lg fa-refresh"
+                    aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-danger" [disabled]="type == 'add' || selectedRows?.length != 1" (onClick)="deleteRole();"><i
+                    class="fa fa-lg fa-trash" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <dx-data-grid [dataSource]="user.roles" (onRowInserting)="checkRoles($event)" [(selectedRowKeys)]="selectedRows">
+            <dxo-selection mode="single"></dxo-selection>
+            <dxo-editing mode="form" [allowAdding]="true">
+            </dxo-editing>
+            <dxi-column dataField="id" [caption]="lang.instant('User.RoleList')">
+                <dxo-lookup [dataSource]="roles" valueExpr="id" displayExpr="name">
+                </dxo-lookup>
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+            </dxi-column>
+        </dx-data-grid>
+    </div>
+    <!-- /.row -->
+</div>
+<swal #swal title="Thông báo" type="info"></swal>

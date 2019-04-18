@@ -1,0 +1,84 @@
+<mk-box [hidden]="!id?.length" [isRemovable]="false">
+  <mk-box-header>
+    <span> History</span>
+  </mk-box-header>
+  <mk-box-content>
+    <span><button (click)="popupAdd()" class="btn btn-sm btn-primary btn-add">Add data</button></span>
+    <dx-list [items]="histories" height="100%">
+      <div *dxTemplate="let item of 'item'">
+        <div class="history">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-5">
+                <span>{{item.cultureField.name}}: </span>
+                <span> <b>{{item.value}}</b></span>
+              </div>
+              <div class="col-md-3"></div>
+              <div class="col-md-2">
+                <span><i>create by <b>{{item.userCreated.userName}}</b></i>  </span>
+                <span> {{item.createdDate| date:'MM/dd/yyyy hh:mm a' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dx-list>
+  </mk-box-content>
+</mk-box>
+
+<dx-popup class="popup"
+          [width]="550"
+          [height]="250"
+          [showTitle]="true"
+          title="Add data"
+          [dragEnabled]="false"
+          [closeOnOutsideClick]="true"
+          [(visible)]="isPopupNew">
+  <div *dxTemplate="let data of 'content'">
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label field-label">
+          <dx-select-box [items]="cultureFields"
+                         placeholder="Choose Culture Field"
+                         displayExpr="name"
+                         [value]="selectedCulFieldId"
+                         (onValueChanged)="selectedCulFieldChanged($event)"
+                         valueExpr="id"></dx-select-box>
+        </div>
+        <div class="dx-field-value field-value">
+          <dx-text-box [(value)]="historyNew.value" [hidden]="selectedCulField.dataType != 'text'">
+            <!--<dx-validator>
+              <dxi-validation-rule type="required" message="Email is required"></dxi-validation-rule>
+            </dx-validator>-->
+          </dx-text-box>
+
+          <dx-number-box [(value)]="historyNew.value"
+                         [hidden]="selectedCulField.dataType != 'number'"
+                         [showSpinButtons]="true"></dx-number-box>
+
+          <dx-check-box [(value)]="historyNew.value"
+                        [hidden]="selectedCulField.dataType != 'boolean'"></dx-check-box>
+
+          <dx-date-box [(value)]="historyNew.value" type="date"
+                       [hidden]="selectedCulField.dataType != 'date'"></dx-date-box>
+
+          <dx-date-box [(value)]="historyNew.value" type="time"
+                       [hidden]="selectedCulField.dataType != 'time'"></dx-date-box>
+
+          <dx-date-box [(value)]="historyNew.value" type="datetime"
+                       [hidden]="selectedCulField.dataType != 'datetime'"></dx-date-box>
+
+          <dx-select-box [items]="sourceList"
+                         placeholder="Choose value"
+                         [hidden]="selectedCulField.dataType != 'list'"
+                         [(value)]="historyNew.value"></dx-select-box>
+        </div>
+      </div>
+    </div>
+    <div class="dx-fieldset">
+      <span>
+        <button (click)="addHistory()" class="btn btn-sm btn-primary btn-add">Save</button>
+      </span>
+    </div>
+  </div>
+</dx-popup>

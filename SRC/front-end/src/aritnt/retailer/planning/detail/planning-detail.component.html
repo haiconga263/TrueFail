@@ -1,0 +1,116 @@
+<div id="grid" class="planning-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i
+                    class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'"
+                (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i
+                    class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{lang.instant('Common.Information')}}</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                            <label>{{lang.instant('Common.Code')}} <span
+                                                    class="dx-field-item-required-mark">*</span></label>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <dx-text-box placeholder="{{lang.instant('Common.Code')}}"
+                                                [value]="planning.code" readOnly="true">
+                                            </dx-text-box>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                            <label>{{lang.instant('Order.DeliveriedDate')}} <span
+                                                    class="dx-field-item-required-mark">*</span></label>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <dx-date-box [(value)]="planning.buyingDate" type="date"
+                                                displayFormat="dd/MM/yyyy" [min]="now" style="width:100%">
+                                            </dx-date-box>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                                            <label>{{lang.instant('Common.Name')}} <span
+                                                    class="dx-field-item-required-mark">*</span></label>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <dx-text-box placeholder="{{lang.instant('Common.Name')}}"
+                                                [(ngModel)]="planning.name" [(isValid)]="isNameValid">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required"
+                                                        message="{{lang.instant('Validation.Required')}}">
+                                                    </dxi-validation-rule>
+                                                    <dxi-validation-rule type="stringLength" max="256"
+                                                        message="{{lang.instant('Validation.WrongLength')}}">
+                                                    </dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <div class="box-body">
+        <h3>{{lang.instant('Order.OrderList')}}</h3>
+        <dx-data-grid [dataSource]="planning.items" [showBorders]="true" (onRowInserting)="insertingItem($event)"
+            (onRowUpdating)="updatingItem($event)">
+
+            <dxo-editing mode="form" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+            </dxo-editing>
+            <dxi-column dataField="productId" [caption]="lang.instant('Admin.Product')">
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+                <dxo-lookup [dataSource]="products" valueExpr="id" displayExpr="name">
+                </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="quantity" [caption]="lang.instant('Order.OrderedQuantity')" dataType="number">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="uoMId" [caption]="lang.instant('Admin.UoM')">
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+                <dxo-lookup [dataSource]="uoms" valueExpr="id" displayExpr="name">
+                </dxo-lookup>
+            </dxi-column>
+        </dx-data-grid>
+    </div>
+</div>

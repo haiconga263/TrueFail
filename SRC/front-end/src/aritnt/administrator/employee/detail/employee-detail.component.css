@@ -1,0 +1,81 @@
+::ng-deep #grid {
+  position: relative;
+  background-color: white;
+  padding: 10px;
+}
+
+  /*::ng-deep #grid .dx-state-disabled.dx-widget {
+    opacity: 1;
+  }*/
+
+  ::ng-deep #grid .right-side {
+    position: absolute;
+    right: 1px;
+    top: 6px;
+  }
+
+  ::ng-deep #grid .left-side {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  ::ng-deep #grid .logo {
+    line-height: 48px;
+  }
+
+    ::ng-deep #grid .logo img {
+      vertical-align: middle;
+      margin: 0 5px;
+    }
+
+  ::ng-deep #grid .dx-row.dx-data-row .employee {
+    color: #bf4e6a;
+    font-weight: bold;
+  }
+
+  ::ng-deep #grid #gridContainer {
+    margin: 20px 0;
+    height: 400px;
+  }
+
+::ng-deep .fe-md {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  height: 30px;
+}
+
+.employee-detail-area .container-avatar {
+  width: 100%;
+  height: 160px;
+  margin-bottom: 10px
+}
+.employee-detail-area .employee-avatar {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 150px;
+  width: 150px;
+}
+.employee-detail-area .container-avatar:hover .employee-choose-image {
+  display: block !important;
+}
+.employee-detail-area .employee-choose-image {
+  width: 40px;
+  height: 40px;
+  z-index: 999;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  font-size: 24pt !important;
+  color: #00B2BF !important;
+}

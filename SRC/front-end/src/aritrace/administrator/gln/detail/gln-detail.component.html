@@ -1,0 +1,45 @@
+<form (submit)="$event.preventDefault();save();">
+  <dx-form id="form" [formData]="gln" [colCount]="2">
+    <dxi-item itemType="group" caption="Code">
+      <dxi-item itemType="group">
+        <dxi-item dataField="code" [label]="{text: 'GLN Code'}">
+          <dxi-validation-rule type="required" message="Name is required"></dxi-validation-rule>
+        </dxi-item>
+        <dxi-item dataField="partnerId" [label]="{text: 'Partner'}"
+                  editorType="dxSelectBox"
+                  [editorOptions]="{
+                      items: companies,
+                      placeholder:'-- Select country --',
+                      displayExpr:'text',
+                      valueExpr:'value'}">
+        </dxi-item>
+        <dxi-item dataField="countryId" [label]="{text: 'Country'}"
+                  editorType="dxSelectBox"
+                  [editorOptions]="{
+                      items: countries  ,
+                      placeholder:'-- Select country --',
+                      displayExpr:'text',
+                      valueExpr:'value'}">
+        </dxi-item>
+        <dxi-item dataField="usedDate" editorType="dxDateBox"></dxi-item>
+        <dxi-item dataField="isUsed" editorType="dxCheckBox"></dxi-item>
+      </dxi-item>
+      <dxi-item itemType="group" [colCount]="6">
+        <dxi-item itemType="empty" [colSpan]="3"></dxi-item>
+        <dxi-item itemType="button"
+                  horizontalAlignment="right"
+                  [buttonOptions]="{ text: 'Cancel', type: 'primary', useSubmitBehavior: false, onClick: cancel}">
+        </dxi-item>
+        <dxi-item itemType="button"
+                  horizontalAlignment="left"
+                  [buttonOptions]="{ text: 'Save', type: 'default', useSubmitBehavior: true}">
+        </dxi-item>
+      </dxi-item>
+    </dxi-item>
+    
+  </dx-form>
+</form>
+
+
+
+

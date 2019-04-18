@@ -1,0 +1,176 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="btn-group">
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="refresh()"><i
+          class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+      <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Process')"
+        [disabled]="!selectedRows?.length" (onClick)="showProcess()"><i class="fa fa-lg fa-cogs" aria-hidden="true"></i>
+      </dx-button>
+      <dx-button class="btn fe-md btn-danger" [hint]="lang.instant('Action.Cancel')" [disabled]="!selectedRows?.length"
+        (onClick)="cancel()"><i class="fa fa-lg fa-window-close-o" aria-hidden="true"></i></dx-button>
+    </div>
+  </div>
+  <div class="left-side">
+    <div class="box">
+      <div class="box-body">
+          <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                      <label>{{lang.instant('Admin.Collection')}}</label>
+                    </div>
+                    <div class="col-xs-8">
+                      <dx-select-box [dataSource]="collections" [(ngModel)]="chooseCollection" displayExpr="name" (onValueChanged)="collectionChanged($event)">
+                      </dx-select-box>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.form-group -->
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+  <div class="left-side">
+    <dx-data-grid id="gridContainer" [columnAutoWidth]="true" [showBorders]="true" [dataSource]="chooseCollection.items"
+      [(selectedRowKeys)]="selectedRows" [masterDetail]="{ enabled: true, template: 'detail' }">
+      <dxo-editing mode="form">
+      </dxo-editing>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-filter-row visible="true"></dxo-filter-row>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+      </dxo-pager>
+
+      <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+      <dxi-column dataField="name" [caption]="lang.instant('Common.Name')"></dxi-column>
+      <dxi-column dataField="farmer.name" [caption]="lang.instant('Admin.Farmer')"></dxi-column>
+      <dxi-column dataField="totalAmount" [caption]="lang.instant('Common.TotalAmount')" format="#,##0.## VND"></dxi-column>
+      <dxi-column dataField="buyingDate" [caption]="lang.instant('Delivery.DeliveryDate')" dataType="date"
+        allowEditing="false"></dxi-column>
+
+      <div *dxTemplate="let order of 'detail'">
+        <div class="master-detail-caption">{{lang.instant('Order.OrderList')}}</div>
+        <dx-data-grid [dataSource]="order.data.items" [showBorders]="true" [columnAutoWidth]="true">
+          <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>
+          <dxi-column dataField="price" [caption]="lang.instant('Common.Price')" format="#,##0.## VND"></dxi-column>
+          <dxi-column dataField="orderedQuantity" [caption]="lang.instant('Order.OrderedQuantity')"></dxi-column>
+          <dxi-column dataField="deliveriedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')"></dxi-column>
+          <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>
+
+<dx-popup [title]="lang.instant('Action.Process') + ' ' + lang.instant('Order.OrderList')" [(visible)]="isPopupVisible">
+  <div *dxTemplate="let data of 'content'" style="overflow-y: auto">
+    <div class="left-side" style="margin-bottom:5px">
+      <div class="btn-group">
+        <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Process')" (onClick)="processing()"><i
+            class="fa fa-lg fa-sitemap" aria-hidden="true"></i></dx-button>
+        <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Print')" (onClick)="print()" [disabled]="processOrder == null || processOrder.statusId == 2"><i
+            class="fa fa-lg fa-print" aria-hidden="true"></i></dx-button>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{lang.instant('Order.Detail')}}</h3>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>{{lang.instant('Common.Code')}}</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-text-box readOnly="true" [(ngModel)]="processOrder.code" readOnly="true">
+                  </dx-text-box>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>{{lang.instant('Admin.Farmer')}}</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-text-box readOnly="true" [(ngModel)]="processOrder.farmer.name" readOnly="true"></dx-text-box>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>{{lang.instant('Common.TotalAmount')}}</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-text-box readOnly="true" [value]="getCurrencyFormat(processOrder.totalAmount)" readOnly="true">
+                  </dx-text-box>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>{{lang.instant('Common.Name')}}</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-text-box readOnly="true" [(ngModel)]="processOrder.name" readOnly="true">
+                  </dx-text-box>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>{{lang.instant('Order.DeliveriedDate')}}</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-date-box readOnly="true" [(value)]="processOrder.buyingDate" type="date"
+                    displayFormat="dd/MM/yyyy" style="width:100%"></dx-date-box>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>{{lang.instant('Common.CurrentTotalAmount')}}</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-text-box readOnly="true" [value]="getCurrencyFormat(processOrder.currentTotalAmount)"
+                    readOnly="true">
+                  </dx-text-box>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <dx-data-grid [dataSource]="processOrder.items" [showBorders]="true" [columnAutoWidth]="true"
+      (onRowUpdated)="updatedItem($event)" style="margin-bottom:5px">
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+      </dxo-pager>
+      <dxo-editing mode="form" [allowUpdating]="true">
+      </dxo-editing>
+      <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"
+        [formItem]="{visible: false}"></dxi-column>
+      <dxi-column dataField="price" [caption]="lang.instant('Common.Price')" format="#,##0.## VND"
+        [formItem]="{visible: false}"></dxi-column>
+      <dxi-column dataField="orderedQuantity" [caption]="lang.instant('Order.OrderedQuantity')"
+        [formItem]="{visible: false}"></dxi-column>
+      <dxi-column dataField="deliveriedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')" dataType="number">
+      </dxi-column>
+      <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')" [formItem]="{visible: false}"></dxi-column>
+    </dx-data-grid>
+  </div>
+</dx-popup>

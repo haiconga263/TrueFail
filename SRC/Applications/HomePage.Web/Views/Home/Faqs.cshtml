@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> L
+@model IEnumerable<Homepage.UI.ViewModels.FaqHomepageViewModel>
+@{
+    ViewData["Title"] = "FQA's";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/faqcollapse_style.css" rel="stylesheet" />
+
+@if (Model.Count() != 0)
+{
+    <div id="faqs" class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="alert alert-info alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" style="color: white;">×</span></button>
+                    <p class="alert-title">Các câu hỏi thường gặp</p>
+                    <p class="alert-body">
+                        Bạn cần thông tin gì?<br />
+
+                        Bạn có thể tham khảo các thông tin bên dưới hoặc liên hệ <a href="@L["R.Contact"]"> tại đây</a> để biết thêm thông tin.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                @foreach (var item in Model)
+                {
+                    <div class="panel-heading" style="border-top: 1px solid #343294">
+                        <h4 class="panel-title">
+                            <a class="text-color" data-toggle="collapse" data-parent="#accordion" href="#@item.Id">@item.QuestionDisplay</a>
+                        </h4>
+                    </div>
+                    <div id="@item.Id" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            @item.AnswerDisplay
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+        <strong>@L["UpdateLoading"]</strong>
+    </div>
+}

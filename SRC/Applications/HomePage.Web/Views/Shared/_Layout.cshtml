@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using System.Collections.Generic;
+@inject IHtmlLocalizer<SharedResource> L
+
+<!DOCTYPE html>
+<html>
+<partial name="_HeaderHtmlLayout" />
+
+<body class="woocommerce woocommerce-page">
+    <div id="wrap" class="wrap fullWidth">
+        <div id="wrapBox" class="wrapBox">
+            <partial name="_HeaderLayout" />
+            @if ((string)ViewData["HasSlider"] == "true")
+            {
+                <partial name="_SliderLayout" />
+            }
+            <div class="wrapContent">
+                <div id="wrapWide" class="wrapWide">
+                    <div class="content" style="margin-left:5%; max-width:90%;">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="_FooterLayout" />
+    <div class="buttonScrollUp upToScroll icon-up-open-micro"></div>
+
+
+    <partial name="_ScriptsLayout" />
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

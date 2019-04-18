@@ -1,0 +1,144 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3" style="margin-top:10px;padding-right:0px">
+              <label>{{lang.instant('Common.Code')}}:</label>
+            </div>
+            <div class="col-xs-9">
+              <dx-select-box [dataSource]="orders" (onSelectionChanged)="orderSelectionChange($event)" [(ngModel)]="order"
+                displayExpr="code" searchEnabled="true">
+              </dx-select-box>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box">
+          <div class="box-header with-border">
+            <h3 class="box-title">{{lang.instant('Order.Detail')}}</h3>
+
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <span>{{lang.instant('Common.Code')}}:</span><span style="padding-left:10px">{{order?.code}}</span>
+                </div>
+
+                <div class="form-group">
+                  <span>{{lang.instant('Order.OrderedDate')}}:</span><span style="padding-left:10px">{{order?.buyingDate?.substr(0, 10)}}</span>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div style="font-size: 20pt; text-align: right"><span>{{lang.instant('Common.TotalAmount')}}:</span><span style="padding-left:10px">{{getCurrency(order?.totalAmount)}}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.col -->
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box">
+          <div class="box-header with-border">
+            <h3 class="box-title">{{lang.instant('Common.Status')}}</h3>
+
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-12">
+                <!-- The time line -->
+                <ul class="timeline">
+                  <!-- timeline item -->
+                  <li *ngFor="let status of statuses">
+                    <i class="fa" [class.bg-green]="order?.statusId >= status.id"></i>
+
+                    <div class="timeline-item">
+                      <h3 class="timeline-header"><a href="#">{{status.name}}</a></h3>
+
+                      <div *ngIf="status.id == 1 && order?.statusId >= 1" class="timeline-body">
+                        {{lang.instant('Retailer.OrderTracing.OrderedMessage')}}: {{order?.orderedDate?.substr(0, 10)}}
+                      </div>
+
+                      <div *ngIf="status.id == 2 && order?.statusId >= 2" class="timeline-body">
+                        {{lang.instant('Retailer.OrderTracing.ConfirmedMessage')}}: {{getAuditOrder(2).createdDate?.substr(0, 10)}}
+                      </div>
+
+                      <div *ngIf="status.id == 3 && order?.statusId >= 3" class="timeline-body">
+                        <ul>
+                          <li *ngFor="let item of order?.items">
+                            {{item.product.defaultName}}: {{getAuditOrderWithOrderItem(3,
+                            item.id).createdDate?.substr(0, 10)}}
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div *ngIf="status.id == 4 && order?.statusId >= 4" class="timeline-body">
+                        <ul>
+                          <li *ngFor="let item of order?.items">
+                            {{item.product.defaultName}}: {{getAuditOrderWithOrderItem(4,
+                            item.id).createdDate?.substr(0, 10)}}
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div *ngIf="status.id == 5 && order?.statusId >= 5" class="timeline-body">
+                        <ul>
+                          <li *ngFor="let item of order?.items">
+                            {{item.product.defaultName}}: {{getAuditOrderWithOrderItem(5,
+                            item.id).createdDate?.substr(0, 10)}}
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div *ngIf="status.id == 6 && order?.statusId >= 6" class="timeline-body">
+                        {{lang.instant('Retailer.OrderTracing.DeliveriedMessage')}}: {{getAuditOrder(6).createdDate?.substr(0, 10)}}
+                      </div>
+
+                      <div *ngIf="status.id == 7 && order?.statusId >= 7" class="timeline-body">
+                        {{lang.instant('Retailer.OrderTracing.CompletedMessage')}}: {{getAuditOrder(7).createdDate?.substr(0, 10)}}
+                      </div>
+                    </div>
+                  </li>
+
+                  <li *ngIf="order?.statusId == -1">
+                    <i class="fa bg-red"></i>
+
+                    <div class="timeline-item">
+                      <h3 class="timeline-header"><a href="#">{{getStatusName(-1)}}</a></h3>
+
+                      <div *ngIf="status.id == 1 && order?.statusId >= 1" class="timeline-body">
+                        {{lang.instant('Retailer.OrderTracing.CanceledMessage')}}: {{order?.canceledDate?.substr(0, 10)}}
+                      </div>
+                    </div>
+                  </li>
+                  <!-- END timeline item -->
+                </ul>
+              </div>
+              <!-- /.col -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.col -->
+    </div>
+  </div>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DAL\DAL.csproj" />
+    <ProjectReference Include="..\..\Modules\Abivin.Integration\Abivin.Integration.csproj" />
+    <ProjectReference Include="..\..\Presentations\Abivin.Integration.UI\Abivin.Integration.UI.csproj" />
+    <ProjectReference Include="..\..\Presentations\MDM.UI\MDM.UI.csproj" />
+    <ProjectReference Include="..\..\Presentations\Order.UI\Order.UI.csproj" />
+  </ItemGroup>
+
+</Project>

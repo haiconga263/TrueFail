@@ -1,0 +1,68 @@
+<div id="grid" class="pack-detail-area">
+  <div class="box-body">
+    <div class="left-side" style="padding:10px">
+      <div class="btn-group">
+        <dx-button class="btn fe-md btn-primary" hint="Đóng gói" (onClick)="save();">
+          <i class="fa fa-cubes" aria-hidden="true"></i>
+        </dx-button>
+        <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'"
+          (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+        <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();">
+          <i class="fa fa-lg fa-undo" aria-hidden="true"></i>
+        </dx-button>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>Nhà máy sơ chế</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-select-box [dataSource]="fulfillments" displayExpr="name" valueExpr="id" [value]="fulfillment.id"
+                    (onValueChanged)="fulfillmentChanged($event)">
+                  </dx-select-box>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <div class="box-body">
+
+      <h4>Danh sách đặt hàng</h4>
+      <dx-data-grid id="gridContainer" [dataSource]="packs" [columnAutoWidth]="true"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
+        [(selectedRowKeys)]="selectedRows" (onSelectionChanged)="onSelectionChanged($event)">
+        <dxo-selection mode="single"></dxo-selection>
+
+        <dxo-filter-row visible="true"></dxo-filter-row>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+        </dxo-pager>
+
+        <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+        <dxi-column dataField="name" [caption]="lang.instant('Common.Name')"></dxi-column>
+        <dxi-column dataField="retailer.name" [caption]="lang.instant('Admin.Retailer')"></dxi-column>
+        <dxi-column dataField="buyingDate" [caption]="lang.instant('Order.DeliveriedDate')" dataType="date"></dxi-column>    
+        <div *dxTemplate="let order of 'detail'">
+          <div class="master-detail-caption">{{lang.instant('Order.OrderList')}}</div>
+          <dx-data-grid [dataSource]="order.data.items" [showBorders]="true" [columnAutoWidth]="true">
+            <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>   
+            <dxi-column dataField="orderedQuantity" [caption]="lang.instant('Order.OrderedQuantity')"></dxi-column>
+            <dxi-column dataField="adapQuantity" [caption]="lang.instant('Order.AdapedQuantity')"></dxi-column>
+            <dxi-column dataField="deliveriedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')"></dxi-column>
+            <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+    </div>
+  </div>
+
+ 
+</div>

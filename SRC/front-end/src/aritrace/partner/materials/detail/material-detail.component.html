@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <mk-box header="Material {{material.code}}" [isRemovable]="false" [boxColor]="primary">
+        <form (submit)="$event.preventDefault();save();">
+          <dx-form id="form" [formData]="material">
+            <dxi-item itemType="group" cssClass="first-group" [colCount]="6">
+              <dxi-item itemType="group" [colSpan]="3">
+                <dxi-item dataField="code" [label]="{text: 'Code'}" [editorOptions]="{disabled: true}"></dxi-item>
+                <dxi-item dataField="name" [label]="{text: 'Name'}">
+                  <dxi-validation-rule type="required" message="Name is required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item itemType="group" [colCount]="2">
+                  <dxi-item dataField="productId" [label]="{text: 'Product'}"
+                            editorType="dxSelectBox"
+                            [editorOptions]="{
+                                items: products,
+                                placeholder:'-- Select product --',
+                                displayExpr:'defaultName',
+                                valueExpr:'id'}">
+                    <dxi-validation-rule type="required" message="Product is required"></dxi-validation-rule>
+                  </dxi-item>
+                  <dxi-item dataField="isUsed" editorType="dxCheckBox"></dxi-item>
+                </dxi-item>
+              </dxi-item>
+              <dxi-item dataField="decription" [colSpan]="3" editorType="dxTextArea" [editorOptions]="{ height: 140 }"></dxi-item>
+            </dxi-item>
+
+            <dxi-item itemType="group" [colCount]="6">
+              <dxi-item itemType="empty" [colSpan]="4"></dxi-item>
+              <dxi-item itemType="button"
+                        horizontalAlignment="right"
+                        [buttonOptions]="{ text: 'Cancel', type: 'primary', useSubmitBehavior: false, onClick: cancel}">
+              </dxi-item>
+              <dxi-item itemType="button"
+                        horizontalAlignment="left"
+                        [buttonOptions]="{ text: 'Save', type: 'default', useSubmitBehavior: true}">
+              </dxi-item>
+            </dxi-item>
+
+          </dx-form>
+        </form>
+      </mk-box>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <material-history></material-history>
+    </div>
+  </div>
+</div>

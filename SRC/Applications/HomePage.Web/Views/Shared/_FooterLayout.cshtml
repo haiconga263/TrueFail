@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> L
+
+
+<footer class="footerWidget">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 widgetWrap">
+                <div class="widget_inner">
+                    <div class="logo_descr com_name" style="font-size:20px;">@L["Index_Company_Name"]</div>
+                    <br />
+                    <h5 class="title">@L["Index_Contact"]</h5>
+
+                    <i class="fa fa-home fa-1x" aria-hidden="true">
+                        <strong>@L["Headquarter"]:</strong>
+                    </i>
+                    <span style="font-size:14px;">
+                        @L["Company_Address_Home"]
+                    </span>
+                    <br />
+                    <i class="fa fa-map-marker fa-1x" aria-hidden="true">
+                        <strong>@L["Office"]:</strong>
+                    </i>
+                    <span style="font-size:14px;">
+                        @L["Index_Company_Address"]
+                    </span>
+                    <br />
+                    <i class="fa fa-phone-square fa-1x" aria-hidden="true">
+                        Hotline:
+                    </i>
+                    <span style="font-size:14px;">
+                        @L["Index_Company_Phone"]
+                    </span>
+
+                </div>
+            </div>
+            <div class="col-sm-3 col-sm-offset-1 widgetWrap">
+                <h5 class="title">@L["footer_Aritnt"]</h5>
+                <ul>
+                    <li>
+                        <a href="@L["R.About"]" style="text-decoration:none;">Về chúng tôi</a>
+                    </li>
+                    <li>
+                        <a href="/home/value" style="text-decoration:none;">Sứ mệnh và giá trị</a>
+                    </li>
+                    <li>
+                        <a href="@L["R.Media"]" style="text-decoration:none;">Truyền thông</a>
+                    </li>
+                    <li>
+                        <a href="https://www.careerlink.vn/viec-lam/k/aritnt" style="text-decoration:none;">Tuyển dụng</a>
+                    </li>
+                    <li>
+                        <a href="@L["R.Faqs"]" style="text-decoration:none;">Các câu hỏi thường gặp</a>
+                    </li>
+                    @*<li>
+                            <a href="@L["R.Trace"]" style="text-decoration:none;">Video</a>
+                        </li>*@
+                    <li>
+                        <a href="@L["R.Trace"]" style="text-decoration:none;">Hướng dẫn đặt hàng</a>
+                    </li>
+                    <li>
+                        <a href="@L["R.Contact"]" style="text-decoration:none;">Liên hệ với chúng tôi</a>
+                    </li>
+                    <li>
+                        <a href="@L["R.Trace"]" style="text-decoration:none;">Truy xuất nguồn gốc</a>
+                    </li>
+                    @*<li>
+                            <a href="@L["R.Trace"]" style="text-decoration:none;">Chính sách bảo mật thông tin</a>
+                        </li>*@
+                    <li>
+                        <a href="@L["R.FarmerNetwork"]" style="text-decoration:none;">
+                            Mạng lưới người nông dân Việt
+                        </a>
+                    </li>
+                    @*<li>
+                            <a href="#" style="text-decoration:none;">
+                                Chính sách đổi trả hàng
+                            </a>
+                        </li>*@
+                </ul>
+            </div>
+            <div class="col-sm-2 widgetWrap">
+                <h5 class="title">@L["footer_Blog"]</h5>
+                <ul>
+                    <li>
+                        <a href="@L["R.GreenSpiritGreenLife"]" style="text-decoration:none;">Tinh thần xanh, Cuộc sống xanh</a>
+                    </li>
+                    <li>
+                        <a href="@L["R.GreenFarming"]" style="text-decoration:none;">Canh tác xanh</a>
+                    </li>
+                    <li>
+                        <a href="@L["R.Travel"]" style="text-decoration:none;">Tản mạn</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-2 widgetWrap">
+                <h5 class="title">@L["footer_PaymentMethod"]</h5>
+                <ul>
+                    <img src="~/images/payment.png" height="155" width="340">
+                </ul>
+                <ul>
+                    <img src="~/images/bocongthuong.png" height="88" width="253">
+                </ul>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                &copy; @L["Copyright"]
+            </div>
+        </div>
+    </div>
+</footer>

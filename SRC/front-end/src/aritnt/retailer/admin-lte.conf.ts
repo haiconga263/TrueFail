@@ -1,0 +1,25 @@
+export const adminLteConf = {
+  skin: 'blue',
+  // isSidebarLeftCollapsed: false,
+  // isSidebarLeftExpandOnOver: false,
+  // isSidebarLeftMouseOver: false,
+  // isSidebarLeftMini: true,
+  // sidebarRightSkin: 'dark',
+  // isSidebarRightCollapsed: true,
+  // isSidebarRightOverContent: true,
+  // layout: 'normal',
+  sidebarLeftMenu: [
+    { label: 'MAIN NAVIGATION', separator: true },
+    { label: 'Dashboard', route: 'dashboard', iconClasses: 'fa fa-dashboard' },
+    { label: 'Quản lý tài khoản', route: 'account', iconClasses: 'fa fa-user' },
+    { label: 'Sổ địa chỉ', route: 'location', iconClasses: 'fa fa-building' },
+    { label: 'Bảng báo giá', route: 'price', iconClasses: 'fa fa-list-alt' },
+    { label: 'Kế hoạch đặt hàng', route: 'planning', iconClasses: 'fa fa-balance-scale' },
+    { label: 'Đặt hàng', route: 'order', iconClasses: 'fa fa-shopping-basket' },
+    { label: 'Theo dõi đơn hàng', route: 'order-tracing', iconClasses: 'fa fa-road' },
+    { label: 'Lịch sử đơn hàng', route: 'order-history', iconClasses: 'fa fa-history' },
+    { label: 'Quản lý đơn hàng đổi', route: 'order-refun', iconClasses: 'fa fa-paper-plane-o' },
+    { label: 'Quét barcode', route: 'barcode', iconClasses: 'fa fa-barcode' },
+    { label: 'OTHER NAVIGATION', separator: true },
+  ]
+};

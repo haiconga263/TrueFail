@@ -1,0 +1,39 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using HomePage.Web.Helpers
+
+@model IEnumerable<MDM.UI.Categories.ViewModels.CategoryViewModel>
+@inject IHtmlLocalizer<SharedResource> L
+
+<div class="row">
+    <ul class="mn-sub-lv">
+        @foreach (var itemlv1 in Model)
+        {
+            <li class="col-md-3 mn-sub-lv-item">
+                <hr>
+                <a class="mn-text mn-text-lv-1" href="@itemlv1.GetUrl()"> @itemlv1.Name</a>
+                @if (itemlv1.Childs != null && itemlv1.Childs.Count() > 0)
+                {
+                    <ul class="mn-sub-lv">
+                        @foreach (var itemlv2 in itemlv1.Childs)
+                        {
+                            <li class="mn-sub-lv-item">
+                                <a class="mn-text mn-text-lv-2" href="@itemlv2.GetUrl()"> @itemlv2.Name</a>
+                                @if (itemlv2.Childs != null && itemlv2.Childs.Count() > 0)
+                                {
+                                    <ul class="mn-sub-lv">
+                                        @foreach (var itemlv3 in itemlv2.Childs)
+                                        {
+                                            <li class="mn-sub-lv-item">
+                                                <a class="mn-text mn-text-lv-3" href="@itemlv3.GetUrl()"> @itemlv3.Name</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+</div>

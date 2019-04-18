@@ -1,0 +1,36 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="btn-group">
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="grid.refresh()"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+      <!-- <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Create')" (onClick)="grid.create()"><i class="fa fa-lg fa-plus" aria-hidden="true"></i></dx-button> -->
+      <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Update')" [disabled]="selectedRows?.length != 1" (onClick)="grid.update()"><i class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i></dx-button>
+      <!-- <dx-button class="btn fe-md btn-danger" [hint]="lang.instant('Action.Delete')" [disabled]="!selectedRows?.length" (onClick)="grid.delete()"><i class="fa fa-lg fa-trash" aria-hidden="true"></i></dx-button> -->
+    </div>
+  </div>
+  <!-- <div class="right-side">
+    <dx-menu [items]="menuItems" (onItemClick)="itemClick($event)"></dx-menu>
+  </div> -->
+  <dx-data-grid id="gridContainer"
+                [columnAutoWidth]="fasle"
+                [dataSource]="dataSource"
+                [(selectedRowKeys)]="selectedRows"
+                [showBorders]="true"
+                (onRowInserted)="grid.insert($event)">
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-editing mode="form">
+    </dxo-editing>
+    <!-- <dxo-filter-row 
+        visible="true" ></dxo-filter-row> -->
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+    </dxo-pager>
+
+    <dxi-column dataField="id" [caption]="id" sortOrder="desc"></dxi-column>
+    <dxi-column dataField="senderName" [caption]="Name"></dxi-column>
+    <dxi-column dataField="phoneNumber" [caption]="Phone" ></dxi-column>
+    <dxi-column dataField="senderEmail" [caption]="Email" ></dxi-column>
+    <dxi-column dataField="messageContent" [caption]="Message" ></dxi-column>
+    <dxi-column dataField="createdDate" [caption]="CreatedDate" dataType="date"></dxi-column>
+    <dxi-column dataField="statusStr" [caption]="Status" ></dxi-column>
+  </dx-data-grid>
+</div>

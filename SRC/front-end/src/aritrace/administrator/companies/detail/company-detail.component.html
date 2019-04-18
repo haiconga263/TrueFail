@@ -1,0 +1,97 @@
+<dx-form id="form" [formData]="company">
+  <dxi-item itemType="group" cssClass="first-group" [colCount]="4">
+    <dxi-item class="avatar-group">
+      <img class="form-avatar" [attr.src]="company.imageData" (click)="inputImage.click()" />
+      <span class="avatar-select">change logo</span>
+      <input #inputImage type="file" accept="image/*" (change)="imageChanged($event)">
+    </dxi-item>
+    <dxi-item itemType="group" [colSpan]="3">
+      <dxi-item dataField="name" [label]="{text: 'Company Name'}"></dxi-item>
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item dataField="taxCode" [label]="{text: 'Tax Code'}"></dxi-item>
+        <dxi-item dataField="website" [label]="{text: 'Website'}"></dxi-item>
+      </dxi-item>
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item dataField="gS1Code" [label]="{text: 'GS1 Code'}"></dxi-item>
+        <dxi-item dataField="companyTypeId" [label]="{text: 'Type'}"
+                  editorType="dxSelectBox"
+                  [editorOptions]="{
+                      items: allCompanyTypes,
+                      placeholder:'-- Select type --',
+                      displayExpr:'name',
+                      valueExpr:'id'}">
+        </dxi-item>
+      </dxi-item>
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item itemType="group" [colCount]="2">
+          <dxi-item dataField="isPartner" editorType="dxCheckBox"></dxi-item>
+          <dxi-item dataField="isUsed" editorType="dxCheckBox"></dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dxi-item>
+  </dxi-item>
+  <dxi-item itemType="group" [colCount]="5" cssClass="second-group">
+    <dxi-item itemType="group" [colSpan]="2">
+      <dxi-item dataField="contact.name" [label]="{text: 'Full Name'}"></dxi-item>
+      <dxi-item dataField="contact.phone" [label]="{text: 'Phone'}"></dxi-item>
+      <dxi-item dataField="contact.email" [label]="{text: 'Email'}"></dxi-item>
+      <dxi-item dataField="contact.gender"
+                editorType="dxRadioGroup"
+                [label]="{text: 'Gender'}"
+                [editorOptions]="{ items:getGenders(), layout: 'horizontal'}"></dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group" [colSpan]="3">
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item dataField="address.countryId" [label]="{text: 'Country'}"
+                  editorType="dxSelectBox"
+                  [editorOptions]="{
+                      items: countries, onValueChanged: countryChanged,
+                      placeholder:'-- Select country --',
+                      displayExpr:'text',
+                      valueExpr:'value'}">
+        </dxi-item>
+        <dxi-item dataField="address.provinceId" [label]="{text: 'Province'}"
+                  editorType="dxSelectBox"
+                  [editorOptions]="{
+                      items: provinces, onValueChanged: provinceChanged,
+                      placeholder:'-- Select province --',
+                      displayExpr:'text',
+                      valueExpr:'value'}">
+        </dxi-item>
+      </dxi-item>
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item dataField="address.districtId" [label]="{text: 'District'}"
+                  editorType="dxSelectBox"
+                  [editorOptions]="{
+                      items: districts, onValueChanged: districtChanged,
+                      placeholder:'-- Select district --',
+                      displayExpr:'text',
+                      valueExpr:'value'}">
+        </dxi-item>
+        <dxi-item dataField="address.wardId" [label]="{text: 'Ward'}"
+                  editorType="dxSelectBox"
+                  [editorOptions]="{
+                      items: wards,
+                      placeholder:'-- Select ward --',
+                      displayExpr:'text',
+                      valueExpr:'value'}">
+        </dxi-item>
+      </dxi-item>
+      <dxi-item dataField="address.street" [label]="{text: 'Address'}"></dxi-item>
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item dataField="address.longitude" [label]="{text: 'Longitude'}"></dxi-item>
+        <dxi-item dataField="address.latitude" [label]="{text: 'Latitude'}"></dxi-item>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item dataField="description" [colSpan]="5" editorType="dxTextArea" [editorOptions]="{ height: 140 }"></dxi-item>
+  </dxi-item>
+</dx-form>
+
+<div class="button-actions">
+  <div class="button">
+    <dx-button text="Cancel" (onClick)="cancel()"></dx-button>
+    <dx-button text="Save" type="default" (onClick)="save()"></dx-button>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

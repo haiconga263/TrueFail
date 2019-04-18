@@ -1,0 +1,85 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3" style="margin-top:10px;padding-right:0px">
+              <label>{{lang.instant('Common.FromDate')}}:</label>
+            </div>
+            <div class="col-xs-9">
+              <dx-date-box [(value)]="from" type="date" displayFormat="dd/MM/yyyy" [max]="to" style="width:100%">
+              </dx-date-box>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3" style="margin-top:10px;padding-right:0px">
+              <label>{{lang.instant('Admin.Collection')}}:</label>
+            </div>
+            <div class="col-xs-9">
+              <dx-select-box [dataSource]="collections" [(ngModel)]="collectionId" displayExpr="name" valueExpr="id">
+              </dx-select-box>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3" style="margin-top:10px;padding-right:0px">
+              <label>{{lang.instant('Common.ToDate')}}:</label>
+            </div>
+            <div class="col-xs-9">
+              <dx-date-box [(value)]="to" type="date" displayFormat="dd/MM/yyyy" [min]="from" style="width:100%">
+              </dx-date-box>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <dx-button style="width:100%;margin-top:3px" class="btn fe-md btn-default" (onClick)="search()"><i
+              class="fa fa-search"></i>
+            {{lang.instant('Common.Search')}}</dx-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="left-side" style="margin-bottom:5px">
+    <div class="btn-group">
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Print')" (onClick)="print()"
+        [disabled]="selectedRows == null || selectedRows.length == 0"><i class="fa fa-lg fa-print"
+          aria-hidden="true"></i></dx-button>
+    </div>
+  </div>
+  <dx-data-grid id="gridContainer" [dataSource]="dataSource" [columnAutoWidth]="true" [showBorders]="true"
+    [(selectedRowKeys)]="selectedRows">
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-filter-row visible="true"></dxo-filter-row>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+    </dxo-pager>
+
+    <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+    <dxi-column dataField="fulfillmentId" [caption]="lang.instant('Admin.Fulfillment')">
+      <dxo-lookup [dataSource]="fulfillments" valueExpr="id" displayExpr="name">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="shipperId" [caption]="lang.instant('Delivery.DeliveryMan')">
+      <dxo-lookup [dataSource]="employees" valueExpr="id" displayExpr="fullName">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="vehicleId" [caption]="lang.instant('Admin.Vehicle')">
+      <dxo-lookup [dataSource]="vehicles" valueExpr="id" displayExpr="name">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="statusId" [caption]="lang.instant('Common.Status')" cellTemplate="statusTemplate">
+    </dxi-column>
+    <dxi-column dataField="createdDate" [caption]="lang.instant('Common.CreatedDate')" dataType="date">
+    </dxi-column>
+    <div *dxTemplate="let status of 'statusTemplate'">
+      <span class="label"
+        [style.background-color]="getStatus(status.value).flagColor">{{getStatus(status.value).name}}</span>
+    </div>
+  </dx-data-grid>
+</div>

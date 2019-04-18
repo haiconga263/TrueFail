@@ -1,0 +1,53 @@
+﻿@model List<BlogViewModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> L
+
+
+<br/>
+<br />
+<br />
+<div class="alert alert-info">
+    <strong>@L["UpdateLoading"]</strong>
+</div>
+@*<div class="container">
+    <nav aria-label="breadcrumb" class="col-sm-2">
+        <ol class="breadcrumb">
+            <li class=""><a href="/">Home</a></li>
+            <li class=" active" aria-current="page">Blog</li>
+        </ol>
+    </nav>
+</div>
+
+<div id="content">
+</div>
+<section id="blog">
+    <div class="container">
+        <div class="row">
+            <div id="slider" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#slider" data-slide-to="0" class="active"></li>
+                    <li data-target="#slider" data-slide-to="1"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="row">
+                            @foreach (var i in Model)
+                            {
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="card text-center">
+                                        <img class="card-img-top" src="@i.Image" alt="" width="100%">
+                                        <div class="card-block">
+                                            <h4 class="card-title">@i.Title</h4>
+                                            <p class="card-text">@i.Description</p>
+                                            <a class="btn btn-default" onclick="GetContent('@i.Id')">@L["ReadMore"]</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@

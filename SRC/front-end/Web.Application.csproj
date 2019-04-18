@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="src\aritrace\administrator\catalog\product\**" />
+    <Compile Remove="src\aritrace\administrator\configuration\language-settings\captions\NewFolder\**" />
+    <Compile Remove="src\aritrace\common\gs1\**" />
+    <Compile Remove="src\core\devextreme\**" />
+    <EmbeddedResource Remove="src\aritrace\administrator\catalog\product\**" />
+    <EmbeddedResource Remove="src\aritrace\administrator\configuration\language-settings\captions\NewFolder\**" />
+    <EmbeddedResource Remove="src\aritrace\common\gs1\**" />
+    <EmbeddedResource Remove="src\core\devextreme\**" />
+    <None Remove="src\aritrace\administrator\catalog\product\**" />
+    <None Remove="src\aritrace\administrator\configuration\language-settings\captions\NewFolder\**" />
+    <None Remove="src\aritrace\common\gs1\**" />
+    <None Remove="src\core\devextreme\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="dist\" />
+    <Folder Include="src\aritnt\administrator\retailer\orderHomepage\detail\" />
+    <Folder Include="src\aritrace\administrator\catalog\categories\detail\" />
+    <Folder Include="src\aritrace\partner\productions\" />
+  </ItemGroup>
+
+</Project>

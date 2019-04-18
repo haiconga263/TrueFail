@@ -1,0 +1,81 @@
+::ng-deep .group {
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+::ng-deep .button-actions {
+  height: 40px;
+}
+
+  ::ng-deep .button-actions .button {
+    position: absolute;
+    right: 30px;
+    margin-bottom: 10px;
+  }
+
+  ::ng-deep .button-actions dx-button {
+    margin-right: 10px;
+  }
+
+
+::ng-deep .gtin-company-code {
+  line-height: 35px;
+  text-align: center;
+  font-weight: bold;
+}
+
+::ng-deep .gtin-description {
+  font-style: italic;
+  text-align: center;
+  margin-top: 3px;
+}
+
+::ng-deep .gtin-code {
+  color: darkred;
+  font-size: 24px;
+  line-height: 35px;
+  font-weight: bold;
+  display: contents;
+}
+
+::ng-deep .gtin-center {
+  text-align: center;
+  text-align: -webkit-center;
+}
+
+  ::ng-deep .gtin-center input {
+    text-align: center;
+  }
+::ng-deep .gtin-sm{
+
+  font-size:10px;   
+}
+::ng-deep .btn-check {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+::ng-deep .msg-check {
+  margin-top: 15px;
+  margin-left: 10px;
+  display: contents;
+  font-size: 13px;
+  font-weight: 600;
+  font-style: italic;
+}
+
+  ::ng-deep .msg-check.error {
+    color: red;
+  }
+
+  ::ng-deep .msg-check.warning {
+    color: orange;
+  }
+
+  ::ng-deep .msg-check.success {
+    color: green;
+  }

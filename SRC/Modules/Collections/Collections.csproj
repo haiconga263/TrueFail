@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DAL\DAL.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Web\Web.csproj" />
+    <ProjectReference Include="..\..\Presentations\Collections.UI\Collections.UI.csproj" />
+    <ProjectReference Include="..\..\Presentations\Order.UI\Order.UI.csproj" />
+  </ItemGroup>
+
+</Project>

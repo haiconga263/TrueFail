@@ -1,0 +1,132 @@
+<div id="grid" class="product-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i
+                    class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'"
+                (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i
+                    class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="" style="margin-top:5px;padding-right:0px">
+                            <label>Question <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="">
+                            <dx-text-area placeholder="Question" [(ngModel)]="faq.question">
+                            </dx-text-area>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="" style="margin-top:5px;padding-right:0px">
+                            <label>Answer <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="">
+                            <dx-text-area placeholder="Answer" [(ngModel)]="faq.answer">
+                            </dx-text-area>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="faq.isUsed" text="{{lang.instant('Common.Active')}}">
+                            </dx-check-box>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Password')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Password')}}" [(ngModel)]="user.password"
+                                [(isValid)]="isPasswordValid" [readOnly]="type == 'update'" mode="password">
+                                <dx-validator>
+                                    <dxi-validation-rule *ngIf="type != 'update'" type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" min="8" max="20" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="pattern" [pattern]="passwordPattern" message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="user.isUsed" text="{{lang.instant('Common.Active')}}"></dx-check-box>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <div class="box-body">
+            <dx-data-grid [dataSource]="modifyLanguages" [keyExpr]="languageId" [showBorders]="true">
+                <dxo-editing mode="form" [allowUpdating]="true">
+                </dxo-editing>
+                <dxi-column dataField="langShowName" [caption]="lang.instant('Common.Language')"
+                    [formItem]="{visible: false}">
+                </dxi-column>
+                <dxi-column dataField="question" [caption]="Question"></dxi-column>
+                <dxi-column dataField="answer" [caption]="Answer"></dxi-column>
+            </dx-data-grid>
+        </div>
+        <!--
+    <div class="box-body">
+        <dx-data-grid [dataSource]="product.prices" [showBorders]="true">
+
+            <dxo-editing mode="form" [allowUpdating]="true" [allowAdding]="true">
+            </dxo-editing>
+            <dxi-column dataField="buyingPrice" [caption]="lang.instant('Common.BuyingPrice')" dataType="number"
+                format="#,##0.## VND">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="sellingPrice" [caption]="lang.instant('Common.SellingPrice')" dataType="number"
+                format="#,##0.## VND">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="weight" [caption]="lang.instant('Admin.Product.Weight')" dataType="number">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="capacity" [caption]="lang.instant('Admin.Product.Volumn')" dataType="number">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="uoMId" [caption]="lang.instant('Admin.UoM')">
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+                <dxo-lookup [dataSource]="uoms" valueExpr="id" displayExpr="name">
+                </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="effectivedDate" [caption]="lang.instant('Common.EffectivedDate')" dataType="date">
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+            </dxi-column>
+        </dx-data-grid>
+    </div> -->
+    </div>

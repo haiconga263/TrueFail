@@ -1,0 +1,127 @@
+﻿@using System.Linq
+@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using HomePage.Web.Helpers
+
+@using Common
+@model IEnumerable<Homepage.UI.ViewModels.ProductHomepageViewModel>;
+@inject IHtmlLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = "Products";
+    var proCate = ViewData["categories"] as IEnumerable<MDM.UI.Categories.Models.Category>;
+    var cateID = int.Parse(string.IsNullOrEmpty(ViewData["cateID"] as string) ? "0" : (ViewData["cateID"] as string));
+    var totalPage = (int)ViewData["TotalPage"];
+    var currentPage = (int)ViewData["currentPage"];
+    var pageSize = (int)ViewData["pagesize"];
+    var totalProduct = (int)ViewData["TotalProduct"];
+    var sortby = (string)ViewData["sortby"];
+    var imagePath = GlobalConfiguration.ProductImagePath;
+
+    MDM.UI.Categories.Models.Category cateory = proCate.Where(x => x.Id == cateID).FirstOrDefault();
+}
+
+<section class="">
+    <div class="container">
+        <section class="post shop_mode_thumbs">
+            <article class="post_content">
+                <nav class="woocommerce-breadcrumb">
+                    <a href="~/">@L["Index_Homepage"]</a>&nbsp;&#47;&nbsp;
+
+
+                    <a href="@L["R.Products"]">@L["Index_Product"]</a>
+
+                    @if (cateory != null)
+                    {
+                        @Html.Raw("&nbsp; &#47;&nbsp")
+                        <a href="@cateory.GetUrl()">@cateory.Name</a>
+                        <h4 class="page-title">@cateory.Name</h4>
+                    }
+                </nav>
+                @*<p class="woocommerce-result-count">
+                        Hiển thị từ @((currentPage - 1) * pageSize + 1)&ndash;@(Math.Min(currentPage * pageSize, totalProduct)) của @totalProduct sản phẩm
+                    </p>*@
+                @*<form class="woocommerce-ordering" method="get" action="@cateory.GetUrl()">
+                        <select name="sortby" class="orderby" onchange="this.form.submit()">
+                            @if (string.IsNullOrWhiteSpace(sortby))
+                            {
+                                <option value="product-name" selected="@(string.IsNullOrWhiteSpace(sortby)?"true":"fa" )">Tên sản phẩm</option>
+                            }
+                            else
+                            {
+                                <option value="product-name">Tên sản phẩm</option>
+                            }
+
+                            @if (sortby == "price-low-to-high")
+                            {
+                                <option value="price-low-to-high" selected>Price low to high</option>
+                            }
+                            else
+                            {
+                                <option value="price-low-to-high">Price low to high</option>
+                            }
+
+
+                            @if (sortby == "price-high-to-low")
+                            {
+                                <option value="price-high-to-low" selected>Price high to low</option>
+                            }
+                            else
+                            {
+                                <option value="price-high-to-low">Price high to low</option>
+                            }
+                        </select>
+                    </form>*@
+                @if (Model != null && Model.Count() > 0)
+                {
+                    <ul class="products">
+                        <div class="container-fluid">
+                            <div class="row">
+                                @foreach (var item in Model)
+                                {
+                                    <div id="pro-1" class="col-md-3 col-sm-6 col-xs-12 pro-item">
+                                        <a href="@item.GetUrl()" style="text-decoration:none;">
+                                            <span class="pro-img" style="background-image:url(@(imagePath + item.ImageURL))"></span>
+                                            <hr />
+                                            <span class="pro-name">@item.Name</span>
+                                            <span class="price" hidden>
+                                                <span class="amount">@item.SellingCurrentPrice.ToFormatCurrency()</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </ul>
+                }
+                else
+                {
+                    <div class="well" style="background-color: #FFECB3;">@L["EmptyProduct"] </div>
+                }
+
+                <div class="text-center">
+                    <ul class='pagination'>
+                        @for (int i = 1; i <= totalPage; i++)
+                        {
+                            @if (i == currentPage)
+                            {
+                                <li class="active">
+                                    <a href="javascript:void(0)">@i</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="@cateory.GetUrl()?page=@i">@i</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </article>
+        </section>
+    </div>
+</section>
+

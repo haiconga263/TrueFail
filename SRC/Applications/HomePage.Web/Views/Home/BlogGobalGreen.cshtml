@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model List<BlogViewModel>
+@inject IHtmlLocalizer<SharedResource> L
+
+
+<br />
+<br />
+<br />
+<div class="alert alert-info">
+    <strong>@L["UpdateLoading"]</strong>
+</div>
+@*<div class="blog-section paddingTB60 ">
+        <div class="container">
+            <nav aria-label="breadcrumb" class="col-sm-2">
+                <ol class="breadcrumb">
+                    <li class=""><a href="/">Home</a></li>
+                    <li class=" active" aria-current="page">Blog</li>
+                </ol>
+            </nav>
+        </div>
+        <div id="content">
+        </div>
+        <div class="row text-center" id="blog">
+            <div class="col-sm-6 col-md-4">
+                @foreach (var i in Model)
+                {
+                    <div class="blog-box">
+                        <div class="blog-box-image">
+                            <img src="@i.Image" class="img-responsive" alt="">
+                        </div>
+                        <div class="blog-box-content">
+                            <h4><a href="#">@i.Title</a></h4>
+                            <p>
+                                @i.Description
+                            </p>
+                            <a onclick="GetContent('@i.Id')" class="btn btn-default site-btn">@L["ReadMore"]</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@

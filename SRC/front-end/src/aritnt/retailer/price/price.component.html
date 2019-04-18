@@ -1,0 +1,23 @@
+<div id="grid">
+  <dx-data-grid id="gridContainer" [columnAutoWidth]="true" [dataSource]="dataSource"
+    [showBorders]="true">
+    <dxo-export [enabled]="true" fileName="Price" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-filter-row visible="true"></dxo-filter-row>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+    </dxo-pager>
+    <dxo-selection
+            selectAllMode="allPages"
+            mode="multiple"
+        ></dxo-selection>
+
+    <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+    <dxi-column dataField="name" [caption]="lang.instant('Common.Name')"></dxi-column>
+    <dxi-column dataField="currentUoM" [caption]="lang.instant('Admin.UoM')">
+      <dxo-lookup [dataSource]="uoms" valueExpr="id" displayExpr="name">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="sellingCurrentPrice" [caption]="lang.instant('Common.Price')" format="#,##0.## VND"></dxi-column>
+  </dx-data-grid>
+  <p><i>{{lang.instant('Common.Warning')}}</i>: {{lang.instant('Retailer.Price.Note')}}</p>
+</div>

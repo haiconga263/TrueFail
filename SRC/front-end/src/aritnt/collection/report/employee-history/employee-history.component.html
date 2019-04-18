@@ -1,0 +1,71 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3" style="margin-top:10px;padding-right:0px">
+              <label>{{lang.instant('Common.FromDate')}}:</label>
+            </div>
+            <div class="col-xs-9">
+              <dx-date-box [(value)]="from" type="date" displayFormat="dd/MM/yyyy" [max]="to" style="width:100%">
+              </dx-date-box>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3" style="margin-top:10px;padding-right:0px">
+              <label>{{lang.instant('Admin.Collection')}}:</label>
+            </div>
+            <div class="col-xs-9">
+              <dx-select-box [dataSource]="collections" [(ngModel)]="collectionId" displayExpr="name" valueExpr="id">
+              </dx-select-box>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3" style="margin-top:10px;padding-right:0px">
+              <label>{{lang.instant('Common.ToDate')}}:</label>
+            </div>
+            <div class="col-xs-9">
+              <dx-date-box [(value)]="to" type="date" displayFormat="dd/MM/yyyy" [min]="from" style="width:100%">
+              </dx-date-box>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <dx-button style="width:100%;margin-top:3px" class="btn fe-md btn-default" (onClick)="search()"><i
+              class="fa fa-search"></i>
+            {{lang.instant('Common.Search')}}</dx-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-side">
+    <!--<dx-select-box></dx-select-box>-->
+  </div>
+  <dx-data-grid id="gridContainer" [columnAutoWidth]="true" [dataSource]="dataSource" [showBorders]="true"
+    keyExpr="employeeId">
+    <dxo-filter-row visible="true"></dxo-filter-row>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+    </dxo-pager>
+
+    <dxi-column dataField="employeeId" [caption]="lang.instant('Admin.Employee')">
+      <dxo-lookup [dataSource]="employeeses" valueExpr="userId" displayExpr="fullName">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="totalOrder" [caption]="lang.instant('Collection.Report.TotalOrder')">
+    </dxi-column>
+    <dxi-column dataField="totalAmount" [caption]="lang.instant('Collection.Report.TotalAmount')" format="#,##0.## VND">
+    </dxi-column>
+    <dxi-column dataField="completedCount" [caption]="lang.instant('Collection.Report.CompletedCount')">
+    </dxi-column>
+    <dxi-column dataField="canceledCount" [caption]="lang.instant('Collection.Report.CanceledCount')">
+    </dxi-column>
+  </dx-data-grid>
+</div>

@@ -1,0 +1,147 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>{{lang.instant('Admin.Collection')}}</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-select-box [dataSource]="collections" [(ngModel)]="chooseCollection" displayExpr="name"
+                    (onValueChanged)="collectionChanged($event)">
+                  </dx-select-box>
+                </div>
+              </div>
+            </div>
+            <!-- /.form-group -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <dx-data-grid id="gridContainer" [dataSource]="dataSource" [columnAutoWidth]="true"
+    [masterDetail]="{ enabled: true, template: 'detail' }" [showBorders]="true">
+    <dxo-selection mode="multiple"></dxo-selection>
+    <dxo-filter-row visible="true"></dxo-filter-row>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+    </dxo-pager>
+    <dxo-export [enabled]="true" fileName="Inventories" [allowExportSelectedData]="true"></dxo-export>
+
+    <dxi-column dataField="productId" [caption]="lang.instant('Common.Name')">
+      <dxo-lookup [dataSource]="products" valueExpr="id" displayExpr="defaultName">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="uoMId" [caption]="lang.instant('Admin.UoM')">
+      <dxo-lookup [dataSource]="uoms" valueExpr="id" displayExpr="name">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="quantity" [caption]="lang.instant('Common.Quantity')"></dxi-column>
+
+    <div *dxTemplate="let detail of 'detail'">
+      <div class="left-side">
+        <div class="btn-group">
+          <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.ReleaseCorruptedGoods')"
+            [disabled]="detail.data.selectedRows == null || detail.data.selectedRows.length == 0"
+            (onClick)="showRelease(detail.data.selectedRows)"><i class="fa fa-lg fa-trash" aria-hidden="true"></i>
+          </dx-button>
+        </div>
+      </div>
+      <div class="master-detail-caption">{{lang.instant('Common.Detail')}}</div>
+      <dx-data-grid [dataSource]="detail.data.details" [showBorders]="true" [columnAutoWidth]="true"
+        [(selectedRowKeys)]="detail.data.selectedRows">
+        <dxo-selection mode="single"></dxo-selection>
+        <dxi-column dataField="traceCode" [caption]="lang.instant('Common.Code')"></dxi-column>
+        <dxi-column dataField="quantity" [caption]="lang.instant('Common.Quantity')"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </dx-data-grid>
+</div>
+
+<dx-popup [title]="lang.instant('Action.ReleaseCorruptedGoods')" [(visible)]="isPopupVisible" maxHeight="300px">
+  <div *dxTemplate="let data of 'content'">
+    <div class="left-side" style="margin-bottom:5px">
+      <div class="btn-group">
+        <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Process')" (onClick)="release()"><i
+            class="fa fa-lg fa-sitemap" aria-hidden="true"></i></dx-button>
+      </div>
+    </div>
+    <div class="left-side">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                <label>{{lang.instant('Common.Code')}}</label>
+              </div>
+              <div class="col-xs-8">
+                <dx-text-box placeholder="{{lang.instant('Common.Code')}}" [value]="releaseInventory.traceCode"
+                  readOnly="true">
+                </dx-text-box>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                <label>{{lang.instant('Admin.Product')}}</label>
+              </div>
+              <div class="col-xs-8">
+                <dx-select-box [value]="releaseInventory.productId" readOnly="true" [dataSource]="products"
+                  valueExpr="id" displayExpr="defaultName">
+                </dx-select-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                <label>{{lang.instant('Admin.UoM')}}</label>
+              </div>
+              <div class="col-xs-8">
+                <dx-select-box [value]="releaseInventory.uoMId" readOnly="true" [dataSource]="uoms" valueExpr="id"
+                  displayExpr="name">
+                </dx-select-box>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                <label>{{lang.instant('Common.Quantity')}} <span class="dx-field-item-required-mark">*</span></label>
+              </div>
+              <div class="col-xs-8">
+                <dx-number-box [(ngModel)]="releaseInventory.releaseQuantity" min="1" [max]="releaseInventory.quantity"
+                  [(isValid)]="isReleaseQuantityValid">
+                </dx-number-box>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-2" style="margin-top:5px;padding-right:0px">
+                <label>{{lang.instant('Common.Reason')}} <span class="dx-field-item-required-mark">*</span></label>
+              </div>
+              <div class="col-xs-10">
+                <dx-text-box placeholder="{{lang.instant('Common.Reason')}}"
+                  [(ngModel)]="releaseInventory.releaseReason" [isValid]="false">
+                  <dx-validator>
+                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                    </dxi-validation-rule>
+                  </dx-validator>
+                </dx-text-box>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dx-popup>

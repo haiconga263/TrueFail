@@ -1,0 +1,6 @@
+<div id="errorscreen" [hidden]="!isError">
+  <p>{{msg}} </p>
+  <a (click)="logout()">
+      {{lang.instant('Login.LoginByAnotherAccount')}}
+  </a>
+</div>

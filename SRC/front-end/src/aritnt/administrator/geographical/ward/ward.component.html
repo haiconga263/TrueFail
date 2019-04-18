@@ -1,0 +1,69 @@
+<div id="grid">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="grid.refresh()">
+                <i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Create')"
+                (onClick)="grid.showCreate()"><i class="fa fa-lg fa-plus" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Update')"
+                [disabled]="selectedRows?.length != 1" (onClick)="grid.showUpdate()"><i
+                    class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-danger" [hint]="lang.instant('Action.Delete')"
+                [disabled]="!selectedRows?.length" (onClick)="grid.delete()"><i class="fa fa-lg fa-trash"
+                    aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <dx-data-grid id="gridContainer" [columnAutoWidth]="true" [dataSource]="dataSource"
+        [(selectedRowKeys)]="selectedRows" [showBorders]="true" (onRowUpdating)="grid.update($event)"
+        (onRowInserting)="grid.create($event)" (onFocusedCellChanged)="grid.optionChanged($event, this)">
+        <dxo-selection mode="single"></dxo-selection>
+        <dxo-editing mode="form">
+        </dxo-editing>
+        <dxo-filter-row visible="true"></dxo-filter-row>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+        </dxo-pager>
+
+        <dxi-column dataField="code" [caption]="lang.instant('Common.Code') + ' ' + lang.instant('Admin.Address.Ward')"
+            [editorOptions]="{ maxLength:10 }">
+            <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+            </dxi-validation-rule>
+            <dxi-validation-rule type="stringLength" max="10" message="{{lang.instant('Validation.WrongLength')}}">
+            </dxi-validation-rule>
+            <dxi-validation-rule type="pattern" [pattern]="nonCharPattern"
+                message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="name" [caption]="lang.instant('Common.Name') + ' ' + lang.instant('Admin.Address.Ward')" [editorOptions]="{ maxLength:50 }">
+            <dxi-validation-rule type="pattern" [pattern]="vietnamesePattern"
+                message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+            <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+            </dxi-validation-rule>
+            <dxi-validation-rule type="stringLength" max="255" message="{{lang.instant('Validation.WrongLength')}}">
+            </dxi-validation-rule>
+            <dxi-validation-rule type="pattern" [pattern]="vietnamesePattern"
+                message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+        </dxi-column>
+        <dxi-column dataField="countryId" [caption]="lang.instant('Admin.Address.Country')">
+            <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+            </dxi-validation-rule>
+            <dxo-lookup [dataSource]="allCountries" valueExpr="id" displayExpr="name">
+            </dxo-lookup>
+        </dxi-column>
+        <dxi-column dataField="provinceId" [caption]="lang.instant('Admin.Address.Province')">
+            <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+            </dxi-validation-rule>
+            <dxo-lookup [dataSource]="provinces" valueExpr="id" displayExpr="name">
+            </dxo-lookup>
+        </dxi-column>
+        <dxi-column dataField="districtId" [caption]="lang.instant('Admin.Address.District')">
+            <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+            </dxi-validation-rule>
+            <dxo-lookup [dataSource]="districts" valueExpr="id" displayExpr="name">
+            </dxo-lookup>
+        </dxi-column>
+        <dxi-column dataField="isUsed" [caption]="lang.instant('Common.Active')" dataType="boolean"></dxi-column>
+    </dx-data-grid>
+</div>
+<swal #swal title="Thông báo" type="info"></swal>

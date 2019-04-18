@@ -1,0 +1,269 @@
+<div id="grid" class="location-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'" (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="container-avatar clear-fix">
+                    <img class="location-avatar" [attr.src]="location.imageData" />
+                    <button class="location-choose-image" (click)="inputChooseAvatar.click()">
+                        <i class="fa fa-cloud-download">
+                        </i>
+                    </button>
+                    <input #inputChooseAvatar type="file" accept="image/*" style="display:none" (change)="avatarChangeEvent($event, this)">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Name')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Name')}}" [(ngModel)]="location.name"
+                                [(isValid)]="isNameValid" [maxLength]="50">
+                                <dx-validator>
+                                    <dxi-validation-rule type="pattern" [pattern]="numberPattern" message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Code')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Code')}}" [(ngModel)]="location.gln" readOnly="true">
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="location.isUsed" text="{{lang.instant('Common.Active')}}"></dx-check-box>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>(*)Mô tả</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box [maxLength]="255" placeholder="{{lang.instant('Location.Description')}}" [(ngModel)]="location.description">
+                                <dx-validator>
+                                    <dxi-validation-rule type="stringLength" max="255" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>{{lang.instant('Admin.Address')}}</h3>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Address.Country')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="allCountries" (onFocusIn)="countryFocusIn($event)" [(ngModel)]="location.address.countryId"
+                                displayExpr="name" valueExpr="id" [(isValid)]="isAddressCountryValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Address.Province')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="provinces" (onFocusIn)="provinceFocusIn($event)" [(ngModel)]="location.address.provinceId"
+                                displayExpr="name" valueExpr="id" [(isValid)]="isAddressProvinceValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Address.District')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="districts" (onFocusIn)="districtFocusIn($event)" [(ngModel)]="location.address.districtId"
+                                displayExpr="name" valueExpr="id" [(isValid)]="isAddressDistrictValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Address.Ward')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="wards" (onFocusIn)="wardFocusIn($event)" [(ngModel)]="location.address.wardId"
+                                displayExpr="name" valueExpr="id" [(isValid)]="isAddressWardValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Address.Street')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Admin.Geographical.Street')}}" [(ngModel)]="location.address.street"
+                                [(isValid)]="isAddressStreetValid" [maxLength]="100">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="100" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Address.Longitude')}}/{{lang.instant('Admin.Address.Latitude')}}<span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-5" style="padding-left: 15px;padding-right: 5px">
+                                    <dx-number-box [(ngModel)]="location.address.longitude" min="-90" max="90">
+                                    </dx-number-box>
+                                </div>
+                                <div class="col-xs-5" style="padding-left: 7px;padding-right: 8px">
+                                    <dx-number-box [(ngModel)]="location.address.latitude" min="-180" max="180">
+                                    </dx-number-box>
+                                </div>
+                                <div class="col-xs-2" style="padding-left: 5px;padding-right: 15px">
+                                    <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Common.Map')" (onClick)="openMap();" style="height: 36px"><i class="fa fa-lg fa-map"
+                                        aria-hidden="true"></i></dx-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>{{lang.instant('Admin.Contact')}}</h3>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Contact.FullName')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Admin.Contact.FullName')}}" [(ngModel)]="location.contact.name"
+                                [(isValid)]="isContactNameValid" [maxLength]="50">
+                                <dx-validator>
+                                    <dxi-validation-rule type="pattern" [pattern]="numberPattern" message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Phone')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Phone')}}" [(ngModel)]="location.contact.phone"
+                                [(isValid)]="isContactPhoneValid" [maxLength]="50">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="pattern" [pattern]="phonePattern" message="{{lang.instant('Validation.WrongFormatPhone')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Email')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Distribution.Contact.Email')}}" [(ngModel)]="location.contact.email"
+                                [(isValid)]="isContactEmailValid" [maxLength]="50">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50" message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="email" message="{{lang.instant('Validation.WrongFormatEmail')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Gender')}} <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="genders" [(ngModel)]="location.contact.gender" displayExpr="name"
+                                valueExpr="id">
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<dx-popup [title]="lang.instant('Admin.Address.Longitude') + '/' + lang.instant('Admin.Address.Latitude')" [(visible)]="isOpenMap">
+    <div *dxTemplate="let data of 'content'">
+        <agm-map style="height: 400px;" [longitude]="location.address.longitude" [latitude]="location.address.latitude"
+        [usePanning]="usePanning" [zoom]="10" (mapClick)="mapClick($event)">
+        <agm-marker 
+            [latitude]="location.address.latitude"
+            [longitude]="location.address.longitude"
+            label="A">
+        </agm-marker>
+      </agm-map>
+    </div>
+  </dx-popup>

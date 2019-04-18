@@ -1,0 +1,31 @@
+select.report{
+    /*border: none;
+    position:absolute;
+    bottom: 20px;
+    right:30px;*/
+    width:100px;
+    height:30px;
+    font-size:12pt;
+    font-family:Consolas;
+    text-align:center;
+    margin-bottom:20px;
+    border-radius:3px;
+}
+span.info-box-number{
+    font-size:24pt;
+    margin-top:20px;
+    display:unset !important;
+}
+span.info-growth
+{
+    font-size:12pt;
+    font-style:italic;
+    margin-left:5px;
+    display:block;
+}
+i.fa-arrow-up{
+    color:green;
+}
+i.fa-arrow-down {
+    color: red;
+}

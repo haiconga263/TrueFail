@@ -1,0 +1,37 @@
+<dx-form id="form" [formData]="caption"  class="caption-group">
+  <dxi-item itemType="group" cssClass="first-group" [colCount]="4">
+    <dxi-item itemType="group" [colSpan]="2">
+      <dxi-item dataField="name" [label]="{text: 'Caption Name'}"></dxi-item>
+      <dxi-item dataField="defaultCaption" [label]="{text: 'Text'}"></dxi-item>
+      <dxi-item itemType="group" [colCount]="2">
+        <dxi-item itemType="group" [colCount]="2">
+          <dxi-item dataField="isCommon" editorType="dxCheckBox"></dxi-item>
+          <dxi-item dataField="isUsed" editorType="dxCheckBox"></dxi-item>
+        </dxi-item>
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item itemType="group" [colSpan]="2">
+      <dx-tab-panel class="caption-language"
+                    [dataSource]="caption.languages"
+                    [selectedIndex]="0"
+                    [animationEnabled]="true"
+                    [swipeEnabled]="true">
+        <div *dxTemplate="let clang of 'title'"><span class="{{clang.langClassIcon}}"></span> {{clang.langName}}</div>
+
+        <div *dxTemplate="let clang of 'item'">
+          <div class="tabpanel-item">
+            <div class="dx-fieldset">
+              <div class="dx-field">
+                <div class="dx-field-label" style="width:20%">Text</div>
+                <div class="dx-field-value" style="width:80%">
+                  <dx-text-box [(value)]="clang.caption"></dx-text-box>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </dx-tab-panel>
+    </dxi-item>
+  </dxi-item>
+</dx-form>

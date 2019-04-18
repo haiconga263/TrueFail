@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <IsPackable>false</IsPackable>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="%2a%2a\**" />
+    <Content Remove="%2a%2a\**" />
+    <EmbeddedResource Remove="%2a%2a\**" />
+    <None Remove="%2a%2a\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DAL\DAL.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Web\Web.csproj" />
+    <ProjectReference Include="..\..\Presentations\Admin.UI\Admin.UI.csproj" />
+    <ProjectReference Include="..\..\Presentations\Users.UI\Users.UI.csproj" />
+  </ItemGroup>
+
+</Project>

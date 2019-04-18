@@ -1,0 +1,279 @@
+<div id="grid" class="vehicle-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i
+                    class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'"
+                (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i
+                    class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="container-avatar clear-fix">
+                    <img class="vehicle-avatar" [attr.src]="vehicle.imageData" />
+                    <button class="vehicle-choose-image" (click)="inputChooseAvatar.click()">
+                        <i class="fa fa-cloud-download">
+                        </i>
+                    </button>
+                    <input #inputChooseAvatar type="file" accept="image/*" style="display:none"
+                        (change)="avatarChangeEvent($event, this)">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Code')}}</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Code')}}" [value]="vehicle.code"
+                                readOnly="true">
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.PlateNumber')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Admin.Vehicle.PlateNumber')}}"
+                                [(ngModel)]="vehicle.name" [(isValid)]="isNameValid" [maxLength]="15">
+                                <dx-validator>
+                                    <dxi-validation-rule type="pattern" [pattern]="nonCharPattern"
+                                        message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50"
+                                        message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Distribution')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="dises" [(ngModel)]="vehicle.orgCode" displayExpr="name"
+                                valueExpr="code" [(isValid)]="isDistributionValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="vehicle.isUsed" text="{{lang.instant('Common.Active')}}">
+                            </dx-check-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.Type')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="types" [(ngModel)]="vehicle.typeId" displayExpr="name"
+                                valueExpr="id" [(isValid)]="isTypeValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.StartTime')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-date-box displayFormat="HH:mm" type="time" pickerType="rollers"
+                                [(value)]="vehicle.startTime">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-date-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.EndTime')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-date-box displayFormat="HH:mm" type="time" pickerType="rollers"
+                                [(value)]="vehicle.endTime">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-date-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.StartLunchTime')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-date-box displayFormat="HH:mm" type="time" pickerType="rollers"
+                                [(value)]="vehicle.startLunchTime">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-date-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.EndLunchTime')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-date-box displayFormat="HH:mm" type="time" pickerType="rollers"
+                                [(value)]="vehicle.endLunchTime">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-date-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.Speed')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-number-box [max]="100" [min]="0" [showSpinButtons]="true" [(ngModel)]="vehicle.speed">
+                            </dx-number-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.TemperatureType')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="temperatureTypes" [(ngModel)]="vehicle.temperatureType"
+                                displayExpr="name" valueExpr="code" [(isValid)]="isTemperatureTypeValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.ZoneCount')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-number-box [max]="100" [min]="0" [showSpinButtons]="true"
+                                [(ngModel)]="vehicle.zoneCount">
+                            </dx-number-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.Weight')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-number-box [max]="99999" [min]="0" [showSpinButtons]="true"
+                                [(ngModel)]="vehicle.weight">
+                            </dx-number-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.VehicleWeight')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-number-box [max]="99999" [min]="0" [showSpinButtons]="true"
+                                [(ngModel)]="vehicle.vehicleWeight">
+                            </dx-number-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Vehicle.Volumn')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-number-box [max]="99999" [min]="0" [showSpinButtons]="true"
+                                [(ngModel)]="vehicle.capacity">
+                            </dx-number-box>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Distributions.UI\Distributions.UI.csproj" />
+    <ProjectReference Include="..\MDM.UI\MDM.UI.csproj" />
+    <ProjectReference Include="..\Order.UI\Order.UI.csproj" />
+  </ItemGroup>
+
+</Project>

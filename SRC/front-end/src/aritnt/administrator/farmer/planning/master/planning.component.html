@@ -1,0 +1,39 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="btn-group">
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="grid.refresh()"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+      <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Convert')" [disabled]="selectedRows?.length != 1" (onClick)="grid.showConvert(selectedRows[0])"><i class="fa fa-random"
+        aria-hidden="true"></i></dx-button>
+    </div>
+  </div>
+  <div class="right-side">
+    <!--<dx-select-box></dx-select-box>-->
+  </div>
+  <dx-data-grid id="gridContainer" [dataSource]="dataSource" [columnAutoWidth]="true" [masterDetail]="{ enabled: true, template: 'detail' }"
+    keyExpr="ID" [showBorders]="true" [(selectedRowKeys)]="selectedRows">
+    <dxo-selection mode="single"></dxo-selection>
+
+    <dxo-filter-row 
+        visible="true" ></dxo-filter-row>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+    </dxo-pager>
+ 
+    <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+    <dxi-column dataField="name" [caption]="lang.instant('Common.Name')"></dxi-column>
+    <dxi-column dataField="farmer.name" [caption]="lang.instant('Admin.Farmer')"></dxi-column>
+    <dxi-column dataField="buyingDate" [caption]="lang.instant('Order.DeliveriedDate')" dataType="date"></dxi-column>
+    <dxi-column dataField="isAdaped" [caption]="lang.instant('Order.IsAdap')" dataType="boolean"></dxi-column>
+    <dxi-column dataField="createdDate" [caption]="lang.instant('Common.CreatedDate')" dataType="date"></dxi-column>
+
+    <div *dxTemplate="let planning of 'detail'">
+      <div class="master-detail-caption">{{lang.instant('Order.PlaningList')}}</div>
+      <dx-data-grid [dataSource]="planning.data.items" [showBorders]="true" [columnAutoWidth]="true">
+        <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>
+        <dxi-column dataField="quantity" [caption]="lang.instant('Order.PlanningQuantity')"></dxi-column>
+        <dxi-column dataField="adapQuantity" [caption]="lang.instant('Order.AdapedQuantity')"></dxi-column>
+        <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </dx-data-grid>
+</div>

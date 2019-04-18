@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Languages\**" />
+    <EmbeddedResource Remove="Languages\**" />
+    <None Remove="Languages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GS1.UI\GS1.UI.csproj" />
+    <ProjectReference Include="..\MDM.UI\MDM.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Settings\Models\" />
+  </ItemGroup>
+
+</Project>

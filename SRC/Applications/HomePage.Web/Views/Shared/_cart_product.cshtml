@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@inject IHtmlLocalizer<SharedResource> L
+
+<li class="usermenuCart">
+    <a class="" href="@L["R.Cart"]">
+        <i class="fa fa-shopping-cart" style="font-size:14px"></i> @L["Cart"]
+        <span class="badge" style="font-size:13px; color:white; font-weight:normal;">0</span>
+    </a>
+</li>
+
+
+

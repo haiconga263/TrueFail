@@ -1,0 +1,64 @@
+::ng-deep .first-group,
+::ng-deep .second-group {
+  padding: 20px;
+}
+
+::ng-deep .second-group {
+  background-color: rgba(191, 191, 191, 0.15);
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+::ng-deep .form-avatar {
+  height: 105px;
+  /*width: 128px;*/
+  margin-right: 10px;
+  /*border: 1px solid #d2d3d5;*/
+  /*border-radius: 50%;*/
+  /*background-image: url('/assets/img/logo-default.png');*/
+  /*background-image: url('images/petersmith.png');*/
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+::ng-deep .avatar-group {
+  text-align: center;
+}
+
+  ::ng-deep .avatar-group:hover {
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+  }
+
+  ::ng-deep .avatar-group .avatar-select {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    display: none;
+    width: 100%;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-bottomright: 3px;
+  }
+
+  ::ng-deep .avatar-group:hover .avatar-select {
+    display: block;
+  }
+
+  ::ng-deep .avatar-group input {
+    display: none;
+  }
+
+::ng-deep .button-actions {
+  height: 40px;
+}
+
+  ::ng-deep .button-actions .button {
+    position: absolute;
+    right: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  ::ng-deep .button-actions dx-button {
+    margin-right: 10px;
+  }

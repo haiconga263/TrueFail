@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+        .ToList();
+    var returnUrl = (string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}")
+        + (Context.Request.QueryString.HasValue ? Context.Request.QueryString.Value : "");
+    var lang = requestCulture.RequestCulture.UICulture.Name;
+}
+@{
+    var domainHost = Url.ActionContext.HttpContext.Request.Host.Host;
+    //var domainHost = ".vn";
+}
+<li class="usermenuFlag">
+    <div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+        <form id="selectLanguage" asp-controller="Home"
+              asp-action="SetLanguage" asp-route-returnUrl="@returnUrl"
+              method="post" class="form-horizontal" role="form">
+            @if (!domainHost.Contains(".vn"))
+            {
+                if (lang.ToLower() == HomePage.Web.Localization.Languages.Vietnamese.ToLower())
+                {
+                    <input name="culture" value="@HomePage.Web.Localization.Languages.English" hidden />
+                    <button class="btn-lang" style="background: url(/images/flag-vi.png)" disabled></button>
+                    <button class="btn-lang" style="background: url(/images/flag-en.png)" onclick="this.form.submit();"></button>
+                }
+                else
+                {
+                    <input name="culture" value="@HomePage.Web.Localization.Languages.Vietnamese" hidden />
+                    <button class="btn-lang" style="background: url(/images/flag-vi.png)" onclick="this.form.submit();"></button>
+                    <button class="btn-lang" style="background: url(/images/flag-en.png)" disabled></button>
+                }
+            }
+        </form>
+    </div>
+</li>
+
+
+

@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model IEnumerable<Homepage.UI.ViewModels.PostHomepageViewModel>
+
+@inject IHtmlLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = "GetBlog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+@if (Model.Count() != 0)
+{
+    @foreach (var item in Model)
+    {
+        <div style="text-align: center">
+            <h2>@item.Title</h2>
+            <span>@item.CreatedDate</span><br /><hr />
+        </div>
+
+        @Html.Raw(item.Content)
+    }
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <div class="alert alert-info">
+        <strong>@L["UpdateLoading"]</strong>
+    </div>
+}
+
+
+

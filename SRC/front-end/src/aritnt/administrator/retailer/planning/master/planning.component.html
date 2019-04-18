@@ -1,0 +1,73 @@
+<div id="grid">
+  <div class="left-side">
+    <div class="btn-group">
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="grid.refresh()"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Update')" [disabled]="selectedRows?.length != 1" (onClick)="grid.showUpdate(selectedRows[0])"><i class="fa fa-eyedropper"
+        aria-hidden="true"></i></dx-button>
+    </div>
+  </div>
+  <div class="right-side">
+    <!--<dx-select-box></dx-select-box>-->
+  </div>
+  <dx-data-grid id="gridContainer" [dataSource]="dataSource" [columnAutoWidth]="true" [masterDetail]="{ enabled: true, template: 'detail' }"
+    keyExpr="ID" [showBorders]="true" [(selectedRowKeys)]="selectedRows">
+    <dxo-selection mode="single"></dxo-selection>
+
+    <dxo-filter-row 
+        visible="true" ></dxo-filter-row>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+    </dxo-pager>
+
+    <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+    <dxi-column dataField="name" [caption]="lang.instant('Common.Name')"></dxi-column>
+    <dxi-column dataField="retailer.name" [caption]="lang.instant('Admin.Retailer')"></dxi-column>
+    <dxi-column dataField="buyingDate" [caption]="lang.instant('Order.DeliveriedDate')" dataType="date"></dxi-column>
+    <dxi-column dataField="isAdaped" [caption]="lang.instant('Order.IsAdap')" dataType="boolean"></dxi-column>
+    <dxi-column dataField="createdDate" [caption]="lang.instant('Common.CreatedDate')" dataType="date"></dxi-column>
+
+    <div *dxTemplate="let planning of 'detail'">
+      <div class="master-detail-caption">{{lang.instant('Order.PlaningList')}}</div>
+      <dx-data-grid [dataSource]="planning.data.items" [showBorders]="true" [columnAutoWidth]="true">
+        <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>
+        <dxi-column dataField="quantity" [caption]="lang.instant('Order.PlanningQuantity')"></dxi-column>
+        <dxi-column dataField="adapQuantity" [caption]="lang.instant('Order.AdapedQuantity')"></dxi-column>
+        <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </dx-data-grid>
+</div>
+
+<dx-popup [title]="lang.instant('Action.Update') + lang.instant('Order.PlaningList')" [(visible)]="isPopupVisible">
+  <div *dxTemplate="let data of 'content'">
+    <div class="left-side" style="margin-bottom:5px">
+      <div class="btn-group">
+          <dx-button class="btn fe-md btn-primary" [disabled]="isCantUpdate" (onClick)="grid.setAdap()"><i class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+      </div>
+    </div>
+    <dx-data-grid [dataSource]="choosePlanning.items" [showBorders]="true" [columnAutoWidth]="true" style="margin-bottom:5px">
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-editing mode="cell" [allowUpdating]="true">
+      </dxo-editing>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+      </dxo-pager>
+      <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')" [allowEditing]="false"></dxi-column>
+      <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')" [allowEditing]="false"></dxi-column>
+      <dxi-column dataField="quantity" [caption]="lang.instant('Order.PlanningQuantity')" [allowEditing]="false"></dxi-column>
+      <dxi-column dataField="adapQuantity" [caption]="lang.instant('Order.AdapedQuantity')"></dxi-column>
+    </dx-data-grid>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-1" style="margin-top:10px;padding-right:0px">
+                <label>{{lang.instant('Common.Note')}}:</label>
+            </div>
+            <div class="col-xs-11">
+                <dx-text-box placeholder="{{lang.instant('Planning.Note')}}" [(ngModel)]="choosePlanning.adapNote">
+                </dx-text-box>
+            </div>
+        </div>
+    </div>
+    <small><i>{{lang.instant('Order.UpdatePlanningMessage')}}</i></small>
+  </div>
+</dx-popup>

@@ -1,0 +1,40 @@
+﻿@using System.Collections.Generic;
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using Common
+@model IEnumerable<Homepage.UI.ViewModels.RetailerHomepageViewModel>;
+@inject IHtmlLocalizer<SharedResource> L
+
+@{
+    ViewData["Title"] = "About";
+    var imagePath = GlobalConfiguration.ProductImagePath;
+}
+
+<div class="page-in">
+    <section class="banner">
+        <div>
+            <h1 style="text-align:center">Về chúng tôi</h1>
+        </div>
+    </section>
+    <section class="content-info">
+        <div class="khung-content wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+            <p style="text-align: justify;"><strong>Chào các bạn trẻ Việt Nam tài năng và nhiệt huyết, Aritnt là startup trong lĩnh vực công nghệ, chúng tôi đang phát triển ứng dụng thương mại điện tử và công nghệ truy xuất cho các sản phẩm nông nghiệp Việt Nam trên nền tảng công nghệ Blockchain và AI.</strong></p>
+
+            <a href="#">
+                <img src="images/img_post4.jpg" />
+            </a>
+            <br />
+            <br />
+            <p>
+                Với tinh thần thay đổi cuộc chơi, tạo ra công nghệ thay đổi cả một ngành công nghiệp, chàng David nhỏ bé thách thức kẻ khổng lồ Goliath, được truyền cảm hứng từ những startup công nghệ “kỳ lân” khu vực và thế giới họ bắt đầu chỉ với tinh thần thay đổi cuộc chơi vốn thống trị của những gã khổng lồ cùng với lòng quyết tâm và trí tuệ của tuổi trẻ và họ đã và đang đóng góp cho sự thay đổi và tiến hóa của công nghệ thế giới như Grap, Go-Jek, Traveloka, Uber, Airbnb,… và Việt Nam chúng ta với những bạn trẻ đầy nhiệt huyết và tài năng hãy gia nhập Aritnt để cùng nhau xây dựng nên startup “kỳ lân” góp phần thay đổi cả một chuỗi giá trị ngành nông nghiệp Việt Nam, từ nông trại tới bàn ăn. Khi đó, chúng ta có thể tự hào về một Việt Nam khác, mộtViệt Nam trí tuệ và với tinh thần nghĩ lớn và khát vọng chiến thắng, chúng ta đã viết lên bản đồ công nghệ thế giới: Startup “ kỳ lân” Việt Nam Aritnt .
+            </p>
+
+            <a href="images/img_post1.png">
+                <img src="images/img_post1.png" />
+            </a>
+        </div>
+    </section>
+</div>
+

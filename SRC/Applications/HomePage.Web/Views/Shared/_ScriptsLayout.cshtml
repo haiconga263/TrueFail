@@ -1,0 +1,28 @@
+﻿
+
+
+<script type='text/javascript' src='~/js/vendor/jquery-1.11.3.min.js'></script>
+<script type='text/javascript' src='~/js/vendor/jquery-migrate.min.js'></script>
+<script src="~/js/custom/jquery.cookie.js"></script>
+<script type='text/javascript' src='~/js/vendor/__packed.js'></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="~/js/vendor/parsley.min.js"></script>
+<script type='text/javascript' src='~/js/custom/_utils.js'></script>
+<script src="~/js/custom/_front.js"></script>
+<script type='text/javascript' src='~/js/custom/shortcodes_init.js'></script>
+<script type='text/javascript' src='~/js/custom/__main.js'></script>
+<script type='text/javascript' src='~/js/custom/common.js'></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/datetime-picker/bootstrap-datetimepicker.js"></script>
+<script src="~/js/Blog.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url: '/commons/LoadCategoryMenu',
+            dataType: 'html',
+            success: function (data) {
+                $('#categoryMenu').html(data);
+            },
+        });
+    });
+</script>

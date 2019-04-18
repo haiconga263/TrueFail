@@ -1,0 +1,159 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> L
+
+@{
+    ViewData["Title"] = L["Recipes"];
+}
+
+<section class="section_padding_top_80">
+    <div class="container-fluid">
+        <h2 class="sc_title sc_title_center sc_title_style_1 margin_bottom_50 text-cooking">
+            CÔNG THỨC CHẾ BIẾN MÓN ĂN
+        </h2>
+        <div class="sc_team sc_team_section_1 sc_team_item_style_1">
+            <div class="sc_columns_4 sc_columns_indent products">
+                <div class="sc_columns_item pro-item">
+                    <a href="@L["R.RecipeDetail"]">
+                        <div class="sc_team_item sc_team_item_1 odd first">
+                            <div class="sc_team_item_avatar_wrap">
+                                <div class="sc_team_item_avatar ">
+                                    <span class="pro-img" style="background-image:url(/images/tom-nuong-muoi-uot.jpg)"></span>
+                                </div>
+                            </div>
+                            <span class="pro-name">Tôm nướng muối ớt</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="sc_columns_item pro-item">
+                    <a href="@L["R.RecipeDetail"]">
+                        <div class="sc_team_item sc_team_item_1 odd first">
+                            <div class="sc_team_item_avatar_wrap">
+                                <div class="sc_team_item_avatar ">
+                                    <span class="pro-img" style="background-image:url(/images/muc-uop-mco-nuong.png)"></span>
+                                </div>
+                            </div>
+                            <span class="pro-name">Mực nướng muối ớt</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="sc_columns_item pro-item">
+                    <a href="@L["r.recipedetail"]">
+                        <div class="sc_team_item sc_team_item_1 odd first">
+                            <div class="sc_team_item_avatar_wrap">
+                                <div class="sc_team_item_avatar ">
+                                    <a>
+                                        <span class="pro-img" style="background-image:url(/images/so-diep-nuong.png)"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <span class="pro-name">Sò điệp nướng</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="sc_columns_item pro-item">
+                    <a href="@L["r.recipedetail"]">
+                        <div class="sc_team_item sc_team_item_1 odd first">
+                            <div class="sc_team_item_avatar_wrap">
+                                <div class="sc_team_item_avatar ">
+                                    <a>
+                                        <span class="pro-img" style="background-image:url(/images/ga-nuong.png)"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <span class="pro-name">Gà nướng muối ớt</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <ul class='pagination'>
+
+                    <li class="active">
+                        <a href="javascript:void(0)">1</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">2</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="sc_line  sc_line_style_dotted"></div>
+<section class="section_padding_top_80">
+    <h2 class="sc_title sc_title_center sc_title_style_1 margin_bottom_50 text-cooking">
+        Pha chế nước chấm
+    </h2>
+    <div class="sc_team sc_team_section_1 sc_team_item_style_1">
+        <div class="sc_columns_4 sc_columns_indent products">
+            <div class="sc_columns_item pro-item">
+                <a href="@L["R.RecipeDetail"]">
+                    <div class="sc_team_item sc_team_item_1 odd first">
+                        <div class="sc_team_item_avatar_wrap">
+                            <div class="sc_team_item_avatar ">
+                                <a>
+                                    <span class="pro-img" style="background-image:url(/images/img-nuoc-cham-1.jpg)"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <span class="pro-name">Nước mắm me</span>
+                    </div>
+                </a>
+            </div>
+            <div class="sc_columns_item pro-item">
+                <a href="@L["R.RecipeDetail"]">
+                    <div class="sc_team_item sc_team_item_1 odd first">
+                        <div class="sc_team_item_avatar_wrap">
+                            <div class="sc_team_item_avatar ">
+                                <a>
+                                    <span class="pro-img" style="background-image:url(/images/img-nuoc-cham-2.jpg)"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <span class="pro-name">Nước trộn gỏi</span>
+                    </div>
+                </a>
+            </div>
+            <div class="sc_columns_item pro-item">
+                <a href="@L["R.RecipeDetail"]">
+                    <div class="sc_team_item sc_team_item_1 odd first">
+                        <div class="sc_team_item_avatar_wrap">
+                            <div class="sc_team_item_avatar ">
+                                <a>
+                                    <span class="pro-img" style="background-image:url(/images/img-nuoc-cham-3.jpg)"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <span class="pro-name">Nước mắm ướt</span>
+                    </div>
+                </a>
+            </div>
+            <div class="sc_columns_item pro-item">
+                <a href="@L["R.RecipeDetail"]">
+                    <div class="sc_team_item sc_team_item_1 odd first">
+                        <div class="sc_team_item_avatar_wrap">
+                            <div class="sc_team_item_avatar ">
+                                <a>
+                                    <span class="pro-img" style="background-image:url(/images/img-nuoc-cham-4.jpg)"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <span class="pro-name">Nước mắm gừng</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class='pagination'>
+
+                <li class="active">
+                    <a href="javascript:void(0)">1</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">2</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

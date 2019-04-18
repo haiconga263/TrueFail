@@ -1,0 +1,221 @@
+<div id="grid" class="product-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i
+                    class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'"
+                (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i
+                    class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="container-avatar clear-fix">
+                    <img class="product-avatar" [attr.src]="product.imageData" />
+                    <button class="product-choose-image" (click)="inputChooseAvatar.click()">
+                        <i class="fa fa-cloud-download">
+                        </i>
+                    </button>
+                    <input #inputChooseAvatar type="file" accept="image/*" style="display:none"
+                        (change)="avatarChangeEvent($event, this)">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Code')}}</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Code')}}" readOnly="true"
+                                [(ngModel)]="product.code">
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Name')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Name')}}" [(ngModel)]="product.defaultName"
+                                [(isValid)]="isNameValid" [maxLength]="50">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50"
+                                        message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.UoM')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-select-box [dataSource]="uoms" [(ngModel)]="product.defaultUoMId" displayExpr="name"
+                                valueExpr="id" [(isValid)]="isUoMValid">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-select-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.BuyingPrice')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-number-box [max]="9999999999" [min]="0" [showSpinButtons]="true"
+                                [(ngModel)]="product.defaultBuyingPrice" (onValueChanged)="buyingPriceChanged($event)">
+                            </dx-number-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="product.isUsed" text="{{lang.instant('Common.Active')}}">
+                            </dx-check-box>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Description')}}</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Description')}}"
+                                [(ngModel)]="product.defaultDescription">
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Admin.Category')}}</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-drop-down-box [(value)]="product.categoryId" valueExpr="id" displayExpr="name"
+                                placeholder="{{lang.instant('Admin.Category')}}" [showClearButton]="true"
+                                [dataSource]="categories" (onValueChanged)="syncTreeViewSelection($event, categoryView)"
+                                [(isValid)]="isCategoryValid">
+
+                                <div #categoryView *dxTemplate="let data of 'content'">
+                                    <dx-tree-view [dataSource]="categories" dataStructure="plain" keyExpr="ID"
+                                        parentIdExpr="parentId" selectionMode="single" displayExpr="name"
+                                        [selectByClick]="true"
+                                        (onContentReady)="$event.component.selectItem(product.categoryId)"
+                                        (onItemSelectionChanged)="treeView_itemSelectionChanged($event)">
+                                    </dx-tree-view>
+                                </div>
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-drop-down-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.SellingPrice')}} <span
+                                    class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-number-box [max]="9999999999" [min]="0" [showSpinButtons]="true"
+                                [(ngModel)]="product.defaultSellingPrice"
+                                (onValueChanged)="sellingPriceChanged($event)"></dx-number-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <div class="box-body">
+        <dx-data-grid [dataSource]="modifyLanguages" [keyExpr]="languageId" [showBorders]="true">
+
+            <dxo-editing mode="form" [allowUpdating]="true">
+            </dxo-editing>
+            <dxi-column dataField="langShowName" [caption]="lang.instant('Common.Language')"
+                [formItem]="{visible: false}">
+            </dxi-column>
+            <dxi-column dataField="name" [caption]="lang.instant('Common.Name')"></dxi-column>
+            <dxi-column dataField="description" [caption]="lang.instant('Common.Description')"></dxi-column>
+        </dx-data-grid>
+    </div>
+    <div class="box-body">
+        <dx-data-grid [dataSource]="product.prices" [showBorders]="true">
+
+            <dxo-editing mode="form" [allowUpdating]="true" [allowAdding]="true">
+            </dxo-editing>
+            <dxi-column dataField="buyingPrice" [caption]="lang.instant('Common.BuyingPrice')" dataType="number"
+                format="#,##0.## VND">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="sellingPrice" [caption]="lang.instant('Common.SellingPrice')" dataType="number"
+                format="#,##0.## VND">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="weight" [caption]="lang.instant('Admin.Product.Weight')" dataType="number">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="capacity" [caption]="lang.instant('Admin.Product.Volumn')" dataType="number">
+                <dxi-validation-rule type="pattern" [pattern]="numberPattern"
+                    message="{{lang.instant('Validation.WrongFormat')}}"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="uoMId" [caption]="lang.instant('Admin.UoM')">
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+                <dxo-lookup [dataSource]="uoms" valueExpr="id" displayExpr="name">
+                </dxo-lookup>
+            </dxi-column>
+            <dxi-column dataField="effectivedDate" [caption]="lang.instant('Common.EffectivedDate')" dataType="date">
+                <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                </dxi-validation-rule>
+            </dxi-column>
+        </dx-data-grid>
+    </div>
+</div>

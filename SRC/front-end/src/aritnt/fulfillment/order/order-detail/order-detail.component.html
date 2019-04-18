@@ -1,0 +1,126 @@
+<div class="box-body" id="grid">
+    <div class="left-side" style="padding:10px">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Save')" (onClick)="return();">
+                <i class="fa fa-lg fa-save" aria-hidden="true"></i>
+            </dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();">
+                    <i class="fa fa-lg fa-undo" aria-hidden="true"></i>
+                </dx-button>
+        </div>
+    </div>
+    <h4>Danh sách đóng gói</h4>
+    <dx-data-grid id="gridContainer" [dataSource]="fulfillmentFrs" [columnAutoWidth]="true"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
+        [(selectedRowKeys)]="selectedRows" (onSelectionChanged)="onSelectionChanged($event)">
+        <dxo-selection mode="single"></dxo-selection>
+
+        <dxo-filter-row visible="true"></dxo-filter-row>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+        </dxo-pager>
+
+        <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+        <dxi-column dataField="fulfillmentName" [caption]="Fulfillment"></dxi-column>
+        <dxi-column dataField="deliveryDate" [caption]="DeliveredDate" dataType="date"></dxi-column>
+        <dxi-column dataField="statusS" caption="Status"></dxi-column>
+
+        <div *dxTemplate="let order of 'detail'">
+            <div class="master-detail-caption">Danh sách hàng</div>
+            <dx-data-grid [dataSource]="order.data.items" [showBorders]="true" [columnAutoWidth]="true">
+                <dxo-editing mode="form" [allowUpdating]="true">
+                </dxo-editing>
+                <dxi-column dataField="traceCode" caption="Trace Code"></dxi-column>
+                <dxi-column dataField="productId" [caption]="lang.instant('Admin.Product')">
+                    <dxo-lookup [dataSource]="products" valueExpr="id" displayExpr="name">
+                    </dxo-lookup>
+                </dxi-column>
+
+                <dxi-column dataField="deliveriedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')">
+                </dxi-column>
+                <dxi-column dataField="adapQuantity" caption="Số lượng sau đóng gói">
+                </dxi-column>
+                <dxi-column dataField="teamId" caption="Team">
+                    <dxo-lookup [dataSource]="teams" valueExpr="id" displayExpr="name">
+                    </dxo-lookup>
+                </dxi-column>
+                <dxi-column dataField="uoM.id" [caption]="lang.instant('Admin.UoM')">
+                    <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+                    </dxi-validation-rule>
+                    <dxo-lookup [dataSource]="uoms" valueExpr="id" displayExpr="name">
+                    </dxo-lookup>
+                </dxi-column>
+                <dxi-column dataField="id" caption="Status">
+                    <dxo-lookup [dataSource]="statusS" valueExpr="id" displayExpr="description">
+                    </dxo-lookup>
+                </dxi-column>
+            </dx-data-grid>
+
+            <dx-data-grid [dataSource]="order.items" [showBorders]="true" (onRowInserting)="insertingItem($event)"
+                (onRowUpdating)="updatingItem($event)" (onRowInserted)="insertedItem($event)"
+                (onRowUpdated)="updatedItem($event)">
+            </dx-data-grid>
+        </div>
+    </dx-data-grid>
+    <!-- <div class="row">
+        <h4>Đóng gói</h4>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                        <label>Sản phẩm</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <dx-select-box [dataSource]="products" valueExpr="id" displayExpr="name"
+                            [(value)]="selectedRows.items.productId">
+                        </dx-select-box>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                        <label>Số lượng sau đóng gói</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <dx-text-box placeholder="Enter full name here..."></dx-text-box>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                        <label>Đơn vị tính</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <dx-text-box placeholder="Enter full name here..."></dx-text-box>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                        <label>Team</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <dx-select-box [items]="simpleProducts" [value]="simpleProducts" [readOnly]="true">
+                        </dx-select-box>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                        <label>Status</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <dx-select-box [dataSource]="Status" displayExpr="description" valueExpr="id"></dx-select-box>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

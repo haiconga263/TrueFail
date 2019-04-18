@@ -1,0 +1,97 @@
+﻿@using Homepage.UI.ViewModels;
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@model ContactHomepageViewModel;
+@inject IHtmlLocalizer<SharedResource> L
+@{
+    ViewData["Title"] = "Contact";
+}
+
+@if (!string.IsNullOrEmpty(ViewData["alert_msg"]?.ToString()))
+{
+    <div class="alert_page">
+        <div class="alert alert-@(ViewData["alert_type"])">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            <strong>@ViewData["alert_msg"]</strong>
+        </div>
+    </div>
+}
+
+<section class="singlePage emptyPostFormatIcon emptyPostTitle emptyPostInfo page">
+    <article class="postContent">
+
+        <div class="postTextArea">
+            <section class="">
+                <div class="container">
+                    <div class="sc_content mainWrap">
+                        <div class="sc_section sc_section_style_2 sc_align_center sc_columns_2_3">
+                            <div class="sc_columns  sc_columns_3 sc_columns_indent">
+                                <div class="sc_columns_item  sc_columns_item_coun_1 odd first">
+                                    <h5 class="sc_title sc_title_style_3 margin_top_50 margin_bottom_20">@L["Information"] </h5>
+                                    <div class="sc_contact_info">
+                                        <div class="sc_contact_info_wrap">
+                                            <div class="sc_contact_info_item sc_contact_address_1">
+                                                <div class="sc_contact_info_lable">@L["AddressName"]</div>
+                                                <strong>@L["Headquarter"]:</strong> <br />@L["Company_Address_Home"]
+                                                <br />
+                                                <strong>@L["Office"]:</strong><br /> @L["Company_Address_Office"]
+
+                                            </div>
+                                            <div class="sc_contact_info_item sc_contact_phone_1">
+                                                <div class="sc_contact_info_lable">@L["Phone"]</div>
+                                                @L["Index_Company_Phone"]
+                                            </div>
+                                            <div class="sc_contact_info_item sc_contact_website">
+                                                <div class="sc_contact_info_lable">@L["Website"]</div>
+                                                @L["WebsiteCompany"]
+                                            </div>
+                                            <div class="sc_contact_info_item sc_contact_email">
+                                                <div class="sc_contact_info_lable">@L["E-mail"]</div>
+                                                @L["EmailCompany"]
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" sc_columns_item  sc_columns_item_coun_2 colspan_2 even" style="padding-left:4%">
+                                    <h5 class="sc_title sc_title_style_3 margin_top_50 margin_bottom_20">@L["Contact_ContactUs"]</h5>
+                                    <div class="sc_form contact_form_1">
+                                        <form class="contact_1" method="post" asp-action="Contact" data-parsley-validate>
+                                            <div class="sc_columns_3 sc_columns_indent">
+                                                <div class="sc_columns_item sc_form_username">
+                                                    <label class="required" for="contact_form_username">@L["Name"]</label>
+                                                    <input asp-for="SenderName" required type="text" name="SenderName" id="contact_form_username" data-parsley-required-message="@L["ValidName"]">
+                                                </div>
+                                                <div class="sc_columns_item sc_form_email">
+                                                    <label class="required" for="contact_form_email">@L["E-mail"]</label>
+                                                    <input asp-for="SenderEmail" type="text" name="SenderEmail" id="contact_form_email" data-parsley-required="true" data-parsley-type="email" data-parsley-required-message="@L["ValidEmail"]" data-parsley-type-message="@L["ValidEmail2"]">
+                                                </div>
+                                                <div class="sc_columns_item sc_form_subj">
+                                                    <label class="required" for="contact_form_subj">@L["Phone"]</label>
+                                                    <input asp-for="PhoneNumber" required type="text" name="PhoneNumber" id="contact_form_subj" data-parsley-required-message="@L["ValidPhone"]">
+                                                </div>
+                                            </div>
+                                            <div class="sc_form_message">
+                                                <label class="required" for="contact_form_message">@L["Note"]</label>
+                                                <textarea asp-for="MessageContent" required id="contact_form_message" class="textAreaSize" name="MessageContent" data-parsley-required-message="@L["ValidContent"]"></textarea>
+                                            </div>
+                                            <div class="sc_form_button">
+                                                <div class="sc_button sc_button_style_3 sc_button_skin_dark sc_button_style_bg sc_button_size_medium">
+                                                    <button type="submit" value="SaveContact" name="contact_submit" class="contact_form_submit">@L["Send"]</button>
+                                                </div>
+                                            </div>
+                                            <div class="result sc_infobox"></div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </article>
+</section>

@@ -1,0 +1,33 @@
+﻿<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTbrZ05VWqhwG7ASkrp-WnEL9FNV_4bjE&callback=initMap">
+</script>
+
+
+@*<script>
+    var requestGeocodingAPI = "https://maps.googleapis.com/maps/api/geocode/json?address={Address}&key=AIzaSyDTbrZ05VWqhwG7ASkrp-WnEL9FNV_4bjE";
+    var geocoder;
+    function initMapWithDraggableMarker(lat, lon, mapContainerId) {
+        lat = lat == undefined ? 10.768451 : lat;
+        lon = lon == undefined ? 106.6943626 : lon;
+        var uluru = { lat: lat, lng: lon };
+        var mapOptions = {
+            zoom: 14,
+            center: uluru
+        }
+        var map = new google.maps.Map(document.getElementById(mapContainerId), mapOptions);
+
+        // Place a draggable marker on the map
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            draggable: true,
+            title: "Choose the right place"
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+            document.getElementById("Lat").value = this.getPosition().lat();
+            document.getElementById("Lon").value = this.getPosition().lng();
+        });
+    }
+</script>*@
+

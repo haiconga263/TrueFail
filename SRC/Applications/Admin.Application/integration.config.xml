@@ -1,0 +1,10 @@
+﻿<root>
+  <ModelArea assembly="Admin.Extensions.dll">
+    <Model Name="UoM" RouteLink="api/integration/uom" Type="MDM.UI.UoMs.Models.UoM">
+      <InsertEvent BeforeRow="Admin.Extensions.UoMs.Insert.BeforeRecord"></InsertEvent>
+      <UpdateEvent></UpdateEvent>
+      <DeleteEvent></DeleteEvent>
+    </Model>
+  </ModelArea>
+</root>
+

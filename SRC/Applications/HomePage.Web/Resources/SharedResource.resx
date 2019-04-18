@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddressName" xml:space="preserve">
+    <value>Địa chỉ:</value>
+  </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Giỏ hàng</value>
+  </data>
+  <data name="CartInfo" xml:space="preserve">
+    <value>Thông tin giỏ hàng</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Thanh toán</value>
+  </data>
+  <data name="CheckOut_Checkout_Information" xml:space="preserve">
+    <value>Thông tin đặt hàng</value>
+  </data>
+  <data name="CheckOut_Cus_Information" xml:space="preserve">
+    <value>Thông tin khách hàng</value>
+  </data>
+  <data name="CheckOut_Name_Company" xml:space="preserve">
+    <value>Tên công ty</value>
+  </data>
+  <data name="CheckOut_Shipping_Address" xml:space="preserve">
+    <value>Địa chỉ giao hàng</value>
+  </data>
+  <data name="CheckOut_Shipping_Date" xml:space="preserve">
+    <value>Ngày giao hàng</value>
+  </data>
+  <data name="Contact_ContactUs" xml:space="preserve">
+    <value>Liên hệ ngay</value>
+  </data>
+  <data name="ContinueShopping" xml:space="preserve">
+    <value>Tiếp tục mua hàng</value>
+  </data>
+  <data name="CustomerInfo" xml:space="preserve">
+    <value>Thông tin khách hàng</value>
+  </data>
+  <data name="E-mail" xml:space="preserve">
+    <value>Thư điện tử</value>
+  </data>
+  <data name="EmailCompany" xml:space="preserve">
+    <value>info@aritnt.com.vn</value>
+  </data>
+  <data name="Index_AboutUs" xml:space="preserve">
+    <value>Về chúng tôi</value>
+  </data>
+  <data name="Index_Blog" xml:space="preserve">
+    <value>Bài viết</value>
+  </data>
+  <data name="Index_Company_Address" xml:space="preserve">
+    <value>Phòng OT-4401, Toà Aqua 1 Vinhomes Golden River, số 2 Tôn Đức Thắng, P. Bến Nghé, Quận 1, Hồ Chí Minh, Việt Nam</value>
+  </data>
+  <data name="Index_Company_Name" xml:space="preserve">
+    <value>Công ty TNHH thương mại điện tử ARITNT</value>
+  </data>
+  <data name="Index_Company_Phone" xml:space="preserve">
+    <value>0899455777</value>
+  </data>
+  <data name="Index_Contact" xml:space="preserve">
+    <value>Liên hệ</value>
+  </data>
+  <data name="Index_ContactUs" xml:space="preserve">
+    <value>Liên hệ ngay</value>
+  </data>
+  <data name="Index_Content" xml:space="preserve">
+    <value>Nội dung</value>
+  </data>
+  <data name="Index_Download" xml:space="preserve">
+    <value>Tải ứng dụng</value>
+  </data>
+  <data name="Index_FreshVegetable" xml:space="preserve">
+    <value>Rau củ sạch</value>
+  </data>
+  <data name="Index_FreshVegetable1" xml:space="preserve">
+    <value>Rau củ quả sạch an toàn cho sức khỏe</value>
+  </data>
+  <data name="Index_Homepage" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="Index_Image_Dasavi" xml:space="preserve">
+    <value>Dasavi nước sốt đặc sản</value>
+  </data>
+  <data name="Index_Image_Dasavi1" xml:space="preserve">
+    <value>Chuyên gia nước sốt đặc sản Việt Nam</value>
+  </data>
+  <data name="Index_Process" xml:space="preserve">
+    <value>QUY TRÌNH VẬN HÀNH</value>
+  </data>
+  <data name="Index_Product" xml:space="preserve">
+    <value>Sản phẩm</value>
+  </data>
+  <data name="Index_Product_Outstading" xml:space="preserve">
+    <value>Sản phẩm nổi bật</value>
+  </data>
+  <data name="Index_Seafood" xml:space="preserve">
+    <value>Hải sản tươi sống</value>
+  </data>
+  <data name="Index_Seafood1" xml:space="preserve">
+    <value>Vì một nền thủy sản bền vững</value>
+  </data>
+  <data name="Index_TestDemoLanguage" xml:space="preserve">
+    <value>Kiểm tra ngôn ngữ</value>
+  </data>
+  <data name="Index_Welcome" xml:space="preserve">
+    <value>Chào mừng đến với ARITNT</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Họ tên</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Ghi chú</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Đặt hàng</value>
+  </data>
+  <data name="OurPartners" xml:space="preserve">
+    <value>Đối tác</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Số điện thoại:</value>
+  </data>
+  <data name="ProductDecription" xml:space="preserve">
+    <value>Mô tả sản phẩm</value>
+  </data>
+  <data name="ProductDetail" xml:space="preserve">
+    <value>Chi tiết sản phẩm</value>
+  </data>
+  <data name="ProductRelatied" xml:space="preserve">
+    <value>Sản phẩm liên quan</value>
+  </data>
+  <data name="Product_Category" xml:space="preserve">
+    <value>Danh mục</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Số lượng</value>
+  </data>
+  <data name="R.About" xml:space="preserve">
+    <value>/ve-chung-toi</value>
+  </data>
+  <data name="R.Cart" xml:space="preserve">
+    <value>/gio-hang</value>
+  </data>
+  <data name="R.CheckOut" xml:space="preserve">
+    <value>/thanh-toan</value>
+  </data>
+  <data name="R.Contact" xml:space="preserve">
+    <value>/lien-he</value>
+  </data>
+  <data name="R.Post" xml:space="preserve">
+    <value>/bai-viet</value>
+  </data>
+  <data name="R.PostDetail" xml:space="preserve">
+    <value>/bai-viet/noi-dung/</value>
+  </data>
+  <data name="R.ProductDetail" xml:space="preserve">
+    <value>/san-pham/chi-tiet/</value>
+  </data>
+  <data name="R.Products" xml:space="preserve">
+    <value>/danh-sach-san-pham</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Gửi</value>
+  </data>
+  <data name="Sreach" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Sản phẩm</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Thành tiền</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Trang web</value>
+  </data>
+  <data name="WebsiteCompany" xml:space="preserve">
+    <value>www.aritnt.com.vn</value>
+  </data>
+  <data name="HomeAddress" xml:space="preserve">
+    <value>84A Ngô Quyền, Phường 6, Thành phố Đà Lạt, Tỉnh Lâm Đồng</value>
+  </data>
+  <data name="footer_Aritnt" xml:space="preserve">
+    <value>Aritnt.com</value>
+  </data>
+  <data name="footer_Blog" xml:space="preserve">
+    <value>Blog Đà Lạt Xanh</value>
+  </data>
+  <data name="footer_PaymentMethod" xml:space="preserve">
+    <value>Phương thức thanh toán</value>
+  </data>
+  <data name="Index_Event" xml:space="preserve">
+    <value>Chúng tôi đang làm gì</value>
+  </data>
+  <data name="Index_Introduce" xml:space="preserve">
+    <value>Giới Thiệu</value>
+  </data>
+  <data name="Index_Recipe" xml:space="preserve">
+    <value>Công thức</value>
+  </data>
+  <data name="Index_Gifts" xml:space="preserve">
+    <value>Quà tặng</value>
+  </data>
+  <data name="Index_GreenFarming" xml:space="preserve">
+    <value>Canh tác xanh</value>
+  </data>
+  <data name="Index_GreenSpiritGreenLife" xml:space="preserve">
+    <value>Tinh thần xanh, Cuộc sống xanh</value>
+  </data>
+  <data name="Index_WhereToBuy" xml:space="preserve">
+    <value>Mua ở đâu</value>
+  </data>
+  <data name="R.Faqs" xml:space="preserve">
+    <value>/hoi-dap</value>
+  </data>
+  <data name="R.RecipeDetail" xml:space="preserve">
+    <value>/chi-tiet-cong-thuc</value>
+  </data>
+  <data name="R.Recipes" xml:space="preserve">
+    <value>/cong-thuc</value>
+  </data>
+  <data name="R.WhereToBuy" xml:space="preserve">
+    <value>/mua-o-dau</value>
+  </data>
+  <data name="Company_Address_Home" xml:space="preserve">
+    <value>84A Ngô Quyền, Phường 6, Thành phố Đà Lạt, Tỉnh Lâm Đồng</value>
+  </data>
+  <data name="Company_Address_Office" xml:space="preserve">
+    <value>Phòng OT-4401, Toà Aqua 1 Vinhomes Golden River, số 2 Tôn Đức Thắng, P. Bến Nghé, Quận 1, Hồ Chí Minh, Việt Nam</value>
+  </data>
+  <data name="Headquarter" xml:space="preserve">
+    <value>Trụ sở chính</value>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>Văn phòng đại diện</value>
+  </data>
+  <data name="ValidContent" xml:space="preserve">
+    <value>Vui lòng nhập nội dung trao đổi</value>
+  </data>
+  <data name="ValidEmail" xml:space="preserve">
+    <value>Email là bắt buộc</value>
+  </data>
+  <data name="ValidEmail2" xml:space="preserve">
+    <value>Định dạng phải là email</value>
+  </data>
+  <data name="ValidName" xml:space="preserve">
+    <value>Vui lòng nhập đầy đủ họ tên</value>
+  </data>
+  <data name="ValidPhone" xml:space="preserve">
+    <value>Vui lòng nhập số điện thoại</value>
+  </data>
+  <data name="R.FarmerNetwork" xml:space="preserve">
+    <value>/mang-luoi-nong-dan</value>
+  </data>
+  <data name="R.GreenFarming" xml:space="preserve">
+    <value>/canh-tac-xanh</value>
+  </data>
+  <data name="R.GreenSpiritGreenLife" xml:space="preserve">
+    <value>/tinh-than-xanh</value>
+  </data>
+  <data name="R.Media" xml:space="preserve">
+    <value>/truyen-thong</value>
+  </data>
+  <data name="R.Travel" xml:space="preserve">
+    <value>/tan-man</value>
+  </data>
+  <data name="R.Introduce" xml:space="preserve">
+    <value>/ve-chung-toi</value>
+  </data>
+  <data name="R.DasaviSauce" xml:space="preserve">
+    <value>/nuoc-sot-dasavi-c1</value>
+  </data>
+  <data name="R.SeaFood" xml:space="preserve">
+    <value>/hai-san-c2</value>
+  </data>
+  <data name="R.VegetablesFruits" xml:space="preserve">
+    <value>/vegetables-&amp;-fruits-c5</value>
+  </data>
+  <data name="Blog1" xml:space="preserve">
+    <value>&lt;div class="mid-title"&gt;
+&lt;div class="titleL"&gt;
+&lt;h1 class="text-lt"&gt;KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;Agrave;NH TR&amp;Igrave;NH Đ&amp;Agrave; LẠT XANH LẦN THỨ NHẤT.&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div class="titleR"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div class="clear"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="the-date"&gt;Thứ hai, 31/12/2018, 20:42 GMT+7&lt;/div&gt;
+&lt;div class="the_content desc"&gt;
+&lt;div align="justify"&gt;
+&lt;div class="imgDetail_left col-md-12 col-xs-12"&gt;&lt;img title="KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;agrave;nh Tr&amp;igrave;nh Đ&amp;agrave; Lạt Xanh Lần Thứ Nhất." src="http://dasavi.com.vn/vnt_upload/ours/2018/12/Dl4_n.jpg" alt="KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;agrave;nh Tr&amp;igrave;nh Đ&amp;agrave; Lạt Xanh Lần Thứ Nhất." width="100%" /&gt;&lt;span class="fDespic"&gt;KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;agrave;nh Tr&amp;igrave;nh Đ&amp;agrave; Lạt Xanh Lần Thứ Nhất.&lt;/span&gt;&lt;/div&gt;
+&lt;div class="col-md-12 col-xs-12"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div class="clear"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;p&gt;Ng&amp;agrave;y 30/12/2018 vừa qua C&amp;ocirc;ng ty Nước Sốt Đặc Sản Việt DASAVI&amp;nbsp; đ&amp;atilde; thực hiện h&amp;agrave;nh tr&amp;igrave;nh&amp;nbsp;Đ&amp;agrave; Lạt xanh lần thứ nhất, chương tr&amp;igrave;nh gồm c&amp;aacute;c hoạt động l&amp;agrave;m vệ sinh m&amp;ocirc;i trường tại khu vực quảng trường Th&amp;agrave;nh Phố Đ&amp;agrave; Lạt v&amp;agrave; đạp xe đạp v&amp;ograve;ng quanh khu vực hồ Xu&amp;acirc;n Hương.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl2_n.jpg" alt="dl2_n" width="100%" /&gt;&lt;/p&gt;
+&lt;p&gt;Ban l&amp;atilde;nh đạo phổ biến chương tr&amp;igrave;nh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl2_n.jpg" alt="DL2_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl2_n.jpg" alt="DL2_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl4_n.jpg" alt="DL4_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl7_n_1.jpg" alt="dl7_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl8_n_1.jpg" alt="dl8_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl100_1.jpg" alt="dl100_1" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl9_n_2.jpg" alt="dl9_n" width="100%" /&gt;Đạp xe v&amp;ograve;ng quanh hồ Xu&amp;acirc;n Hương.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl72_n_1.jpg" alt="dl72_n_1" width="100%" /&gt;Chụp h&amp;igrave;nh kỷ niệm Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl_n.jpg" alt="dl_n" width="100%" /&gt;Chụp h&amp;igrave;nh kỷ niệm Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl1_n.jpg" alt="dl1_n" width="100%" /&gt;Chụp h&amp;igrave;nh kỷ niện Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl4_n.jpg" alt="DL4_n" width="100%" /&gt;Kỷ niệm h&amp;agrave;nh&amp;nbsp;tr&amp;igrave;nh Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="Blog2" xml:space="preserve">
+    <value>&lt;div class="mid-title"&gt;
+&lt;div class="titleL"&gt;
+&lt;h1 class="text-lt"&gt;KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;Agrave;NH TR&amp;Igrave;NH Đ&amp;Agrave; LẠT XANH LẦN THỨ NHẤT.&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div class="titleR"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div class="clear"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="the-date"&gt;Thứ hai, 31/12/2018, 20:42 GMT+7&lt;/div&gt;
+&lt;div class="the_content desc"&gt;
+&lt;div align="justify"&gt;
+&lt;div class="imgDetail_left col-md-12 col-xs-12"&gt;&lt;img title="KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;agrave;nh Tr&amp;igrave;nh Đ&amp;agrave; Lạt Xanh Lần Thứ Nhất." src="http://dasavi.com.vn/vnt_upload/ours/2018/12/Dl4_n.jpg" alt="KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;agrave;nh Tr&amp;igrave;nh Đ&amp;agrave; Lạt Xanh Lần Thứ Nhất." width="100%" /&gt;&lt;span class="fDespic"&gt;KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;agrave;nh Tr&amp;igrave;nh Đ&amp;agrave; Lạt Xanh Lần Thứ Nhất.&lt;/span&gt;&lt;/div&gt;
+&lt;div class="col-md-12 col-xs-12"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div class="clear"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;p&gt;Ng&amp;agrave;y 30/12/2018 vừa qua C&amp;ocirc;ng ty Nước Sốt Đặc Sản Việt DASAVI&amp;nbsp; đ&amp;atilde; thực hiện h&amp;agrave;nh tr&amp;igrave;nh&amp;nbsp;Đ&amp;agrave; Lạt xanh lần thứ nhất, chương tr&amp;igrave;nh gồm c&amp;aacute;c hoạt động l&amp;agrave;m vệ sinh m&amp;ocirc;i trường tại khu vực quảng trường Th&amp;agrave;nh Phố Đ&amp;agrave; Lạt v&amp;agrave; đạp xe đạp v&amp;ograve;ng quanh khu vực hồ Xu&amp;acirc;n Hương.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl2_n.jpg" alt="dl2_n" width="100%" /&gt;&lt;/p&gt;
+&lt;p&gt;Ban l&amp;atilde;nh đạo phổ biến chương tr&amp;igrave;nh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl2_n.jpg" alt="DL2_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl2_n.jpg" alt="DL2_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl4_n.jpg" alt="DL4_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl7_n_1.jpg" alt="dl7_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl8_n_1.jpg" alt="dl8_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl100_1.jpg" alt="dl100_1" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl9_n_2.jpg" alt="dl9_n" width="100%" /&gt;Đạp xe v&amp;ograve;ng quanh hồ Xu&amp;acirc;n Hương.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl72_n_1.jpg" alt="dl72_n_1" width="100%" /&gt;Chụp h&amp;igrave;nh kỷ niệm Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl_n.jpg" alt="dl_n" width="100%" /&gt;Chụp h&amp;igrave;nh kỷ niệm Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl1_n.jpg" alt="dl1_n" width="100%" /&gt;Chụp h&amp;igrave;nh kỷ niện Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl4_n.jpg" alt="DL4_n" width="100%" /&gt;Kỷ niệm h&amp;agrave;nh&amp;nbsp;tr&amp;igrave;nh Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="Blog3" xml:space="preserve">
+    <value>&lt;div class="mid-title"&gt;
+&lt;div class="titleL"&gt;
+&lt;h1 class="text-lt"&gt;KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;Agrave;NH TR&amp;Igrave;NH Đ&amp;Agrave; LẠT XANH LẦN THỨ NHẤT.&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div class="titleR"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div class="clear"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="the-date"&gt;Thứ hai, 31/12/2018, 20:42 GMT+7&lt;/div&gt;
+&lt;div class="the_content desc"&gt;
+&lt;div align="justify"&gt;
+&lt;div class="imgDetail_left col-md-12 col-xs-12"&gt;&lt;img title="KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;agrave;nh Tr&amp;igrave;nh Đ&amp;agrave; Lạt Xanh Lần Thứ Nhất." src="http://dasavi.com.vn/vnt_upload/ours/2018/12/Dl4_n.jpg" alt="KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;agrave;nh Tr&amp;igrave;nh Đ&amp;agrave; Lạt Xanh Lần Thứ Nhất." width="100%" /&gt;&lt;span class="fDespic"&gt;KỶ NIỆM 125 NĂM TH&amp;Agrave;NH LẬP Đ&amp;Agrave; LẠT (1893-2018) - H&amp;agrave;nh Tr&amp;igrave;nh Đ&amp;agrave; Lạt Xanh Lần Thứ Nhất.&lt;/span&gt;&lt;/div&gt;
+&lt;div class="col-md-12 col-xs-12"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div class="clear"&gt;&amp;nbsp;&lt;/div&gt;
+&lt;p&gt;Ng&amp;agrave;y 30/12/2018 vừa qua C&amp;ocirc;ng ty Nước Sốt Đặc Sản Việt DASAVI&amp;nbsp; đ&amp;atilde; thực hiện h&amp;agrave;nh tr&amp;igrave;nh&amp;nbsp;Đ&amp;agrave; Lạt xanh lần thứ nhất, chương tr&amp;igrave;nh gồm c&amp;aacute;c hoạt động l&amp;agrave;m vệ sinh m&amp;ocirc;i trường tại khu vực quảng trường Th&amp;agrave;nh Phố Đ&amp;agrave; Lạt v&amp;agrave; đạp xe đạp v&amp;ograve;ng quanh khu vực hồ Xu&amp;acirc;n Hương.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl2_n.jpg" alt="dl2_n" width="100%" /&gt;&lt;/p&gt;
+&lt;p&gt;Ban l&amp;atilde;nh đạo phổ biến chương tr&amp;igrave;nh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl2_n.jpg" alt="DL2_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl2_n.jpg" alt="DL2_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl4_n.jpg" alt="DL4_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl7_n_1.jpg" alt="dl7_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2019/dl8_n_1.jpg" alt="dl8_n" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl100_1.jpg" alt="dl100_1" width="100%" /&gt;Dọn vệ sinh khu vực Quảng Trường.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl9_n_2.jpg" alt="dl9_n" width="100%" /&gt;Đạp xe v&amp;ograve;ng quanh hồ Xu&amp;acirc;n Hương.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl72_n_1.jpg" alt="dl72_n_1" width="100%" /&gt;Chụp h&amp;igrave;nh kỷ niệm Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/2018/12/dl_n.jpg" alt="dl_n" width="100%" /&gt;Chụp h&amp;igrave;nh kỷ niệm Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl1_n.jpg" alt="dl1_n" width="100%" /&gt;Chụp h&amp;igrave;nh kỷ niện Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://dasavi.com.vn/vnt_upload/ours/01_2019/dl4_n.jpg" alt="DL4_n" width="100%" /&gt;Kỷ niệm h&amp;agrave;nh&amp;nbsp;tr&amp;igrave;nh Đ&amp;agrave; Lạt xanh.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="R.Gifts" xml:space="preserve">
+    <value>/qua-tang</value>
+  </data>
+  <data name="EmptyProduct" xml:space="preserve">
+    <value>Hiện chưa có sản phẩm!</value>
+  </data>
+  <data name="ReadMore" xml:space="preserve">
+    <value>Xem thêm</value>
+  </data>
+  <data name="UpdateLoading" xml:space="preserve">
+    <value>Đang cập nhập...</value>
+  </data>
+  <data name="R.WeWork" xml:space="preserve">
+    <value>/chung-toi-dang-lam-gi</value>
+  </data>
+  <data name="WeWork" xml:space="preserve">
+    <value>Chúng tôi đang làm gì</value>
+  </data>
+  <data name="Blog4" xml:space="preserve">
+    <value>&lt;p style="text-align: left;"&gt;&lt;strong&gt;S&amp;aacute;ng 23/2/2019, hơn 50&amp;nbsp;nh&amp;acirc;n vi&amp;ecirc;n thuộc hai C&amp;ocirc;ng Ty Thương Mại Điện Tử ARITNT&amp;nbsp;v&amp;agrave; C&amp;ocirc;ng ty Nước Sốt Đặc Sản Việt DASAVI đ&amp;atilde; c&amp;oacute; buổi Lễ ra qu&amp;acirc;n chiến dịch &amp;ldquo;B&amp;atilde;i biển&amp;nbsp;xanh 2019&amp;rdquo; trong kh&amp;ocirc;ng kh&amp;iacute; tưng bừng, hồ hởi của những tr&amp;aacute;i tim trẻ nhiệt huyết, sẵn s&amp;agrave;ng đ&amp;oacute;ng g&amp;oacute;p cho cuộc đời.&lt;/strong&gt;&lt;/p&gt;
+&lt;p style="text-align: left;"&gt;&lt;strong&gt;Đến hẹn lại l&amp;ecirc;n, "B&amp;atilde;i biển&amp;nbsp;xanh" l&amp;agrave; chiến dịch t&amp;igrave;nh nguyện đầy &amp;yacute; nghĩa lu&amp;ocirc;n nhận được sự hưởng ứng từ to&amp;agrave;n thể c&amp;aacute;c nh&amp;acirc;n vi&amp;ecirc;n. Năm nay, hơn 50&amp;nbsp;nh&amp;acirc;n&amp;nbsp;vi&amp;ecirc;n của cả hai c&amp;ocirc;ng ty sẽ tham gia c&amp;aacute;c hoạt động cộng đồng, thu dọn v&amp;agrave; xử l&amp;iacute; r&amp;aacute;c thải tại b&amp;atilde;i biển Dốc Lết,&amp;nbsp;một trong những&amp;nbsp;b&amp;atilde;i biển đẹp nhất của tỉnh Kh&amp;aacute;nh H&amp;ograve;a, nổi tiếng với nước biển xanh c&amp;aacute;t trắng.&lt;/strong&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&lt;strong&gt;&lt;img src="http://aritnt.com.vn:82/Images/Blogs/img1.jpg" alt="aritnt dọn dẹp r&amp;aacute;c tại dốc Lết" width="1000" height="564" /&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&lt;em&gt;B&amp;atilde;i biển dốc Lết hiện tại c&amp;oacute; rất nhiều r&amp;aacute;c thải.&lt;/em&gt;&lt;/p&gt;
+&lt;p style="text-align: left;"&gt;&amp;nbsp;&lt;strong&gt;Cụ thể, trong gần một ng&amp;agrave;y&amp;nbsp;tại địa phương, nh&amp;acirc;n vi&amp;ecirc;n DASAVI v&amp;agrave; ARITNT đ&amp;atilde; ra qu&amp;acirc;n xử l&amp;iacute; thu gom r&amp;aacute;c thải, dọn dẹp quan cảnh gần 2km b&amp;atilde;i biển tại Dốc Lết. Đ&amp;acirc;y sẽ l&amp;agrave; những hoạt động thiết thực g&amp;oacute;p phần n&amp;acirc;ng cao chất lượng m&amp;ocirc;i trường&amp;nbsp;cũng như tuy&amp;ecirc;n truyền thực hiện nếp sống văn minh ở địa phương.&lt;/strong&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&amp;nbsp;&lt;img src="http://aritnt.com.vn:82/Images/Blogs/img2.jpg" alt="" width="1000" height="564" /&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&lt;strong&gt;&lt;em&gt;&amp;nbsp;&lt;/em&gt;&lt;/strong&gt;&lt;em&gt;C&amp;aacute;c nh&amp;acirc;n vi&amp;ecirc;n của hai c&amp;ocirc;ng ty rất nhiệt t&amp;igrave;nh d&amp;ugrave; trời nắng n&amp;oacute;ng.&lt;/em&gt;&lt;/p&gt;
+&lt;p style="text-align: left;"&gt;&lt;strong&gt;Với hơn 100 bao r&amp;aacute;c được thu gom, chất đầy 2 xe tải 2,5 tấn, g&amp;oacute;p phần trả lại một b&amp;atilde;i biển từng được xem l&amp;agrave; một trong những b&amp;atilde;i biển đẹp nhất của tỉnh, g&amp;oacute;p phần đem lại vẻ đẹp cũng như thu h&amp;uacute;t kh&amp;aacute;ch du lịch ng&amp;agrave;y c&amp;agrave;ng đ&amp;ocirc;ng hơn. Dưới d&amp;acirc;y l&amp;agrave; một số h&amp;igrave;nh ảnh:&lt;/strong&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&lt;strong&gt;&lt;img src="http://aritnt.com.vn:82/Images/Blogs/img4.jpg" alt="" width="1000" height="564" /&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&lt;em&gt;R&amp;aacute;c thu gom đều được cho v&amp;agrave;o t&amp;uacute;i b&amp;oacute;ng&lt;/em&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&amp;nbsp;&lt;img src="http://aritnt.com.vn:82/Images/Blogs/img7.jpg" alt="" width="1000" height="564" /&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&lt;em&gt;Trong v&amp;ograve;ng v&amp;agrave;i tiếng đồng hồ đ&amp;atilde; thu gom gần 20 bao r&amp;aacute;c.&lt;/em&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&lt;img src="http://aritnt.com.vn:82/Images/Blogs/img8.jpg" alt="" width="1000" height="750" /&gt;&lt;/p&gt;
+&lt;p style="text-align: center;"&gt;&lt;em&gt;C&amp;aacute;c bao r&amp;aacute;c sau đều được chất l&amp;ecirc;n xe tải v&amp;agrave; đem về nơi xử l&amp;iacute;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tin chắc rằng kh&amp;ocirc;ng chỉ trong năm 2019 v&amp;agrave; nhiều năm tiếp theo, chiến dịch "B&amp;atilde;i biển&amp;nbsp;xanh" sẽ tiếp tục l&amp;agrave; một trong những hoạt đồng thường xuy&amp;ecirc;n, đầy &amp;yacute; nghĩa gi&amp;uacute;p gắn kết c&amp;aacute;c nh&amp;acirc;n vi&amp;ecirc;n v&amp;agrave; mang nhiều gi&amp;aacute; trị đối với cộng đồng của to&amp;agrave;n thể nh&amp;acirc;n vi&amp;ecirc;n &lt;strong&gt;C&amp;ocirc;ng Ty Thương Mại Điện Tử ARITNT v&amp;agrave;&amp;nbsp;C&amp;ocirc;ng ty Nước Sốt Đặc Sản Việt DASAVI.&amp;nbsp;&lt;/strong&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p style="text-align: right;"&gt;&lt;em&gt;Thanh Thi&amp;ecirc;n.&lt;/em&gt;&lt;/p&gt;
+&lt;p style="text-align: right;"&gt;&lt;em&gt;Thứ Năm, 28/2/2019&lt;/em&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="R.Trace" xml:space="preserve">
+    <value>/truy-xuat</value>
+  </data>
+  <data name="GreenDaLatBlog" xml:space="preserve">
+    <value>Blog Đà Lạt Xanh</value>
+  </data>
+  <data name="R.GreenDaLatBlog" xml:space="preserve">
+    <value>/blog-da-lat-xanh</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Copyright  2019 - ARITNT.</value>
+  </data>
+  <data name="Index_ListProductOutstading" xml:space="preserve">
+    <value>Phổ biến nhất</value>
+  </data>
+</root>

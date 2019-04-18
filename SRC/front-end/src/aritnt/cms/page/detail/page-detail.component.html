@@ -1,0 +1,206 @@
+<div id="grid" class="page-detail-area">
+    <div class="left-side">
+        <div class="btn-group">
+            <dx-button class="btn fe-md btn-primary" [hint]="lang.instant('Action.Save')" (onClick)="save();"><i
+                    class="fa fa-lg fa-save" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" *ngIf="type == 'update'"
+                (onClick)="refresh();"><i class="fa fa-lg fa-refresh" aria-hidden="true"></i></dx-button>
+            <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Return')" (onClick)="return();"><i
+                    class="fa fa-lg fa-undo" aria-hidden="true"></i></dx-button>
+        </div>
+    </div>
+    <div class="right-side">
+    </div>
+    <div class="box-body">
+        <div class="row">
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>{{lang.instant('Common.Code')}}</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="{{lang.instant('Common.Code')}}" readOnly="true"
+                                [(ngModel)]="page.id">
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>Title<span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="Title" [(ngModel)]="page.title" [(isValid)]="isNameValid"
+                                [maxLength]="5000">
+                                <!-- <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="50000"
+                                        message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator> -->
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label> Description <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="Description" [(ngModel)]="post.description"
+                                [(isValid)]="isNameValid" [maxLength]="5000">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="5000"
+                                        message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label> Link Thummbail <span class="dx-field-item-required-mark">*</span></label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="Description" [(ngModel)]="post.imageUrl" [(isValid)]="isNameValid"
+                                [maxLength]="5000">
+                                <dx-validator>
+                                    <dxi-validation-rule type="required"
+                                        message="{{lang.instant('Validation.Required')}}"></dxi-validation-rule>
+                                    <dxi-validation-rule type="stringLength" max="5000"
+                                        message="{{lang.instant('Validation.WrongLength')}}"></dxi-validation-rule>
+                                </dx-validator>
+                            </dx-text-box>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="page.isUsed" text="{{lang.instant('Common.Active')}}">
+                            </dx-check-box>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:5px;margin-bottom:5px;padding-right:0px">
+                            <dx-check-box [(ngModel)]="page.isFooter" text="Footer">
+                            </dx-check-box>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>Link</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="Link" [(ngModel)]="post.link" type="date">
+                            </dx-text-box>
+
+                        </div>
+
+                    </div>
+                </div> -->
+
+
+
+                <!-- <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>Tag</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-text-box placeholder="Tag" [(ngModel)]="post.tag" type="date">
+                            </dx-text-box>
+
+                        </div>
+
+                    </div>
+                </div> -->
+                <!-- <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>Vote</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <dx-number-box [(ngModel)]="post.vote" [disabled]="true"></dx-number-box>
+                        </div>
+
+                    </div>
+                </div> -->
+
+                <!-- <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                            <label>Topic</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <ng-multiselect-dropdown [placeholder]="'Topic'" [data]="dropdownList"
+                                [(ngModel)]="post.topics" [settings]="dropdownSettings">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="row">
+                    <dx-html-editor [(ngModel)]="page.content">
+                        <dxo-toolbar>
+                            <dxi-item formatName="undo"></dxi-item>
+                            <dxi-item formatName="redo"></dxi-item>
+                            <dxi-item formatName="separator"></dxi-item>
+                            <dxi-item formatName="size"
+                                [formatValues]="['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt']"></dxi-item>
+                            <dxi-item formatName="font"
+                                [formatValues]="['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana']">
+                            </dxi-item>
+                            <dxi-item formatName="separator"></dxi-item>
+                            <dxi-item formatName="bold"></dxi-item>
+                            <dxi-item formatName="italic"></dxi-item>
+                            <dxi-item formatName="strike"></dxi-item>
+                            <dxi-item formatName="underline"></dxi-item>
+                            <dxi-item formatName="separator"></dxi-item>
+                            <dxi-item formatName="alignLeft"></dxi-item>
+                            <dxi-item formatName="alignCenter"></dxi-item>
+                            <dxi-item formatName="alignRight"></dxi-item>
+                            <dxi-item formatName="alignJustify"></dxi-item>
+                            <dxi-item formatName="separator"></dxi-item>
+                            <dxi-item widget="dxButton" [options]="toolbarButtonOptions"></dxi-item>
+                            <dxi-item formatName="header" [formatValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
+                            <dxi-item formatName="separator"></dxi-item>
+                            <dxi-item formatName="orderedList"></dxi-item>
+                            <dxi-item formatName="bulletList"></dxi-item>
+                            <dxi-item formatName="separator"></dxi-item>
+                            <dxi-item formatName="color"></dxi-item>
+                            <dxi-item formatName="background"></dxi-item>
+                            <dxi-item formatName="separator"></dxi-item>
+                            <dxi-item formatName="link"></dxi-item>
+                            <dxi-item formatName="image"></dxi-item>
+                            <dxi-item formatName="separator"></dxi-item>
+                            <dxi-item formatName="clear"></dxi-item>
+                            <dxi-item formatName="codeBlock"></dxi-item>
+                            <dxi-item formatName="blockquote"></dxi-item>
+                        </dxo-toolbar>
+                    </dx-html-editor>
+
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+</div>

@@ -1,0 +1,100 @@
+<!-- <div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h2 style="display:inline">Báo cáo nhanh</h2>
+            <select class="report pull-right" (change)="onChageSelectTime(selectvalue)" [(ngModel)]="selectvalue">
+                <option *ngFor="let t of timeType" [value]="t.id">
+                    {{t.name}}
+                </option>
+            </select>
+        </div>
+        <div class="clearfix"></div>
+        <br />
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-fw fa-money"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Doanh thu</span>
+                    <span class="info-box-number">{{funcs.getCurrency(salesOrderAmountReportBy.current)}}.000</span>
+                    <span class="info-growth">
+                        {{funcs.getPercent(salesOrderAmountReportBy.growthPercen)}}%
+                        <i class="fa fa-fw" [class.fa-arrow-up]="salesOrderAmountReportBy.growthPercen >= 0" [class.fa-arrow-down]="salesOrderAmountReportBy.growthPercen < 0"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-fw fa-cart-plus"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">SKU</span>
+                    <span class="info-box-number">{{funcs.getCurrency(buyOrderAmountReportBy.current)}}.000</span>
+                    <span class="info-growth">
+                        {{funcs.getPercent(buyOrderAmountReportBy.growthPercen)}}%
+                        <i class="fa fa-fw" [class.fa-arrow-up]="buyOrderAmountReportBy.growthPercen >= 0" [class.fa-arrow-down]="buyOrderAmountReportBy.growthPercen < 0"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-fw fa-balance-scale"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Nông dân</span>
+                    <span class="info-box-number">{{funcs.getCurrency(moneyAmountReportBy.current)}}.000</span>
+                    <span class="info-growth">
+                        {{funcs.getPercent(moneyAmountReportBy.growthPercen)}}%
+                        <i class="fa fa-fw" [class.fa-arrow-up]="moneyAmountReportBy.growthPercen >= 0" [class.fa-arrow-down]="moneyAmountReportBy.growthPercen < 0"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-cutlery"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Đơn hàng</span>
+                    <span class="info-box-number">{{funcs.getCurrency(salesOrderReportBy.current)}}</span>
+                    <span class="info-growth">
+                        {{funcs.getPercent(salesOrderReportBy.growthPercen)}}%
+                        <i class="fa fa-fw" [class.fa-arrow-up]="salesOrderReportBy.growthPercen >= 0" [class.fa-arrow-down]="salesOrderReportBy.growthPercen < 0"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-fw fa-ban"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Đơn hủy</span>
+                    <span class="info-box-number">{{funcs.getCurrency(salesOrderCancelReportBy.current)}}</span>
+                    <span class="info-growth">
+                        {{funcs.getPercent(salesOrderCancelReportBy.growthPercen)}}%
+                        <i class="fa fa-fw" [class.fa-arrow-up]="salesOrderCancelReportBy.growthPercen >= 0" [class.fa-arrow-down]="salesOrderCancelReportBy.growthPercen < 0"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-fw fa-cogs"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Đơn thành công</span>
+                    <span class="info-box-number">{{funcs.getCurrency(salesOrderInprogressReportBy.current)}}</span>
+                    <span class="info-growth">
+                        {{funcs.getPercent(salesOrderInprogressReportBy.growthPercen)}}%
+                        <i class="fa fa-fw" [class.fa-arrow-up]="salesOrderInprogressReportBy.growthPercen >= 0" [class.fa-arrow-down]="salesOrderInprogressReportBy.growthPercen < 0"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+            <fusioncharts [id]="idMenuCountChart" [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="menuCountDataSource"></fusioncharts>
+        </div>
+        <div class="col-md-6">
+            <fusioncharts [id]="idMenuAmountChart" [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat" [dataSource]="menuAmountDataSource"></fusioncharts>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div> -->

@@ -1,0 +1,25 @@
+::ng-deep .caption-group {
+  background-color: #FAFAFA;
+  padding: 20px;
+  border-radius:5px;
+}
+
+  ::ng-deep .caption-group .caption-language {
+    background-color: #F5F5F5;
+    border-radius: 5px;
+  }
+
+::ng-deep .button-actions {
+  height: 40px;
+}
+
+  ::ng-deep .button-actions .button {
+    position: absolute;
+    right: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  ::ng-deep .button-actions dx-button {
+    margin-right: 10px;
+  }

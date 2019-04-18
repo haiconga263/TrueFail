@@ -1,0 +1,160 @@
+<div id="grid" class="order-detail-area">
+  <div class="left-side" style="padding:10px">
+    <div class="btn-group">
+      <dx-button class="btn fe-md btn-default" hint="Nhập kho" (onClick)="ImportWarehouse();">
+        <i class="fa fa-cart-arrow-down"></i>
+      </dx-button>
+      <!-- <dx-button class="btn fe-md btn-default" hint="In hóa đơn" (onClick)="return();">
+        <i class="fa fa-get-pocket"></i>
+      </dx-button> -->
+      <dx-button class="btn fe-md btn-default" [hint]="lang.instant('Action.Refresh')" (onClick)="grid.refresh();">
+        <i class="fa fa-lg fa-refresh" aria-hidden="true"></i>
+      </dx-button>
+    </div>
+  </div>
+  <div class="left-side">
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>{{lang.instant('Admin.Collection')}}</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-select-box [dataSource]="collections" displayExpr="name" valueExpr="id"
+                    (onValueChanged)="collectionChanged($event)"> >
+                  </dx-select-box>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-body">
+      <h4>Danh sách hàng từ collection</h4>
+      <dx-data-grid id="gridContainer" [dataSource]="fcModel" [columnAutoWidth]="true"
+        [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="id" [showBorders]="true"
+        [(selectedRowKeys)]="selectedRows" (onSelectionChanged)="onSelectionChanged($event)">
+        <dxo-selection mode="single"></dxo-selection>
+
+        <dxo-filter-row visible="true"></dxo-filter-row>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]" [showInfo]="true">
+        </dxo-pager>
+
+        <dxi-column dataField="code" [caption]="lang.instant('Common.Code')"></dxi-column>
+        <dxi-column dataField="collection.name" [caption]="Collection"></dxi-column>
+        <dxi-column dataField="fulfillment.name" [caption]="Fulfillment"></dxi-column>
+        <dxi-column dataField="deliveryDate" [caption]="DeliveredDate" dataType="date"></dxi-column>
+
+        <div *dxTemplate="let order of 'detail'">
+          <div class="master-detail-caption">Danh sách hàng</div>
+          <dx-data-grid [dataSource]="order.data.items" [showBorders]="true" [columnAutoWidth]="true">
+            <dxi-column dataField="traceCode" caption="Trace Code"></dxi-column>
+            <dxi-column dataField="product.defaultName" [caption]="lang.instant('Admin.Product')"></dxi-column>
+            <dxi-column dataField="shippedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')"></dxi-column>
+            <dxi-column dataField="uoM.name" [caption]="lang.instant('Admin.UoM')"></dxi-column>
+          </dx-data-grid>
+
+          <dx-data-grid [dataSource]="order.items" [showBorders]="true" (onRowInserting)="insertingItem($event)"
+            (onRowUpdating)="updatingItem($event)" (onRowInserted)="insertedItem($event)"
+            (onRowUpdated)="updatedItem($event)">
+          </dx-data-grid>
+        </div>
+      </dx-data-grid>
+    </div>
+    <div class="box">
+      <h2>Thông tin hàng hóa</h2>
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <br />
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>Code</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-text-box placeholder="Enter code here..." readOnly="true" [(value)]="selectedRows.code"></dx-text-box>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>Collection</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-select-box [(dataSource)]="collections" readOnly="true" displayExpr="name" valueExpr="id"
+                    [(value)]="selectedRows.collectionId" [(value)]="collection.id">
+                  </dx-select-box>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <br />
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>Ngày giao hàng</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-date-box [(value)]="selectedRows.deliveryDate" readOnly="true" type="date" displayFormat="dd/MM/yyyy"
+                    style="width:100%">
+                  </dx-date-box>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>Fulfillment</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-select-box [dataSource]="fulfillments" displayExpr="name" valueExpr="id"
+                    [(value)]="selectedRows.fulfillmentId"></dx-select-box>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4" style="margin-top:5px;padding-right:0px">
+                  <label>Status</label>
+                </div>
+                <div class="col-xs-8">
+                  <dx-select-box [dataSource]="statusModify" displayExpr="description" valueExpr="id"
+                    (onValueChanged)="statusChanged($event)" [(value)]="_status.id"></dx-select-box>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="master-detail-caption">Danh sách hàng</div>
+          <dx-data-grid [dataSource]="selectedRows.items" [showBorders]="true" [columnAutoWidth]="true">
+            <dxo-editing mode="form" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+            </dxo-editing>
+            <dxi-column dataField="traceCode" caption="Trace Code" ></dxi-column>
+            <dxi-column dataField="productId" [caption]="lang.instant('Admin.Product')">
+              <dxo-lookup [dataSource]="products" valueExpr="id" displayExpr="name">
+              </dxo-lookup>
+            </dxi-column>
+
+            <dxi-column dataField="shippedQuantity" [caption]="lang.instant('Order.DeliveredQuantity')"></dxi-column>
+
+            <dxi-column dataField="uoM.id" [caption]="lang.instant('Admin.UoM')">
+              <dxi-validation-rule type="required" message="{{lang.instant('Validation.Required')}}">
+              </dxi-validation-rule>
+              <dxo-lookup [dataSource]="uoms" valueExpr="id" displayExpr="name">
+              </dxo-lookup>
+            </dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Categories\ViewModels\" />
+    <Folder Include="CompanyTypes\ViewModels\" />
+    <Folder Include="Countries\ViewModels\" />
+    <Folder Include="Districts\ViewModels\" />
+    <Folder Include="GrowingMethods\ViewModels\" />
+    <Folder Include="Languages\ViewModels\" />
+    <Folder Include="ProductLanguages\ViewModels\" />
+    <Folder Include="Provinces\ViewModels\" />
+    <Folder Include="Regions\ViewModels\" />
+    <Folder Include="Roles\ViewModels\" />
+    <Folder Include="Settings\ViewModels\" />
+    <Folder Include="UnitOfMeasurements\ViewModels\" />
+    <Folder Include="Wards\ViewModels\" />
+  </ItemGroup>
+
+</Project>
